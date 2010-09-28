@@ -31,6 +31,7 @@ public class FileSource {
 			_reader = new DataInputStream(
 						new BufferedInputStream(
 							new FileInputStream(location)));
+			
 		} catch (FileNotFoundException e) {
 			/* the path is not valid */
 			throw e;
