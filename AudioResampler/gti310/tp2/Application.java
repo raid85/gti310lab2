@@ -34,19 +34,18 @@ public class Application {
 			}
 		
 		//Si c'est le programme1 on passe le fichier dans le filtre audio 16 à 8 bits
-		if (programme == "programme1") {
+		if (programme.equals("programme1")) {
 			AudioFilter1628 audioFilter = new AudioFilter1628(fichierEntree, fichierSortie);
 			audioFilter.process();
 		}
 		
 		//Si c'est le programme1 on passe le fichier dans le filtre audio 16 à 8 bits
-		if (programme == "programme1") {
+		if (programme.equals("programme2")) {
 			
 		}
-		else {
+		if (!(programme.equals("programme1")) && !(programme.equals("programme2"))){
 			System.out.println("Le premier argument doit être <programme1> ou <programme2>");
 		}
-		
 		
 	}
 }
