@@ -1,6 +1,7 @@
 package gti310.tp2;
 
 import gti310.tp2.io.FileSource;
+import gti310.tp2.audio.AudioFilter1628;
 
 import java.io.FileNotFoundException;
 
@@ -16,24 +17,36 @@ public class Application {
 	public static void main(String args[]) {
 		System.out.println("Audio Resample project!");
 		
-		try {
-			FileSource fs = new FileSource("App1Test1Mono16bits.wav");
-			
-			byte[] header = fs.pop(44);
-			
-			
-			int i = 0;
-			
-			for (i = 0; i < 44; i++){
-				System.out.print(Integer.toHexString(header[i]));
-				
-			}
-			
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String programme = "";
+		String fichierEntree = "";
+		String fichierSortie= "";
+		
+		//On lance le programme avec les arguments
+		if (args[0] != null && args[1] != null && args[2] != null) {
+			programme = args[0];
+			fichierEntree = args[1];
+			fichierSortie = args[2];
 		}
+			else{
+				System.out.println("Il vous manque des arguments!");
+				System.out.println("(java <programme1> <fichier d'entrée> <fichier de sortie>)");
+				System.out.println("(java <programme2> <fichier de référence> <fichier à analyser>)");
+			}
+		
+		//Si c'est le programme1 on passe le fichier dans le filtre audio 16 à 8 bits
+		if (programme == "programme1") {
+			AudioFilter1628 audioFilter = new AudioFilter1628(fichierEntree, fichierSortie);
+			audioFilter.process();
+		}
+		
+		//Si c'est le programme1 on passe le fichier dans le filtre audio 16 à 8 bits
+		if (programme == "programme1") {
+			
+		}
+		else {
+			System.out.println("Le premier argument doit être <programme1> ou <programme2>");
+		}
+		
 		
 	}
 }
