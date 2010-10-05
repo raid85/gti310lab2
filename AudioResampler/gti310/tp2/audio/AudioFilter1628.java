@@ -13,7 +13,6 @@ public class AudioFilter1628 implements AudioFilter {
 	private String fichierSortie= "";
 	
 	public AudioFilter1628 (String fichierEntree, String fichierSortie){
-		
 		this.fichierEntree = fichierEntree;
 		this.fichierSortie = fichierSortie;
 	}
@@ -63,14 +62,17 @@ public class AudioFilter1628 implements AudioFilter {
 			}
 			
 			//On regarde le nombre de canaux du fichier
-			if (!(headerHEX[22].equals("1"))){
+			if (headerHEX[22].equals("1")){
 				nbCanaux = 1;
 				System.out.println("Fichier Mono");
 			}
-			if (!(headerHEX[22].equals("2"))){
+			if (headerHEX[22].equals("2")){
 				nbCanaux = 2;
 				System.out.println("Fichier Stereo");
 			}
+			
+			//On regarde la longueur du data du fichier wav
+			
 			
 			//Si le fichier est valide on effectue les manipulations
 			if (fichierInvalide = false){
@@ -82,7 +84,6 @@ public class AudioFilter1628 implements AudioFilter {
 			e.printStackTrace();
 		}
     
-		
 	}
 
 }
