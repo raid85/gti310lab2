@@ -23,7 +23,7 @@ public class AudioFilter1628 implements AudioFilter {
 		try {
 			FileSource fs = new FileSource(fichierEntree);
 			byte[] header = fs.pop(HEADER_SIZE);
-			String headerHEX[] = new String[44];
+			String headerHEX[] = new String[HEADER_SIZE];
 			int i = 0;
 			
 			for (i = 0; i < HEADER_SIZE; i++){
@@ -33,20 +33,27 @@ public class AudioFilter1628 implements AudioFilter {
 		
 			System.out.println();
 			
-			//Valide le format RIFF 
+			//Valide le type de fichier RIFF 
 			if (!(headerHEX[0].equals("52")) || !(headerHEX[1].equals("49")) || !(headerHEX[2].equals("46")) || !(headerHEX[3].equals("46"))){
 				fichierInvalide = true;
+				System.out.println("Type de fichier invalide");
 			}
 			else{
-				System.out.println("Format RIFF valide");
+				System.out.println("Fichier RIFF valide");
 			}
 				
 			//Vérifie que c'est un fichier 16 bits valide
 			if (!(headerHEX[34].equals("10")) || (!(headerHEX[35].equals("0")))){
 				fichierInvalide = true;
+				System.out.println("Fichier 16 bits invalide");
 			}
 			else{
 				System.out.println("Fichier 16 bits valide");
+			}
+			
+			//Si le fichier est valide on effectue les manipulations
+			if (fichierInvalide = false){
+				
 			}
 			
 		} catch (FileNotFoundException e) {
