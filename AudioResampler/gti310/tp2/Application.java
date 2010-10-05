@@ -8,8 +8,6 @@ import java.io.FileNotFoundException;
 public class Application {
 
 	
-	private final int HEADER_SIZE = 44;
-	
 	/**
 	 * Launch the application
 	 * @param args This parameter is ignored
@@ -39,8 +37,10 @@ public class Application {
 			audioFilter.process();
 		}
 		
-		//Si c'est le programme1 on passe le fichier dans le filtre audio 16 à 8 bits
+		//Si c'est le programme2 on...
 		if (programme.equals("programme2")) {
+			
+			//...
 			
 		}
 		if (!(programme.equals("programme1")) && !(programme.equals("programme2"))){
