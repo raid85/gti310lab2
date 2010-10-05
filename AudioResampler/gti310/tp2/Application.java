@@ -20,6 +20,7 @@ public class Application {
 		String fichierSortie= "";
 		
 		//On lance le programme avec les arguments
+		//test
 		if (args[0] != null && args[1] != null && args[2] != null) {
 			programme = args[0];
 			fichierEntree = args[1];
