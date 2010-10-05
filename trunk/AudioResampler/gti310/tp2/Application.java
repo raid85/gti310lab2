@@ -20,17 +20,16 @@ public class Application {
 		String fichierSortie= "";
 		
 		//On lance le programme avec les arguments
-		//test
-		if (args[0] != null && args[1] != null && args[2] != null) {
+		if (args.length < 3){
+			System.out.println("Il vous manque des arguments!");
+			System.out.println("(java <programme1> <fichier d'entrée> <fichier de sortie>)");
+			System.out.println("(java <programme2> <fichier de référence> <fichier à analyser>)");
+		}
+		else if (args[0] != null && args[1] != null && args[2] != null) {
 			programme = args[0];
 			fichierEntree = args[1];
 			fichierSortie = args[2];
 		}
-			else{
-				System.out.println("Il vous manque des arguments!");
-				System.out.println("(java <programme1> <fichier d'entrée> <fichier de sortie>)");
-				System.out.println("(java <programme2> <fichier de référence> <fichier à analyser>)");
-			}
 		
 		//Si c'est le programme1 on passe le fichier dans le filtre audio 16 à 8 bits
 		if (programme.equals("programme1")) {
