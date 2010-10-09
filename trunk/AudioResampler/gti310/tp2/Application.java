@@ -21,7 +21,7 @@ public class Application {
 		
 		//On lance le programme avec les arguments
 		if (args.length < 3){
-			System.out.println("Il vous manque des arguments!");
+			System.out.println("Il vous manque des arguments!!");
 			System.out.println("(java <programme1> <fichier d'entrée> <fichier de sortie>)");
 			System.out.println("(java <programme2> <fichier de référence> <fichier à analyser>)");
 		}
