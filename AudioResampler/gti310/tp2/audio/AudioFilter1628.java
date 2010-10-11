@@ -32,7 +32,6 @@ public class AudioFilter1628 implements AudioFilter {
 			}
 		
 			System.out.println();
-			System.out.println(headerHEX[22]);
 			
 			//Valide le type de fichier RIFF 
 			if (!(headerHEX[0].equals("52")) || !(headerHEX[1].equals("49")) || !(headerHEX[2].equals("46")) || !(headerHEX[3].equals("46"))){
@@ -44,7 +43,8 @@ public class AudioFilter1628 implements AudioFilter {
 			}
 			
 			//Valide le format PCM
-			if (!(headerHEX[20].equals("1"))){
+			int PCM = readBytesLittle(header[20], header[21]);
+			if (!(PCM == 1)){
 				fichierInvalide = true;
 				System.out.println("Format PCM invalide");
 			}
@@ -52,8 +52,9 @@ public class AudioFilter1628 implements AudioFilter {
 				System.out.println("Format PCM valide");
 			}
 			
-			//Vérifie que c'est un fichier 16 bits valide
-			if (!(headerHEX[34].equals("10")) || (!(headerHEX[35].equals("0")))){
+			//Vérifie que c'est un fichier 16 bits par échantillon valide
+			int BPS = readBytesLittle(header[34], header[35]);
+			if (!(BPS == 16)){
 				fichierInvalide = true;
 				System.out.println("Fichier 16 bits invalide");
 			}
@@ -84,6 +85,38 @@ public class AudioFilter1628 implements AudioFilter {
 			e.printStackTrace();
 		}
     
+	}
+	
+	public int readBytesLittle(byte B1, byte B2){
+		int firstByte = 0;
+        int secondByte = 0;
+        char result = 0;
+        
+        //On inverse car on est en little endian
+        firstByte = 0xFF & (int)B2;
+        secondByte = 0xFF & (int)B1;
+        
+        result  = (char) (firstByte << 8 | secondByte);
+        
+        return (int)result;
+	}
+	
+	public int readBytesLittle(byte B1, byte B2, byte B3, byte B4){
+		int firstByte = 0;
+        int secondByte = 0;
+        int thirdByte = 0;
+        int fourthByte = 0;
+        long result = 0;
+        
+        //On inverse car on est en little endian
+        firstByte = 0xFF & (int)B4;
+        secondByte = 0xFF & (int)B3;
+        thirdByte = 0xFF & (int)B2;
+        fourthByte = 0xFF & (int)B1;
+        
+        result = ((long) (firstByte << 24 | secondByte << 16| thirdByte << 8| fourthByte))& 0xFFFFFFFFL;
+        
+        return (int) result;
 	}
 
 }
