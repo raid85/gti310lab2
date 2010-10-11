@@ -8,7 +8,7 @@ public class AudioFilter1628 implements AudioFilter {
 	private final int HEADER_SIZE = 44;
 	
 	private boolean fichierInvalide = false;
-	private int nbCanaux = 0;
+	private int nbChannel = 0;
 	private String fichierEntree = "";
 	private String fichierSortie= "";
 	
@@ -63,17 +63,17 @@ public class AudioFilter1628 implements AudioFilter {
 			}
 			
 			//On regarde le nombre de canaux du fichier
-			if (headerHEX[22].equals("1")){
-				nbCanaux = 1;
+			int nbChannel = readBytesLittle(header[22], header[23]);
+			if (nbChannel == 1){
 				System.out.println("Fichier Mono");
 			}
-			if (headerHEX[22].equals("2")){
-				nbCanaux = 2;
+			if (nbChannel == 2){
 				System.out.println("Fichier Stereo");
 			}
 			
-			//On regarde la longueur du data du fichier wav
-			
+			//On regarde la longueur du data du fichier wav (ChunkSize)
+			int chunkSize = readBytesLittle(header[4], header[5], header[6], header[7]);
+			System.out.println("Taille du Fichier : " + chunkSize);
 			
 			//Si le fichier est valide on effectue les manipulations
 			if (fichierInvalide = false){
@@ -87,6 +87,7 @@ public class AudioFilter1628 implements AudioFilter {
     
 	}
 	
+	//Retourne la valeur "unsigned" des octets en little endian
 	public int readBytesLittle(byte B1, byte B2){
 		int firstByte = 0;
         int secondByte = 0;
@@ -101,6 +102,7 @@ public class AudioFilter1628 implements AudioFilter {
         return (int)result;
 	}
 	
+	//Retourne la valeur "unsigned" des octets en little endian
 	public int readBytesLittle(byte B1, byte B2, byte B3, byte B4){
 		int firstByte = 0;
         int secondByte = 0;
@@ -114,7 +116,7 @@ public class AudioFilter1628 implements AudioFilter {
         thirdByte = 0xFF & (int)B2;
         fourthByte = 0xFF & (int)B1;
         
-        result = ((long) (firstByte << 24 | secondByte << 16| thirdByte << 8| fourthByte))& 0xFFFFFFFFL;
+        result = ((long) (firstByte << 24 | secondByte << 16| thirdByte << 8| fourthByte));
         
         return (int) result;
 	}
