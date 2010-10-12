@@ -73,7 +73,9 @@ public class AudioFilter1628 implements AudioFilter {
 			
 			//On regarde la longueur du data du fichier wav (ChunkSize)
 			int chunkSize = readBytesLittle(header[4], header[5], header[6], header[7]);
-			System.out.println("Taille du Fichier : " + chunkSize);
+			int subChunkSize = readBytesLittle(header[40], header[41], header[42], header[43]);
+			System.out.println("Taille du fichier : " + chunkSize);
+			System.out.println("SubChunkSize : " + subChunkSize);
 			
 			//Si le fichier est valide on effectue les manipulations
 			if (fichierInvalide = false){
