@@ -83,9 +83,17 @@ public class AudioFilter1628 implements AudioFilter {
 					if (nbChannel == 1){
 						byte[] buffer = fs.pop(2);
 						
+						int valeur16 = readBytesLittle(buffer[0], buffer[1]);
+						int valeur8 = valeur16 / 256;
+						
 					}
 					if (nbChannel == 2){
 						byte[] buffer = fs.pop(4);
+						
+						int valeurLeft16 = readBytesLittle(buffer[0], buffer[1]);
+						int valeurLeft8 = valeurLeft16 / 256;
+						int valeurRight16 = readBytesLittle(buffer[0], buffer[1]);
+						int valeurRight8 = valeurRight16 / 256;
 						
 					}
 					
