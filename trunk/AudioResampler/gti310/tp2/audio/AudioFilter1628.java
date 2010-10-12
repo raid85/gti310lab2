@@ -85,7 +85,7 @@ public class AudioFilter1628 implements AudioFilter {
 				//8 bits, taille, etc
 				//fsink.push(header);
 				
-				//Boucle qui parcours chaque échantillon (2 ou 4 octets depend du nbChannel)
+				//Boucle qui parcours chaque échantillon (de 2 ou 4 octets depend du nbChannel)
 				for (int k=0;k<(subChunkSize/(nbChannel*2));k++){
 					if (nbChannel == 1){
 						byte[] buffer = fsource.pop(2);
@@ -134,7 +134,6 @@ public class AudioFilter1628 implements AudioFilter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    
 	}
 	
 	//Retourne la valeur "unsigned" des octets en little endian
@@ -170,20 +169,4 @@ public class AudioFilter1628 implements AudioFilter {
         
         return (int) result;
 	}
-
-	//Retourne la valeur "signed" des octets en little endian
-//	public long readBytesLittleSigned(byte B1, byte B2){
-//		int firstByte = 0;
-//        int secondByte = 0;
-//        char result = 0;
-//        
-//        //On inverse car on est en little endian
-//        firstByte = 0xFF & (int)B2;
-//        secondByte = 0xFF & (int)B1;
-//        
-//        result  = (char) (firstByte << 8 | secondByte);
-//        
-//        return (long)result;
-//	}
-
 }
