@@ -77,9 +77,20 @@ public class AudioFilter1628 implements AudioFilter {
 			System.out.println("Taille du fichier : " + chunkSize);
 			System.out.println("SubChunkSize : " + subChunkSize);
 			
-			//Si le fichier est valide on effectue les manipulations
+			//Si le fichier est valide on effectue la conversion 16 à 8 bits
 			if (fichierInvalide = false){
-				
+				for (int k=0;k<(subChunkSize/4);i++){
+					if (nbChannel == 1){
+						byte[] buffer = fs.pop(2);
+						
+					}
+					if (nbChannel == 2){
+						byte[] buffer = fs.pop(4);
+						
+					}
+					
+					
+				}
 			}
 			
 		} catch (FileNotFoundException e) {
