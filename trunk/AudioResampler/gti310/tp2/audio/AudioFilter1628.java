@@ -82,7 +82,7 @@ public class AudioFilter1628 implements AudioFilter {
 			if (fichierInvalide == false){
 				
 				//On modife l'entête du nouveau fichier
-				//8 bits, taille, etc
+				//On met les bits par échantillons de 16 à 8
 				//fsink.push(header);
 				
 				//Boucle qui parcours chaque échantillon (de 2 ou 4 octets depend du nbChannel)
@@ -136,7 +136,7 @@ public class AudioFilter1628 implements AudioFilter {
 		}
 	}
 	
-	//Retourne la valeur "unsigned" des octets en little endian
+	//Retourne la valeur int "unsigned" des octets en little endian
 	public int readBytesLittle(byte B1, byte B2){
 		int firstByte = 0;
         int secondByte = 0;
@@ -151,7 +151,7 @@ public class AudioFilter1628 implements AudioFilter {
         return (int)result;
 	}
 	
-	//Retourne la valeur "unsigned" des octets en little endian
+	//Retourne la valeur int "unsigned" des octets en little endian
 	public int readBytesLittle(byte B1, byte B2, byte B3, byte B4){
 		int firstByte = 0;
         int secondByte = 0;
@@ -169,4 +169,16 @@ public class AudioFilter1628 implements AudioFilter {
         
         return (int) result;
 	}
+	
+	//big-endian?
+	public static final byte[] intToByteArray_big(int value) {
+		return new byte[]{
+		(byte)(value >>> 24), (byte)(value >> 16 & 0xff), (byte)(value >> 8 & 0xff), (byte)(value & 0xff) };
+		}
+	
+	//little-endian?
+	public static final byte[] intToByteArray_little(int value) {
+		return new byte[]{
+		 (byte)(value & 0xff), (byte)(value >> 8 & 0xff), (byte)(value >> 16 & 0xff), (byte)(value >>> 24) };
+		}
 }
