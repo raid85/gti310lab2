@@ -21,8 +21,9 @@ public class AudioFilter1628 implements AudioFilter {
 		
 		//On lit l'entête du fichier
 		try {
-			FileSource fs = new FileSource(fichierEntree);
-			byte[] header = fs.pop(HEADER_SIZE);
+			FileSource fsource = new FileSource(fichierEntree);
+			FileSink fsink = new FileSink(fichierSortie);
+			byte[] header = fsource.pop(HEADER_SIZE);
 			String headerHEX[] = new String[HEADER_SIZE];
 			int i = 0;
 			
@@ -78,31 +79,55 @@ public class AudioFilter1628 implements AudioFilter {
 			System.out.println("SubChunkSize : " + subChunkSize);
 			
 			//Si le fichier est valide on effectue la conversion 16 à 8 bits
-			if (fichierInvalide = false){
+			if (fichierInvalide == false){
+				
+				//On modife l'entête du nouveau fichier
+				//8 bits, taille, etc
+				//fsink.push(header);
+				
 				//Boucle qui parcours chaque échantillon (2 ou 4 octets depend du nbChannel)
-				for (int k=0;k<(subChunkSize/(nbChannel*2));i++){
+				for (int k=0;k<(subChunkSize/(nbChannel*2));k++){
 					if (nbChannel == 1){
-						byte[] buffer = fs.pop(2);
+						byte[] buffer = fsource.pop(2);
+				
+						int valeur16 = readBytesLittle(buffer[0], buffer[1]);
+						int valeur8 = 0;
 						
-						short valeur16 = readBytesLittleSigned(buffer[0], buffer[1]);
-						int valeur8 = valeur16 / 256;
+						if (valeur16 >= 32767){
+							valeur8 = (valeur16 - 32767)/256;
+						}
+						if (valeur16 < 32767){
+							valeur8 = 128 + (valeur16 / 256);
+						}
+						
+						//System.out.println("Valeur_16bits : " + k + " : " +  valeur16);
+						//System.out.println("Valeur_8bits : " + k + " : " +  valeur8);
 						
 					}
 					if (nbChannel == 2){
-						byte[] buffer = fs.pop(4);
+						byte[] buffer = fsource.pop(4);
 						
-						short valeurLeft16 = readBytesLittleSigned(buffer[0], buffer[1]);
-						int valeurLeft8 = valeurLeft16 / 256;
-						short valeurRight16 = readBytesLittleSigned(buffer[0], buffer[1]);
-						int valeurRight8 = valeurRight16 / 256;
+						//Gauche
+						int valeurLeft16 = readBytesLittle(buffer[0], buffer[1]);
+						int valeurLeft8 = 0;
+						if (valeurLeft16 >= 32767){
+							valeurLeft8 = (valeurLeft16 - 32767)/256;
+						}
+						if (valeurLeft16 < 32767){
+							valeurLeft8 = 128 + (valeurLeft16 / 256);
+						}
 						
+						//Droite
+						int valeurRight16 = readBytesLittle(buffer[0], buffer[1]);
+						int valeurRight8 = 0;
+						if (valeurRight16 >= 32767){
+							valeurRight8 = (valeurRight16 - 32767)/256;
+						}
+						if (valeurRight16 < 32767){
+							valeurRight8 = 128 + (valeurRight16 / 256);
+						}
 					}
-					
-					
 				}
-				
-				//On modife l'entête du nouveau fichier
-				
 			}
 			
 		} catch (FileNotFoundException e) {
@@ -147,14 +172,18 @@ public class AudioFilter1628 implements AudioFilter {
 	}
 
 	//Retourne la valeur "signed" des octets en little endian
-	public short readBytesLittleSigned(byte B1, byte B2){
-		
-        short result = 0;
-        
-        //On inverse B1 et B2 car on est en little endian
-        result  = (short)(B2 << 8 | B1);
-        
-        return result;
-	}
+//	public long readBytesLittleSigned(byte B1, byte B2){
+//		int firstByte = 0;
+//        int secondByte = 0;
+//        char result = 0;
+//        
+//        //On inverse car on est en little endian
+//        firstByte = 0xFF & (int)B2;
+//        secondByte = 0xFF & (int)B1;
+//        
+//        result  = (char) (firstByte << 8 | secondByte);
+//        
+//        return (long)result;
+//	}
 
 }
