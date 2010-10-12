@@ -82,7 +82,23 @@ public class AudioFilter1628 implements AudioFilter {
 			if (fichierInvalide == false){
 				
 				//On modife l'entête du nouveau fichier
+				
 				//On met les bits par échantillons de 16 à 8
+//				header[34]= 
+//				header[35]=
+				
+				//On met SubChunk1Size = 8
+				//On met ChunkSize = ChunkSize / 2
+//				header[4]=
+//				header[5]=
+//				header[6]=
+//				header[7]=
+				      
+				//On met SubChunk2Size = SubChunk2Size / 2
+//				header[40]=
+//				header[41]=
+//				header[42]=
+//				header[43]=
 				//fsink.push(header);
 				
 				//Boucle qui parcours chaque échantillon (de 2 ou 4 octets depend du nbChannel)
