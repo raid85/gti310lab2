@@ -108,7 +108,6 @@ public class AudioFilter1628 implements AudioFilter {
 			
 				//On change le SubChunk2Size (== NumSamples * NumChannels * BitsPerSample/8)
 				int subChunk2Size_8bits = subChunk2Size / 2;
-				System.out.println("subChunk2Size_8bits : " + subChunk2Size_8bits);
 				byte[] subChunk2SizeTab = intToByteArray_little(subChunk2Size_8bits);
 			    header[40]= subChunk2SizeTab[0];
 				header[41]= subChunk2SizeTab[1];
@@ -117,19 +116,22 @@ public class AudioFilter1628 implements AudioFilter {
 				
 				//On met ChunkSize = 36 + SubChunk2Size ou 4 + (8 + SubChunk1Size) + (8 + SubChunk2Size)
 				int chunkSize_8bits = 36 + subChunk2Size_8bits;
-				System.out.println("ChunkSize_8bits : " + chunkSize_8bits);
 				byte[] chunkSizeTab = intToByteArray_little(chunkSize_8bits);
 			    header[4]= chunkSizeTab[0];
 				header[5]= chunkSizeTab[1];
 				header[6]= chunkSizeTab[2];
 				header[7]= chunkSizeTab[3];
+				
+				System.out.println("ChunkSize_8bits : " + chunkSize_8bits);
+				System.out.println("subChunk2Size_8bits : " + subChunk2Size_8bits);
 			
 				fsink.push(header);
 				
-				//Boucle qui parcours chaque échantillon (de 2 ou 4 octets depend du nbChannel)
+				//Boucle qui parcours chaque échantillon (de 2 ou 4 octets, dependant du nbChannel)
 				for (int k=0;k<(subChunk2Size/(nbChannel*2));k++){
 					if (nbChannel == 1){
-						byte[] buffer = fsource.pop(2);
+						//lit un sample de 2 octets
+						byte[] buffer = fsource.pop(nbChannel*2);
 						
 						int valeur16 = readBytesLittle(buffer[0], buffer[1]);
 						int valeur8 = 0;
@@ -144,12 +146,10 @@ public class AudioFilter1628 implements AudioFilter {
 						byte[] newData = {(byte) valeur8};
 						fsink.push(newData);
 						
-						//System.out.println("Valeur_16bits : " + k + " : " +  valeur16);
-						//System.out.println("Valeur_8bits : " + k + " : " +  valeur8);
-						
 					}
 					if (nbChannel == 2){
-						byte[] buffer = fsource.pop(4);
+						//lit un sample de 4 octets
+						byte[] buffer = fsource.pop(nbChannel*2);
 
 						//Gauche
 						int valeurLeft16 = readBytesLittle(buffer[0], buffer[1]);
@@ -179,6 +179,8 @@ public class AudioFilter1628 implements AudioFilter {
 					}
 				}
 			}
+			
+			fsink.close();
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
