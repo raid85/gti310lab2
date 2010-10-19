@@ -37,6 +37,7 @@ public class SNRFilter implements AudioFilter {
 		pointeur ++;
 	}
 
+	
 
 	public void process() {
 		// TODO Auto-generated method stub
