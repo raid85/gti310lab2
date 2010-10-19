@@ -108,19 +108,22 @@ public class AudioFilter1628 implements AudioFilter {
 			
 				//On change le SubChunk2Size (== NumSamples * NumChannels * BitsPerSample/8)
 				int subChunk2Size_8bits = subChunk2Size / 2;
+				System.out.println("subChunk2Size_8bits : " + subChunk2Size_8bits);
+				byte[] subChunk2SizeTab = intToByteArray_little(subChunk2Size_8bits);
+			    header[40]= subChunk2SizeTab[0];
+				header[41]= subChunk2SizeTab[1];
+				header[42]= subChunk2SizeTab[2];
+				header[43]= subChunk2SizeTab[3];
 				
-				//On met ChunkSize = ChunkSize / 2 ?
-//				header[4]=
-//				header[5]=
-//				header[6]=
-//				header[7]=
-				      
-				//On met SubChunk2Size = SubChunk2Size / 2 ?
-//				header[40]=
-//				header[41]=
-//				header[42]=
-//				header[43]=
-				
+				//On met ChunkSize = 36 + SubChunk2Size ou 4 + (8 + SubChunk1Size) + (8 + SubChunk2Size)
+				int chunkSize_8bits = 36 + subChunk2Size_8bits;
+				System.out.println("ChunkSize_8bits : " + chunkSize_8bits);
+				byte[] chunkSizeTab = intToByteArray_little(chunkSize_8bits);
+			    header[4]= chunkSizeTab[0];
+				header[5]= chunkSizeTab[1];
+				header[6]= chunkSizeTab[2];
+				header[7]= chunkSizeTab[3];
+			
 				fsink.push(header);
 				
 				//Boucle qui parcours chaque échantillon (de 2 ou 4 octets depend du nbChannel)
