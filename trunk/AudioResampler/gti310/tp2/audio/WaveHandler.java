@@ -13,11 +13,16 @@ public class WaveHandler {
 	
 	private final int HEADER_SIZE = 44;	
 	private boolean fichierInvalide = false;
-	private int nbChannel = 0;
 	private String fichierEntree = "";
 	private String fichierSortie= "";
 	private byte[] header ;
 	private String headerHEX[];
+	private int dataChunkSize = 0 ;
+	private boolean EightBits = false ;
+	private boolean SixteenBits = false;
+	private FileSource FichierOriginal ;
+	private short bps = 0 ;
+	private short nbChannel = 0;
 
 	
 	/** 
@@ -37,10 +42,10 @@ public class WaveHandler {
 	 */
 	public WaveHandler (String fichierEntree){
 		try{
-			FileSource fsource = new FileSource(fichierEntree);			
-			this.header = fsource.pop(HEADER_SIZE);
+			FichierOriginal = new FileSource(fichierEntree);			
+			this.header = FichierOriginal.pop(HEADER_SIZE);
 		    this.headerHEX = new String[HEADER_SIZE];
-			
+		    
 			for (int i = 0; i < HEADER_SIZE; i++){
 				System.out.print(Integer.toHexString(header[i]));
 				headerHEX[i] = Integer.toHexString(header[i]);
@@ -49,6 +54,54 @@ public class WaveHandler {
 		catch (FileNotFoundException e) {			
 			e.printStackTrace();
 		}
+		validate ();
+	}
+	
+	
+	
+	
+	/** 
+	 * Méthode interne pour valider le fichier wave et receuillir
+	 * les principales informations issues de son entête                
+	@param   void
+	@return  void                
+	 */	
+	private void validate (){		
+		
+		int PCM = readBytesLittle(header[20], header[21]);
+		if (!(PCM == 1)){			
+			fichierInvalide = true;
+			System.out.println("Format PCM invalide");
+		}
+		else{
+			System.out.println("Format PCM valide");		
+			}		
+		this.bps = (short) readBytesLittle(header[34], header[35]);
+		
+		if (!(bps == 16)||!(bps == 8)){			
+			fichierInvalide = true;
+			System.out.println("Fichier invalide (nombre de bits) = "+bps);
+		}		
+		//On regarde le nombre de canaux du fichier
+		this.nbChannel = (short) readBytesLittle(header[22], header[23]);
+		if (nbChannel == 1){
+			System.out.println("Fichier Mono");
+		}
+		if (nbChannel == 2){
+			System.out.println("Fichier Stereo");
+		}	
+	}
+	/** 
+	 * Méthode qui retourne un entier représentant la taille de la
+	 * partie de données du fichier wave                 
+	@param   none
+	@return  int                
+	 */
+	public int getDataChunkSize (){
+		
+		this.dataChunkSize = readBytesLittle(header[40], header[41], header[42], header[43]);
+		//System.out.println("DATA CHUNK SIZE"+this.toString());
+		return this.dataChunkSize;
 	}
 	/** 
 	 * Cette méthode à pour tâche de retourner un entier correspondant
