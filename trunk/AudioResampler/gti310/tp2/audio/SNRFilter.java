@@ -40,7 +40,8 @@ public class SNRFilter implements AudioFilter {
 	
 
 	public void process() {
-		// TODO Auto-generated method stub
+		int taille =HandlerCompares.length;
+		
 
 	}
 
