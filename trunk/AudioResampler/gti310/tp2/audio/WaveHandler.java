@@ -18,11 +18,10 @@ public class WaveHandler {
 	private byte[] header ;
 	private String headerHEX[];
 	private int dataChunkSize = 0 ;
-	private boolean EightBits = false ;
-	private boolean SixteenBits = false;
 	private FileSource FichierOriginal ;
 	private short bps = 0 ;
 	private short nbChannel = 0;
+	private String data[] ;
 
 	
 	/** 
@@ -58,8 +57,45 @@ public class WaveHandler {
 	}
 	
 	
+	/** 
+	 * Retourne si le fichier est valide ()	                          
+	@param   void
+	@return boolean                          
+	@see         J.S
+	 */
+	public boolean isValid (){
+		return !fichierInvalide ;
+	}
+	/** 
+	 * "Getter" du nombre de bits par echantillons	                          
+	@param   void                       
+	@return  short (bps)
+	 */
+	public short getBps() {
+		return bps;
+	}
+	/** 
+	 * "Getter" du nombre de canaux	                          
+	@param   void                       
+	@return  short 
+	 */
+	public short getNbChannel() {
+		return nbChannel;
+	}
 	
 	
+	/** 
+	 * Méthode qui retourne un entier représentant la taille de la
+	 * partie de données du fichier wave                 
+	@param   none
+	@return  int                
+	 */
+	public int getDataChunkSize (){
+		
+		this.dataChunkSize = readBytesLittle(header[40], header[41], header[42], header[43]);
+		//System.out.println("DATA CHUNK SIZE"+this.toString());
+		return this.dataChunkSize;
+	}
 	/** 
 	 * Méthode interne pour valider le fichier wave et receuillir
 	 * les principales informations issues de son entête                
@@ -92,24 +128,12 @@ public class WaveHandler {
 		}	
 	}
 	/** 
-	 * Méthode qui retourne un entier représentant la taille de la
-	 * partie de données du fichier wave                 
-	@param   none
-	@return  int                
-	 */
-	public int getDataChunkSize (){
-		
-		this.dataChunkSize = readBytesLittle(header[40], header[41], header[42], header[43]);
-		//System.out.println("DATA CHUNK SIZE"+this.toString());
-		return this.dataChunkSize;
-	}
-	/** 
 	 * Cette méthode à pour tâche de retourner un entier correspondant
 	 * aux deux bytes recu en format little endian                          
 	@param   byte B1, byte B2
 	@return  int                  
 	 */
-	public int readBytesLittle(byte B1, byte B2){
+	private int readBytesLittle(byte B1, byte B2){
 
 		int firstByte = 0;
 		int secondByte = 0;
@@ -129,7 +153,7 @@ public class WaveHandler {
 	@param   byte B1, byte B2, byte B3, byte B4
 	@return  int                  
 	 */
-	public int readBytesLittle(byte B1, byte B2, byte B3, byte B4){
+	private int readBytesLittle(byte B1, byte B2, byte B3, byte B4){
 		
 		int firstByte = 0;
 		int secondByte = 0;
@@ -152,7 +176,7 @@ public class WaveHandler {
 	@param   int
 	@return  byte[]                
 	 */
-	public static final byte[] intToByteArray_big(int value) {
+	private static final byte[] intToByteArray_big(int value) {
 		return new byte[]{
 				(byte)(value >>> 24), (byte)(value >> 16 & 0xff), (byte)(value >> 8 & 0xff), (byte)(value & 0xff) };
 	}
@@ -161,7 +185,7 @@ public class WaveHandler {
 	@param   int
 	@return  byte[]                
 	 */
-	public static final byte[] intToByteArray_little(int value) {
+	private static final byte[] intToByteArray_little(int value) {
 		return new byte[]{
 				(byte)(value & 0xff), (byte)(value >> 8 & 0xff), (byte)(value >> 16 & 0xff), (byte)(value >>> 24) };
 	}
