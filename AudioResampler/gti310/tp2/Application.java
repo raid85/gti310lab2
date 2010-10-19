@@ -1,7 +1,7 @@
 package gti310.tp2;
 
 import gti310.tp2.io.FileSource;
-import gti310.tp2.audio.AudioFilter1628;
+import gti310.tp2.audio.*;
 
 import java.io.FileNotFoundException;
 
@@ -38,9 +38,15 @@ public class Application {
 		}
 		
 		//Si c'est le programme2 on...
-		if (programme.equals("programme2")) {
+		if (programme.equals("programme2")) {			
 			
-			//...
+			SNRFilter SNRFilter = new SNRFilter(args[1]);
+			
+			for(int i = 2 ; i<= args.length;i++){
+				
+				SNRFilter.addCompare(args[i]);
+				
+			}
 			
 		}
 		if (!(programme.equals("programme1")) && !(programme.equals("programme2"))){
