@@ -1,9 +1,6 @@
 package gti310.tp2.audio;
-import gti310.tp2.io.FileSink;
-import gti310.tp2.io.FileSource;
-
 import java.io.FileNotFoundException;
-import java.util.ArrayList ;
+
 
 
 
@@ -24,10 +21,26 @@ import java.util.ArrayList ;
 
 public class SNRFilter implements AudioFilter {
 
-	@Override
-	public void process() {
-		// TODO Auto-generated method stub
-		
-	}
+	private WaveHandler HandlerComparant ;
+	private WaveHandler[]HandlerCompares ;
+	private int pointeur = 0;
+
+	public SNRFilter (String fichierComparant){
+
+		this.HandlerComparant = new WaveHandler(fichierComparant);		
 
 	}
+	
+	public void addCompare (String Compare){
+		
+		HandlerCompares[pointeur] = new WaveHandler(Compare);
+		pointeur ++;
+	}
+
+
+	public void process() {
+		// TODO Auto-generated method stub
+
+	}
+
+}
