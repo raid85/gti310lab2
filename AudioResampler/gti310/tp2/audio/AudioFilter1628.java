@@ -74,9 +74,9 @@ public class AudioFilter1628 implements AudioFilter {
 			
 			//On regarde la longueur du data du fichier wav (ChunkSize)
 			int chunkSize = readBytesLittle(header[4], header[5], header[6], header[7]);
-			int subChunkSize = readBytesLittle(header[40], header[41], header[42], header[43]);
-			System.out.println("Taille du fichier : " + chunkSize);
-			System.out.println("SubChunkSize : " + subChunkSize);
+			int subChunk2Size = readBytesLittle(header[40], header[41], header[42], header[43]);
+			System.out.println("ChunkSize : " + chunkSize);
+			System.out.println("SubChunk2Size : " + subChunk2Size);
 			
 			//Si le fichier est valide on effectue la conversion 16 à 8 bits
 			if (fichierInvalide == false){
@@ -84,17 +84,30 @@ public class AudioFilter1628 implements AudioFilter {
 				//On modife l'entête du nouveau fichier
 				
 				//On met les bits par échantillons de 16 à 8
-				//byte[] bytes = intToByteArray_little(8);
-				//System.out.println(bytes[0] + bytes[1]);
-                header[34]= (byte) 8;
+				BPS = 8;
+                header[34]= (byte) BPS;
 				header[35]= (byte) 0;
 				
-				//On met SubChunk1Size = 8
-				//bytes = intToByteArray_little(8);
-				header[16]= (byte) 8;
-				header[17]= (byte) 0;
-				header[18]= (byte) 0;
-				header[19]= (byte) 0;
+				//On change le byterate (== SampleRate * NumChannels * BitsPerSample/8)
+				int sampleRate = readBytesLittle(header[24], header[25], header[26], header[27]);
+				System.out.println("Samplerate : " + sampleRate);
+			    int byteRate = sampleRate * nbChannel * BPS/8;
+			    System.out.println("ByteRate : " + byteRate);
+			    byte[] byteRateTab = intToByteArray_little(byteRate);
+			    header[28]= byteRateTab[0];
+				header[29]= byteRateTab[1];
+				header[30]= byteRateTab[2];
+				header[31]= byteRateTab[3];
+			    	
+				//On change le blockAlign (== NumChannels * BitsPerSample/8)
+				int blockAlign = nbChannel * BPS/8;
+				byte[] blockAlignTab = intToByteArray_little(blockAlign);
+				System.out.println("BlockAlign : " + blockAlign);
+			    header[32]= blockAlignTab[0];
+				header[33]= blockAlignTab[1];
+			
+				//On change le SubChunk2Size (== NumSamples * NumChannels * BitsPerSample/8)
+				int subChunk2Size_8bits = subChunk2Size / 2;
 				
 				//On met ChunkSize = ChunkSize / 2 ?
 //				header[4]=
@@ -111,7 +124,7 @@ public class AudioFilter1628 implements AudioFilter {
 				fsink.push(header);
 				
 				//Boucle qui parcours chaque échantillon (de 2 ou 4 octets depend du nbChannel)
-				for (int k=0;k<(subChunkSize/(nbChannel*2));k++){
+				for (int k=0;k<(subChunk2Size/(nbChannel*2));k++){
 					if (nbChannel == 1){
 						byte[] buffer = fsource.pop(2);
 						
@@ -213,6 +226,18 @@ public class AudioFilter1628 implements AudioFilter {
 	//Conversion entier à bytes[4] little-endian?
 	public static final byte[] intToByteArray_little(int value) {
 		return new byte[]{
-		 (byte)(value & 0xff), (byte)(value >> 8 & 0xff), (byte)(value >> 16 & 0xff), (byte)(value >>> 24) };
+		 (byte)(value), (byte)(value >> 8 ), (byte)(value >> 16 ), (byte)(value >>> 24) };
+		}
+	
+	//Conversion entier à bytes[4] little-endian?
+	//public static final byte[] intToByteArray_little(int value) {
+		//return new byte[]{
+		// (byte)(value & 0xff), (byte)(value >> 8 & 0xff), (byte)(value >> 16 & 0xff), (byte)(value >>> 24) };
+		//}
+	
+	//Conversion entier à bytes[2] little-endian?
+	public static final byte[] intToByteArray2_little(int value) {
+		return new byte[]{
+		 (byte)(value & 0xff), (byte)(value >> 8 & 0xff)};
 		}
 }
