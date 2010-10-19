@@ -21,7 +21,7 @@ public class WaveHandler {
 	private FileSource FichierOriginal ;
 	private short bps = 0 ;
 	private short nbChannel = 0;
-	private String data[] ;
+	private byte[] data ;
 
 	
 	/** 
@@ -82,9 +82,7 @@ public class WaveHandler {
 	public short getNbChannel() {
 		return nbChannel;
 	}
-	
-	
-	/** 
+		/** 
 	 * Méthode qui retourne un entier représentant la taille de la
 	 * partie de données du fichier wave                 
 	@param   none
@@ -95,6 +93,21 @@ public class WaveHandler {
 		this.dataChunkSize = readBytesLittle(header[40], header[41], header[42], header[43]);
 		//System.out.println("DATA CHUNK SIZE"+this.toString());
 		return this.dataChunkSize;
+	}
+	/** 
+	 * Methode qui retourne le prochain Byte lu converti en
+	 * entier	                          
+	@param    none                          
+	@return int
+	 */
+	public int getData() {
+		
+		data=FichierOriginal.pop(1);
+		int datai = 0;
+		datai=(int)data[0];
+		System.out.println("BYTE CONVERTI ENVOYE @ SNR FILTER par WaveHandler  "+this.toString());
+		return datai;
+	
 	}
 	/** 
 	 * Méthode interne pour valider le fichier wave et receuillir
