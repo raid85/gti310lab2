@@ -84,28 +84,37 @@ public class AudioFilter1628 implements AudioFilter {
 				//On modife l'entête du nouveau fichier
 				
 				//On met les bits par échantillons de 16 à 8
-//				header[34]= 
-//				header[35]=
+				//byte[] bytes = intToByteArray_little(8);
+				//System.out.println(bytes[0] + bytes[1]);
+                header[34]= (byte) 8;
+				header[35]= (byte) 0;
 				
 				//On met SubChunk1Size = 8
-				//On met ChunkSize = ChunkSize / 2
+				//bytes = intToByteArray_little(8);
+				header[16]= (byte) 8;
+				header[17]= (byte) 0;
+				header[18]= (byte) 0;
+				header[19]= (byte) 0;
+				
+				//On met ChunkSize = ChunkSize / 2 ?
 //				header[4]=
 //				header[5]=
 //				header[6]=
 //				header[7]=
 				      
-				//On met SubChunk2Size = SubChunk2Size / 2
+				//On met SubChunk2Size = SubChunk2Size / 2 ?
 //				header[40]=
 //				header[41]=
 //				header[42]=
 //				header[43]=
-				//fsink.push(header);
+				
+				fsink.push(header);
 				
 				//Boucle qui parcours chaque échantillon (de 2 ou 4 octets depend du nbChannel)
 				for (int k=0;k<(subChunkSize/(nbChannel*2));k++){
 					if (nbChannel == 1){
 						byte[] buffer = fsource.pop(2);
-				
+						
 						int valeur16 = readBytesLittle(buffer[0], buffer[1]);
 						int valeur8 = 0;
 						
@@ -116,13 +125,16 @@ public class AudioFilter1628 implements AudioFilter {
 							valeur8 = 128 + (valeur16 / 256);
 						}
 						
+						byte[] newData = {(byte) valeur8};
+						fsink.push(newData);
+						
 						//System.out.println("Valeur_16bits : " + k + " : " +  valeur16);
 						//System.out.println("Valeur_8bits : " + k + " : " +  valeur8);
 						
 					}
 					if (nbChannel == 2){
 						byte[] buffer = fsource.pop(4);
-						
+
 						//Gauche
 						int valeurLeft16 = readBytesLittle(buffer[0], buffer[1]);
 						int valeurLeft8 = 0;
@@ -133,6 +145,9 @@ public class AudioFilter1628 implements AudioFilter {
 							valeurLeft8 = 128 + (valeurLeft16 / 256);
 						}
 						
+						byte[] newDataLeft = {(byte) valeurLeft8};
+						fsink.push(newDataLeft);
+						
 						//Droite
 						int valeurRight16 = readBytesLittle(buffer[0], buffer[1]);
 						int valeurRight8 = 0;
@@ -142,6 +157,9 @@ public class AudioFilter1628 implements AudioFilter {
 						if (valeurRight16 < 32767){
 							valeurRight8 = 128 + (valeurRight16 / 256);
 						}
+						
+						byte[] newDataRight = {(byte) valeurRight8};
+						fsink.push(newDataRight);
 					}
 				}
 			}
@@ -186,13 +204,13 @@ public class AudioFilter1628 implements AudioFilter {
         return (int) result;
 	}
 	
-	//big-endian?
+	//Conversion entier à bytes[4] big-endian?
 	public static final byte[] intToByteArray_big(int value) {
 		return new byte[]{
 		(byte)(value >>> 24), (byte)(value >> 16 & 0xff), (byte)(value >> 8 & 0xff), (byte)(value & 0xff) };
 		}
 	
-	//little-endian?
+	//Conversion entier à bytes[4] little-endian?
 	public static final byte[] intToByteArray_little(int value) {
 		return new byte[]{
 		 (byte)(value & 0xff), (byte)(value >> 8 & 0xff), (byte)(value >> 16 & 0xff), (byte)(value >>> 24) };
