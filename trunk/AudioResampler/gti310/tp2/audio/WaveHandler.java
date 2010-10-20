@@ -45,8 +45,7 @@ public class WaveHandler {
 			this.header = FichierOriginal.pop(HEADER_SIZE);
 		    this.headerHEX = new String[HEADER_SIZE];
 		    
-			for (int i = 0; i < HEADER_SIZE; i++){
-				System.out.print(Integer.toHexString(header[i]));
+			for (int i = 0; i < HEADER_SIZE; i++){			
 				headerHEX[i] = Integer.toHexString(header[i]);
 			}
 		}
@@ -127,7 +126,7 @@ public class WaveHandler {
 			}		
 		this.bps = (short) readBytesLittle(header[34], header[35]);
 		
-		if (!(bps == 16)||!(bps == 8)){			
+		if (!(bps == 16)&&!(bps == 8)){			
 			fichierInvalide = true;
 			System.out.println("Fichier invalide (nombre de bits) = "+bps);
 		}		
