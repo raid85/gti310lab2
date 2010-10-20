@@ -104,7 +104,7 @@ public class WaveHandler {
 		data=FichierOriginal.pop(1);
 		short datai = 0;
 		datai=(short)data[0];
-		System.out.println("BYTE CONVERTI ENVOYE @ SNR FILTER par WaveHandler  "+datai+"Trace  "+this.toString());
+		//System.out.println("BYTE CONVERTI ENVOYE @ SNR FILTER par WaveHandler  "+datai+"Trace  "+this.toString());
 		return datai;
 	
 	}
