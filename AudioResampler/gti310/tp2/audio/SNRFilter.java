@@ -1,24 +1,7 @@
 package gti310.tp2.audio;
-import java.io.FileNotFoundException;
 import java.lang.Math;
 
 
-
-
-/*Il s'agit d'avoir les deux "paths" des deux fichiers (l'original et le sampled
- * ensuite on compare les fichiers (en petit morceaux)valeur par valeur dans la 
- * formule a la page 2 des notes de lab.
- *  1.FileSource
- *  2.FileSink (s)
- *  for i = 0,nbfilesink
- *  2.Split	 *
- *  3.Read
- *  4.Calculate(......)
- *  5.Store
- *  --
- *  6.Sort
- *  7.Display
- *  ,*/
 
 public class SNRFilter implements AudioFilter {
 
@@ -27,7 +10,7 @@ public class SNRFilter implements AudioFilter {
 	private int pointeur = 0;
 	private short taille = 0; 
 	private double tableauSNR[] ;
-	private double SNRinter [];
+	private double SNRinter;
 
 	public SNRFilter (String fichierComparant){
 
@@ -49,25 +32,24 @@ public class SNRFilter implements AudioFilter {
 
 		for(short i=0; i<=this.taille; i++){
 
-			if((HandlerCompares[i].getDataChunkSize()==HandlerComparant.getDataChunkSize())&& (HandlerCompares[i].getNbChannel()==HandlerComparant.getNbChannel())&&(HandlerCompares[i].getBps()==HandlerComparant.getBps())){
-				
+			if((HandlerCompares[i].getDataChunkSize()==HandlerComparant.getDataChunkSize())&& (HandlerCompares[i].getNbChannel()==HandlerComparant.getNbChannel())&&(HandlerCompares[i].getBps()==HandlerComparant.getBps()))
+			{
+
 				int nbEch=HandlerCompares[i].getDataChunkSize();
-				
+
 				System.out.println("Les deux fichiers sont mono, 8 bits et de même taille  "+(nbEch+44)+"Bytes");				
-				
+
 				for(int j=0; j<=nbEch;j++){
-					
-					double snr = 10 * Math.log10((Math.pow(HandlerComparant.getData(),2))/(Math.pow((HandlerComparant.getData()-HandlerCompares[i].getData()), 2))) ;
-					
-					SNRinter[j]= snr;
+
+					double val1 = Math.pow(HandlerComparant.getData(),2);
+					double val2 = Math.pow((HandlerComparant.getData()-HandlerCompares[i].getData()), 2);				
+					SNRinter = SNRinter +  Math.log10(val1/val2);
+					System.out.println("Process@SNRFilter : i : "+i+" j : "+j+" SNR : "+SNRinter);
 
 				}
 				
-				for (int k = 0; k<= SNRinter.length;k++){
-					
-					
-				}
-				
+				tableauSNR[i] = SNRinter;
+
 			}
 
 		}
