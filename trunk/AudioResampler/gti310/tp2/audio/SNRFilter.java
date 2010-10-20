@@ -1,5 +1,6 @@
 package gti310.tp2.audio;
 import java.io.FileNotFoundException;
+import java.lang.Math;
 
 
 
@@ -24,24 +25,52 @@ public class SNRFilter implements AudioFilter {
 	private WaveHandler HandlerComparant ;
 	private WaveHandler[]HandlerCompares ;
 	private int pointeur = 0;
+	private short taille = 0; 
+	private double tableauSNR[] ;
+	private double SNRinter [];
 
 	public SNRFilter (String fichierComparant){
 
 		this.HandlerComparant = new WaveHandler(fichierComparant);		
 
 	}
-	
+
 	public void addCompare (String Compare){
-		
+
 		HandlerCompares[pointeur] = new WaveHandler(Compare);
 		pointeur ++;
 	}
 
-	
+
 
 	public void process() {
-		int taille =HandlerCompares.length;
-		
+
+		this.taille =(short) HandlerCompares.length;
+
+		for(short i=0; i<=this.taille; i++){
+
+			if((HandlerCompares[i].getDataChunkSize()==HandlerComparant.getDataChunkSize())&& (HandlerCompares[i].getNbChannel()==HandlerComparant.getNbChannel())&&(HandlerCompares[i].getBps()==HandlerComparant.getBps())){
+				
+				int nbEch=HandlerCompares[i].getDataChunkSize();
+				
+				System.out.println("Les deux fichiers sont mono, 8 bits et de même taille  "+(nbEch+44)+"Bytes");				
+				
+				for(int j=0; j<=nbEch;j++){
+					
+					double snr = 10 * Math.log10((Math.pow(HandlerComparant.getData(),2))/(Math.pow((HandlerComparant.getData()-HandlerCompares[i].getData()), 2))) ;
+					
+					SNRinter[j]= snr;
+
+				}
+				
+				for (int k = 0; k<= SNRinter.length;k++){
+					
+					
+				}
+				
+			}
+
+		}
 
 	}
 

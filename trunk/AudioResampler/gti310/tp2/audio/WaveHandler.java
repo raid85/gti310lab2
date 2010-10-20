@@ -100,12 +100,12 @@ public class WaveHandler {
 	@param    none                          
 	@return int
 	 */
-	public int getData() {
+	public short getData() {
 		
 		data=FichierOriginal.pop(1);
-		int datai = 0;
-		datai=(int)data[0];
-		System.out.println("BYTE CONVERTI ENVOYE @ SNR FILTER par WaveHandler  "+this.toString());
+		short datai = 0;
+		datai=(short)data[0];
+		System.out.println("BYTE CONVERTI ENVOYE @ SNR FILTER par WaveHandler  "+datai+"Trace  "+this.toString());
 		return datai;
 	
 	}
