@@ -1,16 +1,17 @@
 package gti310.tp2.audio;
 import java.lang.Math;
+import java.util.Stack;
 
 
 
 public class SNRFilter implements AudioFilter {
 
 	private WaveHandler HandlerComparant ;
-	private WaveHandler[]HandlerCompares ;
+	private WaveHandler[]HandlerCompares = new WaveHandler[10] ;
 	private int pointeur = 0;
 	private short taille = 0; 
-	private double tableauSNR[] ;
-	private double SNRinter;
+	private double tableauSNR[]= new double[10] ;
+	private int SNRinter = 0;
 
 	public SNRFilter (String fichierComparant){
 
@@ -20,8 +21,11 @@ public class SNRFilter implements AudioFilter {
 
 	public void addCompare (String Compare){
 
-		HandlerCompares[pointeur] = new WaveHandler(Compare);
-		pointeur ++;
+		
+		WaveHandler tempo = new WaveHandler (Compare);		
+		HandlerCompares[pointeur] = tempo;
+		this.pointeur= pointeur +1 ;
+		
 	}
 
 
@@ -40,11 +44,12 @@ public class SNRFilter implements AudioFilter {
 				System.out.println("Les deux fichiers sont mono, 8 bits et de même taille  "+(nbEch+44)+"Bytes");				
 
 				for(int j=0; j<=nbEch;j++){
-
-					double val1 = Math.pow(HandlerComparant.getData(),2);
-					double val2 = Math.pow((HandlerComparant.getData()-HandlerCompares[i].getData()), 2);				
-					SNRinter = SNRinter +  Math.log10(val1/val2);
-					System.out.println("Process@SNRFilter : i : "+i+" j : "+j+" SNR : "+SNRinter);
+                    
+					double EchOriginal =(double)HandlerComparant.getData();					
+					double EchCompare = (double)HandlerCompares[i].getData();
+					
+					
+					//System.out.println("Process@SNRFilter : i : "+i+" j : "+j+" SNR : "+SNRinter);
 
 				}
 				
