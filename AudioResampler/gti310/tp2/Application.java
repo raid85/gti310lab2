@@ -50,7 +50,7 @@ public class Application {
 				
 				SNRFilter.addCompare(args[i]);
 			
-				System.out.println("Fichier à comparers : "+args[i]);
+				System.out.println("Fichier à comparer : "+args[i]);
 			}
 			
 			SNRFilter.process();
