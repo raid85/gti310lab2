@@ -121,8 +121,6 @@ public class SNRFilter implements AudioFilter {
 			}
 			tableauSNR[pointeur+1] = valInter;
 		}
-		
-		//affichage
 		System.out.println("*************************");
 		System.out.println("Voici les valeurs triées ;");
 		for(int j =0; j<tableauSNR.length;j++){			
