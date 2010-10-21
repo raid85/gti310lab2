@@ -21,7 +21,7 @@ public class WaveHandler {
 	private FileSource FichierOriginal ;
 	private short bps = 0 ;
 	private short nbChannel = 0;
-	private byte[] data ;
+	private byte[] data = new byte[1];
 
 
 	/** 
@@ -97,13 +97,13 @@ public class WaveHandler {
 	 * Methode qui retourne le prochain Byte lu converti en
 	 * entier	                          
 	@param    none                          
-	@return int
+	@return double
 	 */
-	public short getData() {
+	public double getData() {
 
 		data=FichierOriginal.pop(1);
-		short datai = 0;
-		datai=(short)data[0];
+		double datai = 0;
+		datai= 0xFF & data[0];
 		//System.out.println("BYTE CONVERTI ENVOYE @ SNR FILTER par WaveHandler  "+datai+"Trace  "+this.toString());
 		return datai;
 
