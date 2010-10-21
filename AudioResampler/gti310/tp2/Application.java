@@ -40,13 +40,20 @@ public class Application {
 		//Si c'est le programme2 on...
 		if (programme.equals("programme2")) {			
 			
-			SNRFilter SNRFilter = new SNRFilter(args[1]);
+			System.out.println("Vous avez appeler le programme d'évaluation du SNR avec le fichier original : "+args[1]);
+			short nbCompare = (short) (args.length-2);
+			System.out.println("Il y a "+(nbCompare)+" fichiers à comparer ; ");
+			SNRFilter SNRFilter = new SNRFilter(args[1],nbCompare);
 			
-			for(int i = 2 ; i<= args.length;i++){
+			
+			for(int i = 2 ; i<args.length;i++){				
 				
 				SNRFilter.addCompare(args[i]);
-				
+			
+				System.out.println("Fichier à comparers : "+args[i]);
 			}
+			
+			SNRFilter.process();
 			
 		}
 		if (!(programme.equals("programme1")) && !(programme.equals("programme2"))){

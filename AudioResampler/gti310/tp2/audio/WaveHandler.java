@@ -4,13 +4,13 @@ import gti310.tp2.io.*;
 /**
  * La classe WaveHandler à la responsabilité de traiter les fichiers
  * wave, principalemet de démêler l'encodage de l'entête. 
-*@author Riad
-*@version 0.1
-*@
-*
-*/
+ *@author Riad
+ *@version 0.1
+ *@
+ *
+ */
 public class WaveHandler {
-	
+
 	private final int HEADER_SIZE = 44;	
 	private boolean fichierInvalide = false;
 	private String fichierEntree = "";
@@ -23,7 +23,7 @@ public class WaveHandler {
 	private short nbChannel = 0;
 	private byte[] data ;
 
-	
+
 	/** 
 	 * Constructeur de la classe	                          
 	@param   String fichierEntree, String fichierSortie                          
@@ -43,8 +43,8 @@ public class WaveHandler {
 		try{
 			FichierOriginal = new FileSource(fichierEntree);			
 			this.header = FichierOriginal.pop(HEADER_SIZE);
-		    this.headerHEX = new String[HEADER_SIZE];
-		    
+			this.headerHEX = new String[HEADER_SIZE];
+
 			for (int i = 0; i < HEADER_SIZE; i++){			
 				headerHEX[i] = Integer.toHexString(header[i]);
 			}
@@ -54,8 +54,8 @@ public class WaveHandler {
 		}
 		validate ();
 	}
-	
-	
+
+
 	/** 
 	 * Retourne si le fichier est valide ()	                          
 	@param   void
@@ -81,14 +81,14 @@ public class WaveHandler {
 	public short getNbChannel() {
 		return nbChannel;
 	}
-		/** 
+	/** 
 	 * Méthode qui retourne un entier représentant la taille de la
 	 * partie de données du fichier wave                 
 	@param   none
 	@return  int                
 	 */
 	public int getDataChunkSize (){
-		
+
 		this.dataChunkSize = readBytesLittle(header[40], header[41], header[42], header[43]);
 		//System.out.println("DATA CHUNK SIZE"+this.toString());
 		return this.dataChunkSize;
@@ -100,13 +100,13 @@ public class WaveHandler {
 	@return int
 	 */
 	public short getData() {
-		
+
 		data=FichierOriginal.pop(1);
 		short datai = 0;
 		datai=(short)data[0];
 		//System.out.println("BYTE CONVERTI ENVOYE @ SNR FILTER par WaveHandler  "+datai+"Trace  "+this.toString());
 		return datai;
-	
+
 	}
 	/** 
 	 * Méthode interne pour valider le fichier wave et receuillir
@@ -115,29 +115,23 @@ public class WaveHandler {
 	@return  void                
 	 */	
 	private void validate (){		
-		
+
 		int PCM = readBytesLittle(header[20], header[21]);
 		if (!(PCM == 1)){			
 			fichierInvalide = true;
 			System.out.println("Format PCM invalide");
 		}
-		else{
-			System.out.println("Format PCM valide");		
-			}		
+
+
 		this.bps = (short) readBytesLittle(header[34], header[35]);
-		
+
 		if (!(bps == 16)&&!(bps == 8)){			
 			fichierInvalide = true;
 			System.out.println("Fichier invalide (nombre de bits) = "+bps);
 		}		
 		//On regarde le nombre de canaux du fichier
 		this.nbChannel = (short) readBytesLittle(header[22], header[23]);
-		if (nbChannel == 1){
-			System.out.println("Fichier Mono");
-		}
-		if (nbChannel == 2){
-			System.out.println("Fichier Stereo");
-		}	
+
 	}
 	/** 
 	 * Cette méthode à pour tâche de retourner un entier correspondant
@@ -166,7 +160,7 @@ public class WaveHandler {
 	@return  int                  
 	 */
 	private int readBytesLittle(byte B1, byte B2, byte B3, byte B4){
-		
+
 		int firstByte = 0;
 		int secondByte = 0;
 		int thirdByte = 0;
@@ -202,5 +196,5 @@ public class WaveHandler {
 				(byte)(value & 0xff), (byte)(value >> 8 & 0xff), (byte)(value >> 16 & 0xff), (byte)(value >>> 24) };
 	}
 
-	
+
 }
