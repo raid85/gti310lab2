@@ -66,11 +66,42 @@ public class SNRFilter implements AudioFilter {
 				tableauSNR[i] = SNRinter;
 				System.out.println("SNR Correspondant:  "+tableauSNR[i]+" dB");
 
+				
+
 
 			}
+			else{System.out.println("Désolé ce programme ne prend pas en charge les fichiers de formats différents");}
 
 		}
+		triInsertion();
 
 	}
 
+	private void triInsertion(){
+		int pointeur;
+		double valInter;
+
+		for(int i = 1; i < tableauSNR.length ; i++)
+		{    
+			valInter = tableauSNR[i];
+			pointeur = i-1;
+			
+			while(pointeur>=0 && tableauSNR[pointeur]>valInter){
+				
+				tableauSNR[pointeur+1] = tableauSNR[pointeur];
+				pointeur--;
+			}
+			tableauSNR[pointeur+1] = valInter;
+		}
+		System.out.println("*************************");
+		System.out.println("Voici les valeurs triées ;");
+		for(int j =0; j<tableauSNR.length;j++){
+			
+			
+			System.out.println("_______________________");
+			System.out.println("|"+tableauSNR[j]+" dB |");
+			System.out.println("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
+
+		}
+	}
 }
