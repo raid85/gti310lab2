@@ -1,9 +1,13 @@
 package gti310.tp2.audio;
 import java.lang.Math;
 
-
-
-
+/**
+ * La SNRFilter a la responsabilité de trouver un Sound to noise ratio
+ * (SNR) à partir d'un fichier original et d'une série de fichiers 
+ * à comparer recus en paramètres
+ * @author Riad
+ * @version 1.0
+ */
 public class SNRFilter implements AudioFilter {
 
 	private WaveHandler HandlerComparant ;
@@ -15,6 +19,14 @@ public class SNRFilter implements AudioFilter {
 	private double val2=0;
 	private short nbCompares = 0;
 
+	/**
+	 * Constructeur qui qui initialise le tableau de fichiers
+	 * comparés ainsi que le tableau de valeur de SNR à partir du chemin d'acces
+	 * du fichier original et du nombre d'éléments a comparer qui sont tirés 
+	 * des arguments fournis lors de l'appel du programme.
+	 * @see Application.java
+	 * @param String, short
+	 */	
 	public SNRFilter (String fichierComparant, short nbCompares){
 
 		this.HandlerComparant = new WaveHandler(fichierComparant);		
@@ -23,7 +35,12 @@ public class SNRFilter implements AudioFilter {
 		tableauSNR = new double[this.nbCompares];
 
 	}
-
+	/**
+	 * Méthode qui ajoute un fichier à comparer au tableau à partir
+	 * du chemin d'accès donné en paramètre et, incrémente le pointeur
+	 * @param String
+	 * @return void
+	 */
 	public void addCompare (String Compare){
 
 		WaveHandler tempo = new WaveHandler (Compare);		
@@ -31,7 +48,13 @@ public class SNRFilter implements AudioFilter {
 		this.pointeur= pointeur +1 ;
 
 	}
-
+	/**
+	 * Méthode redéfinie de l'interface AudioFilter qui sert à traiter les deux
+	 * fichiers pour en calculer le SNR correspondant. Ensuite le SNR est placé 
+	 * dans un tableau et trié par la méthode de tri insertion.
+	 * @param void
+	 * @return void
+	 */
 	public void process() {
 
 
@@ -76,7 +99,12 @@ public class SNRFilter implements AudioFilter {
 		triInsertion();
 
 	}
-
+	/**
+	 * Méthode qui tri le tableau à l'aide de l'algorithme de tri par insertion
+	 * et contient aussi une boucle d'affichage
+	 * @param  void
+	 * @return void
+	 */
 	private void triInsertion(){
 		int pointeur;
 		double valInter;
@@ -93,11 +121,11 @@ public class SNRFilter implements AudioFilter {
 			}
 			tableauSNR[pointeur+1] = valInter;
 		}
+		
+		//affichage
 		System.out.println("*************************");
 		System.out.println("Voici les valeurs triées ;");
-		for(int j =0; j<tableauSNR.length;j++){
-			
-			
+		for(int j =0; j<tableauSNR.length;j++){			
 			System.out.println("_______________________");
 			System.out.println("|"+tableauSNR[j]+" dB |");
 			System.out.println("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
