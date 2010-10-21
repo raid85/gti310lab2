@@ -1,6 +1,6 @@
 package gti310.tp2.audio;
 import java.lang.Math;
-import java.util.Stack;
+
 
 
 
@@ -25,18 +25,17 @@ public class SNRFilter implements AudioFilter {
 	}
 
 	public void addCompare (String Compare){
-		
+
 		WaveHandler tempo = new WaveHandler (Compare);		
 		HandlerCompares[pointeur] = tempo;
 		this.pointeur= pointeur +1 ;
-		
+
 	}
 
 
 
 	public void process() {
 
-	
 
 		for(short i=0; i<HandlerCompares.length; i++){
 
@@ -46,7 +45,7 @@ public class SNRFilter implements AudioFilter {
 				int nbEch=HandlerCompares[i].getDataChunkSize();
 
 				System.out.println("Les deux fichiers sont mono, 8 bits et de même taille  "+(nbEch+44)+"Bytes");				
-				
+
 				//valeur originale
 				if(val1 == 0){
 					for (int j=0; j<nbEch;j++){
@@ -55,10 +54,10 @@ public class SNRFilter implements AudioFilter {
 						val1 = val1 + EchOriginal;
 					}
 				}
-				
+
 				//valeur comparée
 				for(int j=0; j<nbEch;j++){
-                    double EchCompare = (double)HandlerCompares[i].getData();
+					double EchCompare = (double)HandlerCompares[i].getData();
 					//System.out.println("EchOriginal "+EchOriginal+" EchCompare "+EchCompare+" j  "+j);
 					val2 = val2 + EchCompare;
 					//val2 = val2+Math.pow((EchCompare), 2);
@@ -66,17 +65,18 @@ public class SNRFilter implements AudioFilter {
 					//System.out.println("Process@SNRFilter : i : "+i+" j : "+j+" SNR : "+SNRinter);
 
 				}
+
+
 				//formule a lintérieur du LOG
 				double top = Math.pow(val1, 2);
-				double bottom = Math.pow(val1-val2, 2);
-				System.out.println("Val1 "+top+" Val2 "+bottom);
-				
+				double bottom = Math.pow((val1-val2), 2);
+				System.out.println("Val1 "+top+" Val2 "+bottom);				
 				SNRinter= 10 * Math.log10(top/bottom);
 				val2=0;
 				System.out.println("SNRinter.."+SNRinter);
 				System.out.println("I.."+i);
 				tableauSNR[i] = SNRinter;
-				
+
 
 			}
 
