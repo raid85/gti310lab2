@@ -15,6 +15,7 @@ public class WaveHandler {
 	private boolean fichierInvalide = false;
 	private String fichierEntree = "";
 	private String fichierSortie= "";
+	private String nomFichier;
 	private byte[] header ;
 	private String headerHEX[];
 	private int dataChunkSize = 0 ;
@@ -41,6 +42,7 @@ public class WaveHandler {
 	 */
 	public WaveHandler (String fichierEntree){
 		try{
+			this.nomFichier=fichierEntree;
 			FichierOriginal = new FileSource(fichierEntree);			
 			this.header = FichierOriginal.pop(HEADER_SIZE);
 			this.headerHEX = new String[HEADER_SIZE];
@@ -196,5 +198,10 @@ public class WaveHandler {
 				(byte)(value & 0xff), (byte)(value >> 8 & 0xff), (byte)(value >> 16 & 0xff), (byte)(value >>> 24) };
 	}
 
+	public String toString(){
+		
+		return this.nomFichier;
+		
+	}
 
 }
