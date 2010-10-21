@@ -7,22 +7,24 @@ import java.util.Stack;
 public class SNRFilter implements AudioFilter {
 
 	private WaveHandler HandlerComparant ;
-	private WaveHandler[]HandlerCompares = new WaveHandler[10] ;
+	private WaveHandler[]HandlerCompares  ;
 	private int pointeur = 0;
-	private short taille = 0; 
-	private double tableauSNR[]= new double[10] ;
+	private double tableauSNR[] ;
 	private double SNRinter = 0;
-	double val1 = 0;
-	double val2=0;
+	private double val1 = 0;
+	private double val2=0;
+	private short nbCompares = 0;
 
-	public SNRFilter (String fichierComparant){
+	public SNRFilter (String fichierComparant, short nbCompares){
 
 		this.HandlerComparant = new WaveHandler(fichierComparant);		
+		this.nbCompares =nbCompares ;
+		HandlerCompares = new WaveHandler[this.nbCompares];
+		tableauSNR = new double[this.nbCompares];
 
 	}
 
 	public void addCompare (String Compare){
-
 		
 		WaveHandler tempo = new WaveHandler (Compare);		
 		HandlerCompares[pointeur] = tempo;
@@ -34,9 +36,9 @@ public class SNRFilter implements AudioFilter {
 
 	public void process() {
 
-		this.taille =(short) HandlerCompares.length;
+	
 
-		for(short i=0; i<=this.taille; i++){
+		for(short i=0; i<HandlerCompares.length; i++){
 
 			if((HandlerCompares[i].getDataChunkSize()==HandlerComparant.getDataChunkSize())&& (HandlerCompares[i].getNbChannel()==HandlerComparant.getNbChannel())&&(HandlerCompares[i].getBps()==HandlerComparant.getBps()))
 			{
@@ -45,12 +47,12 @@ public class SNRFilter implements AudioFilter {
 
 				System.out.println("Les deux fichiers sont mono, 8 bits et de même taille  "+(nbEch+44)+"Bytes");				
 
-				for(int j=0; j<=nbEch;j++){
+				for(int j=0; j<nbEch;j++){
                     
 					double EchOriginal =(double)HandlerComparant.getData();					
 					double EchCompare = (double)HandlerCompares[i].getData();
 					
-					val1= val1+Math.pow(EchOriginal, 2);
+					val1 = val1+Math.pow(EchOriginal, 2);
 					val2 = val2+Math.pow((EchOriginal-EchCompare), 2);
 					//System.out.println("Val1 "+val1+" Val2 "+val2);
 					
