@@ -12,6 +12,15 @@ public class AudioFilter1628 implements AudioFilter {
 		this.waveHandler = new WaveHandler(fichierEntree, fichierSortie);
 	}
 	
+	/** 
+	 * Processus qui regroupe l'ensemble des méthodes nécessaire à la conversion
+	 * de 16 bits à 8 bits	 
+	 * 
+	 * Analyse de complexité: Le processus suivant s'exécutera le même nombre de fois dans
+	 * le meilleur des cas comme dans le pire des cas du moment que le fichier .wav est valide.
+	 * Si le fichier .wav est invalide la complexité sera d'ordre O(12) à O(22) 
+	 * Si le fichier .wav est valide la complexité est d'ordre O(n + 22 + 30 + 8 * nbCannaux)                                       
+	 */
 	public void process() {
 	
 		//On valide le fichier
