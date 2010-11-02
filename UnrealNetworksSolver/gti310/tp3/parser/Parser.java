@@ -29,5 +29,5 @@ public interface Parser<E> {
 	 * @return An object produced from the input file, or null if something
 	 * 		   went wrong.
 	 */
-	E parse(String filename);
+	gInputData parse(String filename);
 }
