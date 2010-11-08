@@ -103,6 +103,8 @@ public class mySolver implements Solver {
 	@Override
 	public Object solve(Object input) {
 		
+		//Devrais recevoir matrice + sommet départ de input...
+		
 		hamiltonianPath();
 		
 		//On retourne la liste de solutions
