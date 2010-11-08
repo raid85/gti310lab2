@@ -22,6 +22,7 @@ public class mySolver implements Solver {
 	//Les indices commences à 0 donc 0 correspond à 1 pour les sommets etc.
 	public static int depart = 0;
 	public static int counter = 0;
+	public static ArrayList<List<Integer>> solutions;
 	public static ArrayList<Integer> solution;
 	public static ArrayList<Integer> listeVoisins;
 
@@ -81,6 +82,8 @@ public class mySolver implements Solver {
 		//On ferme le cyle avec le sommet de depart
 		solution = (ArrayList<Integer>) chemin;
 		solution.add(depart);
+		//On ajoute la solution trouvé à la liste de solutions
+		solutions.add(solution);
 		System.err.print((depart+1) +" ");
 		System.err.println();
 
@@ -102,7 +105,8 @@ public class mySolver implements Solver {
 		
 		hamiltonianPath();
 		
-		return solution;
+		//On retourne la liste de solutions
+		return solutions;
 	}
 
 }
