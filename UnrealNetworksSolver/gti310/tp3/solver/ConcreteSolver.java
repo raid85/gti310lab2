@@ -25,17 +25,16 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 	public static int n;
 	public static int depart = 0;
 	public static int counter = 0;
-	public static ArrayList<List<Integer>> solutions;
-	public static ArrayList<Integer> solution;
+	public static ArrayList<List<Integer>> solutions = new ArrayList<List<Integer>>();
+	public static ArrayList<Integer> solution = new ArrayList<Integer>();
 	public static ArrayList<Integer> listeVoisins;
 	
 	/**
-	 * Complete the required task based on the input E and return an output
-	 * object T. The method should return null if the task cannot be completed
-	 * properly.
+	 * Methode qui resous le probleme a partir des infos de gInputData (matrice, sommetDepart, etc)
+	 * et qui retourne une liste des solutions trouvé
 	 * 
-	 * @param input The object required to complete the task.
-	 * @return A user defined object, or null if something went wrong.
+	 * @param input (gInputData) Ce qui est requis pour resoudre le probleme
+	 * @return solutions ( ArrayList<List<Integer>> ) ou null
 	 */
 	public ArrayList<List<Integer>> solve(gInputData input) {
 		
@@ -47,12 +46,11 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 			hamiltonianPath();
 			
 			return solutions;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		
-		
 	}
 	
 	/**
@@ -68,6 +66,8 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 	/**
 	 * Methode récursive qui trouve un cycle hamiltonien a partir d'une matrice d'adjacence
 	 * Sert de point de depart
+	 * 
+	 * Référence : http://moodle.cornellcollege.edu/0809/mod/resource/view.php?id=8993
 	 * 
 	 * @return void
 	 */
@@ -92,6 +92,7 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 					cycle = true;
 				}
 			}
+			//Si on a un cycle on ajoute la solution
 			if (cycle == true){
 				ajouteSolution(chemin);
 				return;
@@ -116,6 +117,13 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 
 	}
 
+	/**
+	 * Methode qui ajoute une solution dans la liste de solutions et
+	 * imprime a l'écran la solution
+	 *
+	 * @param List<Integer> chemin
+	 * @return void
+	 */
 	public static void ajouteSolution(List<Integer> chemin) {
 		Iterator<Integer> it = chemin.iterator();
 		while (it.hasNext()) {
@@ -128,9 +136,14 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 		solutions.add(solution);
 		System.err.print((depart+1) +" ");
 		System.err.println();
-
 	}
 
+	/**
+	 * Methode qui trouve les voisins d'un sommet à partir de la matrice
+	 *
+	 * @param int noeud
+	 * @return ArrayList<Integer> Liste des voisins
+	 */
 	public static ArrayList<Integer> getVoisins(int noeud) {
 		
 		listeVoisins = new ArrayList<Integer>();
