@@ -1,4 +1,5 @@
 package gti310.tp3;
+import gti310.tp3.parser.*;
 
 /**
  * The Application class defines a template method to call the elements to
@@ -19,5 +20,7 @@ public class Application {
 	 */
 	public static void main(String args[]) {
 		System.out.println("Unreal Networks Solver !");
+		Parser p = new ConcreteParser();
+		p.parse("Musee.txt");
 	}
 }
