@@ -6,7 +6,7 @@ import java.util.List;
 
 import gti310.tp3.parser.gInputData;
 
-public class ConcreteSolver implements Solver<gInputData, Object>{
+public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer>>>{
 
 	
 	public static int[][] matrice = {
@@ -37,7 +37,7 @@ public class ConcreteSolver implements Solver<gInputData, Object>{
 	 * @param input The object required to complete the task.
 	 * @return A user defined object, or null if something went wrong.
 	 */
-	public Object solve(gInputData input) {
+	public ArrayList<List<Integer>> solve(gInputData input) {
 		
 		try {
 			//int[][] matrice = gInputData.get
@@ -56,14 +56,21 @@ public class ConcreteSolver implements Solver<gInputData, Object>{
 	}
 	
 	/**
-	 * Methode qui appel la methode recursive hamiltonianPath
+	 * Methode qui appel la methode recursive hamiltonianPath(ArrayList<Integer>)
+	 * Sert de point de depart
 	 * 
-	 * @param input The object required to complete the task.
-	 * @return A user defined object, or null if something went wrong.
+	 * @return void
 	 */
 	public static void hamiltonianPath() {
 		hamiltonianPath(new ArrayList<Integer>());
 	}
+	
+	/**
+	 * Methode récursive qui trouve un cycle hamiltonien a partir d'une matrice d'adjacence
+	 * Sert de point de depart
+	 * 
+	 * @return void
+	 */
 	public static void hamiltonianPath(List<Integer> chemin){
 		
 		//Ajoute le sommet de départ et un counter pour ajouter le sommet de depart
@@ -86,7 +93,7 @@ public class ConcreteSolver implements Solver<gInputData, Object>{
 				}
 			}
 			if (cycle == true){
-				printSolution(chemin);
+				ajouteSolution(chemin);
 				return;
 			}
 			
@@ -109,7 +116,7 @@ public class ConcreteSolver implements Solver<gInputData, Object>{
 
 	}
 
-	public static void printSolution(List<Integer> chemin) {
+	public static void ajouteSolution(List<Integer> chemin) {
 		Iterator<Integer> it = chemin.iterator();
 		while (it.hasNext()) {
 			System.err.print((it.next()+ 1) +" ");
