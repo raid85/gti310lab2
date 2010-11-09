@@ -6,18 +6,14 @@ public class gInputData {
 	private int nbSommet ;
 	private int valI ;
 	private int SommetDepart ;	
-	final String end = "$";
+	
 	private ArrayList<Integer> m = new ArrayList<Integer> ();
 
 
-	public void add(String n){
+	public void add(int n){		
+						
+			m.add(n);			
 		
-		
-		if(!n.equals(end)){
-			
-			int i = Integer.parseInt(n);			
-			m.add(i);			
-		}
 		System.out.println(""+m.toString());
 	}
 	/**
