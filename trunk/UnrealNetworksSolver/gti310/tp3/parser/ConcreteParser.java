@@ -51,19 +51,30 @@ public class ConcreteParser implements Parser<gInputData> {
 		      int nbSommets = data.getNbSommet();
 		      matrice = new int[nbSommets][nbSommets];
 		      
+		      //Boucle pour initialiser la matrice avec la valeur pour l'infinie...)
+		      int i,j = 0;
+		      for (i=0;i<nbSommets;i++){
+		    	  for (j=0;j<nbSommets;j++){
+		    		  matrice[i][j] = data.getValI();
+		    	  }
+		      }
 		      //On lit le reste du fichier pour construire la matrice
 		      while ((line = reader.readLine()) != null) {
 
 		    	  if (!(line.contains(end))){
-		    		  
-		    		  String[] strArray = line.split(" ");
+		    		  try{
+		    		  String[] strArray = line.split("\t");
 		    		  int sommet1 = Integer.parseInt(strArray[0]);
 		    		  int sommet2 = Integer.parseInt(strArray[1]);
 		    		  int poids = Integer.parseInt(strArray[2]);
 		    		
-		    		  matrice[sommet1][sommet2] = poids;
+		    		  //On enlève 1 aux sommets car l'indice de la matrice commence à 0...
+		    		  matrice[(sommet1 - 1)][(sommet2 - 1)] = poids;
 		    		  
 		    		  //System.out.println(line);
+		    		  } catch (Exception e) {
+		    		      e.printStackTrace();
+		    		    }
 			        }
 		    	  else{
 		    		  break;
@@ -100,10 +111,7 @@ public class ConcreteParser implements Parser<gInputData> {
 		}else
 			System.out.println("Format de fichier non valide !!!");
 		
-
-
-		// TODO Auto-generated method stub
-		return null;
+		return data;
 	}
 
 	private boolean validate(String filename){

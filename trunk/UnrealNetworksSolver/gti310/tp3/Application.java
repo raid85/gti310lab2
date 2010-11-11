@@ -25,7 +25,7 @@ public class Application {
 		Parser p = new ConcreteParser();
 		Solver s = new ConcreteSolver();
 		
-		//mettre args au lieu de musee.txt
+		//gInputData data = p.parse(args[0]);
 		gInputData data = p.parse("Musee.txt");
 		
 		s.solve(data);

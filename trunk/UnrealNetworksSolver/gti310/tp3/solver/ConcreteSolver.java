@@ -9,21 +9,10 @@ import gti310.tp3.parser.gInputData;
 public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer>>>{
 
 	
-	public static int[][] matrice = {
-		 { 0, 0, 0, 0, 2, 0, 0, 3, 0, 0, 4 },
-	     { 0, 0, 0, 0, 0, 3, 5, 0, 0, 0, 0 },
-	     { 0, 0, 0, 0, 0, 3, 0, 4, 0, 2, 0 },
-	     { 0, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0 },
-	     { 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3 },
-	     { 0, 0, 3, 0, 0, 0, 0, 0, 2, 4, 0 },
-	     { 0, 5, 0, 0, 0, 0, 0, 0, 0, 3, 0 },
-	     { 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 6 },
-	     { 0, 0, 0, 5, 2, 0, 0, 0, 0, 0, 0 },
-	     { 0, 0, 2, 0, 0, 4, 3, 0, 0, 0, 0 },
-	     { 0, 0, 0, 0, 3, 0, 0, 6, 0, 0, 0 },
-	};
+	public static int[][] matrice = null;
 	public static int n;
 	public static int depart = 0;
+	public static int valInf = 999999;
 	public static int counter = 0;
 	public static ArrayList<List<Integer>> solutions = new ArrayList<List<Integer>>();
 	public static ArrayList<Integer> solution = new ArrayList<Integer>();
@@ -36,11 +25,12 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 	 * @param input (gInputData) Ce qui est requis pour resoudre le probleme
 	 * @return solutions ( ArrayList<List<Integer>> ) ou null
 	 */
-	public ArrayList<List<Integer>> solve(gInputData input) {
+	public ArrayList<List<Integer>> solve(gInputData data) {
 		
 		try {
-			//int[][] matrice = gInputData.get
-			
+			matrice = data.getMatrice();
+			depart = (data.getSommetDepart() - 1); //depart = depart - 1 car l'indice de la matrice commence a 0...
+			valInf = data.getValI();
 			n = matrice.length;
 			
 			hamiltonianPath();
@@ -107,7 +97,7 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 		} else {
 			int noeudCourant = chemin.get(chemin.size()-1);
 			for (int i=0;i <n; i++ ) {
-				if (!chemin.contains(i) && matrice[noeudCourant][i] != 0) {
+				if (!chemin.contains(i) && matrice[noeudCourant][i] < valInf) {
 					chemin.add(i);
 					hamiltonianPath(chemin);
 					chemin.remove(chemin.size()-1);
@@ -148,7 +138,7 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 		
 		listeVoisins = new ArrayList<Integer>();
 		 for(int j=0; j < n; j++){
-	 	   if (matrice[noeud][j] > 0) {
+	 	   if (matrice[noeud][j] < valInf) {
 	 		   listeVoisins.add(j);
 	 	   }   
 	    }
