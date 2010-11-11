@@ -1,6 +1,13 @@
 package gti310.tp3.parser;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -13,7 +20,7 @@ public class ConcreteParser implements Parser<gInputData> {
 
 	private gInputData data = new gInputData();
 	final String end = "$";
-
+	private int[][] matrice = null;
 
 
 
@@ -23,21 +30,73 @@ public class ConcreteParser implements Parser<gInputData> {
 
 		if(validate(filename)){
 
-			try {
-				Scanner s = new Scanner(new FileReader(filename));			
-				//boucle qui s'occupe d'envoyer les donnees a la classe gInputData
+			File file = new File(filename);
+		    FileInputStream fis = null;
+		 
+		    try {
+		      fis = new FileInputStream(file);
+		      BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+		      String line = null;
+		      
+		      //La premiere ligne sera le nombre de sommet
+		      data.setNbSommet(Integer.parseInt(reader.readLine()));
+		      
+		      //La deuxieme ligne sera la valeur pour l'infinie
+		      data.setValI(Integer.parseInt(reader.readLine()));
+		      
+		      //La troisieme ligne sera le sommet de depart
+		      data.setSommetDepart(Integer.parseInt(reader.readLine()));
+		      
+		      //On se sert du nombre de sommets pour initialiser la matrice avec les dimensions
+		      int nbSommets = data.getNbSommet();
+		      matrice = new int[nbSommets][nbSommets];
+		      
+		      //On lit le reste du fichier pour construire la matrice
+		      while ((line = reader.readLine()) != null) {
 
-				while(s.hasNextInt()){				
+		    	  if (!(line.contains(end))){
+		    		  
+		    		  String[] strArray = line.split(" ");
+		    		  int sommet1 = Integer.parseInt(strArray[0]);
+		    		  int sommet2 = Integer.parseInt(strArray[1]);
+		    		  int poids = Integer.parseInt(strArray[2]);
+		    		
+		    		  matrice[sommet1][sommet2] = poids;
+		    		  
+		    		  //System.out.println(line);
+			        }
+		    	  else{
+		    		  break;
+		    	  }
+		      }
 
-					data.add(s.nextInt());	
-				}
+		      data.setMatrice(matrice);
+		      
+		      //On ferme l'inputStream et le reader
+		      fis.close();
+		      reader.close();
 
-			} 
-
-			catch (FileNotFoundException e) {
-				System.out.println("Fichier introuvable!");
-				e.printStackTrace();
-			}
+		    } catch (FileNotFoundException e) {
+		      e.printStackTrace();
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    }
+		    
+//			try {
+//				Scanner s = new Scanner(new FileReader(filename));			
+//				//boucle qui s'occupe d'envoyer les donnees a la classe gInputData
+//
+//				while(s.hasNextInt()){				
+//
+//					data.add(s.nextInt());	
+//				}
+//
+//			} 
+//
+//			catch (FileNotFoundException e) {
+//				System.out.println("Fichier introuvable!");
+//				e.printStackTrace();
+//			}
 		}else
 			System.out.println("Format de fichier non valide !!!");
 		
