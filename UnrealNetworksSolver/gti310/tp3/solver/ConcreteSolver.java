@@ -85,6 +85,7 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 			//Si on a un cycle on ajoute la solution
 			if (cycle == true){
 				ajouteSolution(chemin);
+				cycle = false;
 				return;
 			}
 			
@@ -115,17 +116,18 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 	 * @return void
 	 */
 	public static void ajouteSolution(List<Integer> chemin) {
+		System.out.print("Solution : ");
 		Iterator<Integer> it = chemin.iterator();
 		while (it.hasNext()) {
-			System.err.print((it.next()+ 1) +" ");
+			System.out.print((it.next()+ 1) +" ");
 		}
 		//On ferme le cyle avec le sommet de depart
 		solution = (ArrayList<Integer>) chemin;
 		solution.add(depart);
 		//On ajoute la solution trouvé à la liste de solutions
 		solutions.add(solution);
-		System.err.print((depart+1) +" ");
-		System.err.println();
+		System.out.print((depart+1) +" ");
+		System.out.println();
 	}
 
 	/**
