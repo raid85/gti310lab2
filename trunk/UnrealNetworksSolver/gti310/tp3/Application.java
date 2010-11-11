@@ -1,5 +1,7 @@
 package gti310.tp3;
 import gti310.tp3.parser.*;
+import gti310.tp3.solver.ConcreteSolver;
+import gti310.tp3.solver.Solver;
 
 /**
  * The Application class defines a template method to call the elements to
@@ -21,6 +23,11 @@ public class Application {
 	public static void main(String args[]) {
 		System.out.println("Unreal Networks Solver !");
 		Parser p = new ConcreteParser();
-		p.parse("Musee.txt");
+		Solver s = new ConcreteSolver();
+		
+		//mettre args au lieu de musee.txt
+		gInputData data = p.parse("Musee.txt");
+		
+		s.solve(data);
 	}
 }

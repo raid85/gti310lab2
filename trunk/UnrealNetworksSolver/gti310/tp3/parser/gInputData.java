@@ -6,16 +6,23 @@ public class gInputData {
 	private int nbSommet ;
 	private int valI ;
 	private int SommetDepart ;	
+	private int[][] matrice ;
 	
-	private ArrayList<Integer> m = new ArrayList<Integer> ();
-
-
-	public void add(int n){		
-						
-			m.add(n);			
-		
-		System.out.println(""+m.toString());
+	public int[][] getMatrice() {
+		return matrice;
 	}
+	public void setMatrice(int[][] matrice) {
+		this.matrice = matrice;
+	}
+//	private ArrayList<Integer> m = new ArrayList<Integer> ();
+//
+//
+//	public void add(int n){		
+//						
+//			m.add(n);			
+//		
+//		System.out.println(""+m.toString());
+//	}
 	/**
 	 * @param nbSommet the nbSommet to  set
 	 */
