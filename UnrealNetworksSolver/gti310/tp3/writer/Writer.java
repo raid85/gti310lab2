@@ -17,12 +17,12 @@ package gti310.tp3.writer;
  *
  * @param <T> The user-defined object that will be written to file. 
  */
-public interface Writer<T> {
+public interface Writer<SolutionData> {
 
 	/**
 	 * Write the given object's data to file.
 	 * @param filename The complete path to the file that will be created.
 	 * @param output The data which will be written to the file.
 	 */
-	void write(String filename, T output);
+	void write(String filename, SolutionData solutionData);
 }

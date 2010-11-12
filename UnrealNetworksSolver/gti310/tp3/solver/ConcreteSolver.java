@@ -6,7 +6,7 @@ import java.util.List;
 
 import gti310.tp3.parser.gInputData;
 
-public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer>>>{
+public class ConcreteSolver implements Solver<gInputData, SolutionData>{
 
 	
 	public static int[][] matrice = null;
@@ -14,8 +14,9 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 	public static int depart = 0;
 	public static int valInf = 999999;
 	public static int counter = 0;
-	public static ArrayList<List<Integer>> solutions = new ArrayList<List<Integer>>();
-	public static ArrayList<Integer> solution = new ArrayList<Integer>();
+	//public static ArrayList<List<Integer>> solutions = new ArrayList<List<Integer>>();
+	//public static ArrayList<Integer> solution = new ArrayList<Integer>();
+	private static SolutionData solutionData = new SolutionData();
 	public static ArrayList<Integer> listeVoisins;
 	
 	/**
@@ -25,7 +26,7 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 	 * @param input (gInputData) Ce qui est requis pour resoudre le probleme
 	 * @return solutions ( ArrayList<List<Integer>> ) ou null
 	 */
-	public ArrayList<List<Integer>> solve(gInputData data) {
+	public SolutionData solve(gInputData data) {
 		
 		try {
 			matrice = data.getMatrice();
@@ -35,7 +36,7 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 			
 			hamiltonianPath();
 			
-			return solutions;
+			return solutionData;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -116,18 +117,24 @@ public class ConcreteSolver implements Solver<gInputData, ArrayList<List<Integer
 	 * @return void
 	 */
 	public static void ajouteSolution(List<Integer> chemin) {
+		String solution = "";
 		System.out.print("Solution : ");
+		
+		//On parcours le chemin et on ajoute l'écrit dans la String solution
 		Iterator<Integer> it = chemin.iterator();
 		while (it.hasNext()) {
-			System.out.print((it.next()+ 1) +" ");
+			int nb = it.next();
+			solution = solution + Integer.toString((nb + 1)) + " -> ";
+			System.out.print((nb + 1) +" ");
 		}
-		//On ferme le cyle avec le sommet de depart
-		solution = (ArrayList<Integer>) chemin;
-		solution.add(depart);
-		//On ajoute la solution trouvé à la liste de solutions
-		solutions.add(solution);
 		System.out.print((depart+1) +" ");
 		System.out.println();
+		
+		//On ferme le cyle avec le sommet de depart
+		solution = solution + (Integer.toString(depart) + 1);
+		
+		//On ajoute la solution trouvé à la liste de solutions
+		solutionData.addSolution(solution);
 	}
 
 	/**
