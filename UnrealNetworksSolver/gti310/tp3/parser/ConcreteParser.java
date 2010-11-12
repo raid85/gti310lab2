@@ -19,11 +19,8 @@ public class ConcreteParser implements Parser<InputData> {
 	final String end = "$";
 	private int[][] matrice = null;
 
-
-
 	@Override
 	public InputData parse(String filename) {
-
 
 		if(validate(filename)){
 
@@ -41,14 +38,13 @@ public class ConcreteParser implements Parser<InputData> {
 		      //La deuxieme ligne sera la valeur pour l'infinie
 		      data.setValI(Integer.parseInt(reader.readLine()));
 		      
-		      //La troisieme ligne sera le sommet de depart ( 1 si aucun de mentionné)
+		      //La troisieme ligne sera le sommet de depart ( 1 si aucun d'écrit )
 		      String sommetDepart = reader.readLine();
 		      if (!(sommetDepart.equals(""))){
 		    	  data.setSommetDepart(Integer.parseInt(reader.readLine()));
 		      }else{
 		    	  data.setSommetDepart(1);
 		      }
-		      
 		      
 		      //On se sert du nombre de sommets pour initialiser la matrice avec les dimensions
 		      int nbSommets = data.getNbSommet();
@@ -61,6 +57,7 @@ public class ConcreteParser implements Parser<InputData> {
 		    		  matrice[i][j] = data.getValI();
 		    	  }
 		      }
+		      
 		      //On lit le reste du fichier pour construire la matrice
 		      while ((line = reader.readLine()) != null) {
 
@@ -95,22 +92,6 @@ public class ConcreteParser implements Parser<InputData> {
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    }
-		    
-//			try {
-//				Scanner s = new Scanner(new FileReader(filename));			
-//				//boucle qui s'occupe d'envoyer les donnees a la classe gInputData
-//
-//				while(s.hasNextInt()){				
-//
-//					data.add(s.nextInt());	
-//				}
-//
-//			} 
-//
-//			catch (FileNotFoundException e) {
-//				System.out.println("Fichier introuvable!");
-//				e.printStackTrace();
-//			}
 		}else
 			System.out.println("Format de fichier non valide !!!");
 		
@@ -149,12 +130,6 @@ public class ConcreteParser implements Parser<InputData> {
 			e.printStackTrace();
 		}
 
-
-
-
-
-
-		//System.out.println("valide ?" +isValid);
 		return isValid;
 
 	}
