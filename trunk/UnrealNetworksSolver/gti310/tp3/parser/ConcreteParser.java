@@ -41,8 +41,14 @@ public class ConcreteParser implements Parser<gInputData> {
 		      //La deuxieme ligne sera la valeur pour l'infinie
 		      data.setValI(Integer.parseInt(reader.readLine()));
 		      
-		      //La troisieme ligne sera le sommet de depart
-		      data.setSommetDepart(Integer.parseInt(reader.readLine()));
+		      //La troisieme ligne sera le sommet de depart ( 1 si aucun de mentionné)
+		      String sommetDepart = reader.readLine();
+		      if (!(sommetDepart.equals(""))){
+		    	  data.setSommetDepart(Integer.parseInt(reader.readLine()));
+		      }else{
+		    	  data.setSommetDepart(1);
+		      }
+		      
 		      
 		      //On se sert du nombre de sommets pour initialiser la matrice avec les dimensions
 		      int nbSommets = data.getNbSommet();
