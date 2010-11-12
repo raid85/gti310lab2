@@ -4,6 +4,7 @@ import java.util.List;
 
 import gti310.tp3.parser.*;
 import gti310.tp3.solver.ConcreteSolver;
+import gti310.tp3.solver.SolutionData;
 import gti310.tp3.solver.Solver;
 import gti310.tp3.writer.ConcreteWriter;
 import gti310.tp3.writer.Writer;
@@ -28,8 +29,8 @@ public class Application {
 	public static void main(String args[]) {
 		System.out.println("Unreal Networks Solver !");
 		Parser<gInputData> p = new ConcreteParser();
-		Solver<gInputData, ?> s = new ConcreteSolver();
-		Writer<ArrayList<List<Integer>>> w = new ConcreteWriter();
+		Solver<gInputData, SolutionData> s = new ConcreteSolver();
+		Writer<SolutionData> w = new ConcreteWriter();
 		
 		if ((args[0]==null) || (args[1]==null)){
 			System.out.println("Il manque des arguments...");
@@ -38,10 +39,10 @@ public class Application {
 			gInputData data = p.parse(args[0]);
 			
 			//On résous le problème à partir des données
-			ArrayList<List<Integer>> solutions = (ArrayList<List<Integer>>) s.solve(data);
+			SolutionData solutionData = s.solve(data);
 			
 			//On écrit les solutions trouvé dans le fichier de sortie
-			w.write(args[1], solutions);
+			w.write(args[1], solutionData);
 		}
 	}
 }

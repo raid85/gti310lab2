@@ -1,33 +1,26 @@
 package gti310.tp3.writer;
 
+import gti310.tp3.solver.SolutionData;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ConcreteWriter implements Writer<ArrayList<List<Integer>>> {
+public class ConcreteWriter implements Writer<SolutionData> {
 
 	
-	public void write(String filename, ArrayList<List<Integer>> output) {
+	public void write(String filename, SolutionData solutionData) {
 		
 		 try{
 			    //On crée le fichier
 			    FileWriter fstream = new FileWriter(filename);
 			    BufferedWriter writer = new BufferedWriter(fstream);
 			    
-			    int i,j=0;
+			    int nbSol = solutionData.getNbSolution();
+			    int i=0;
 			    //Boucle qui passe le nombre de solutions
-			    for (i=0;i<output.size();i++){
-			    	List<Integer> solution = output.get(i);
-			    	//On écrit chaque solution
-			    	for (j=0;j<solution.size();j++){
-			    		if (j == (solution.size()-1)){
-			    			writer.write(solution.get(j).toString());
-			    		}else{
-			    			writer.write(solution.get(j).toString());
-				    		writer.write(" -> ");
-			    		}	
-			    	}
+			    for (i=0;i<nbSol;i++){
+			    	String solution = solutionData.getSolution(i);
+			    	writer.write(solution);
 			    }
 			   
 			    writer.close(); 
