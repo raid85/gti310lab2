@@ -31,14 +31,17 @@ public class Application {
 		Solver<gInputData, ?> s = new ConcreteSolver();
 		Writer<ArrayList<List<Integer>>> w = new ConcreteWriter();
 		
-		//On récupère les données du fichier source
-		gInputData data = p.parse(args[0]);
-		
-		//On résous le problème à partir des données
-		ArrayList<List<Integer>> solutions = (ArrayList<List<Integer>>) s.solve(data);
-		
-		//On écrit les solutions trouvé dans le fichier de sortie
-		w.write(args[1], solutions);
-		
+		if ((args[0]==null) || (args[1]==null)){
+			System.out.println("Il manque des arguments...");
+		}else {
+			//On récupère les données du fichier source
+			gInputData data = p.parse(args[0]);
+			
+			//On résous le problème à partir des données
+			ArrayList<List<Integer>> solutions = (ArrayList<List<Integer>>) s.solve(data);
+			
+			//On écrit les solutions trouvé dans le fichier de sortie
+			w.write(args[1], solutions);
+		}
 	}
 }
