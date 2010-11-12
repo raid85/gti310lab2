@@ -28,15 +28,15 @@ public class Application {
 	 */
 	public static void main(String args[]) {
 		System.out.println("Unreal Networks Solver !");
-		Parser<gInputData> p = new ConcreteParser();
-		Solver<gInputData, SolutionData> s = new ConcreteSolver();
+		Parser<InputData> p = new ConcreteParser();
+		Solver<InputData, SolutionData> s = new ConcreteSolver();
 		Writer<SolutionData> w = new ConcreteWriter();
 		
 		if ((args[0]==null) || (args[1]==null)){
 			System.out.println("Il manque des arguments...");
 		}else {
 			//On récupère les données du fichier source
-			gInputData data = p.parse(args[0]);
+			InputData data = p.parse(args[0]);
 			
 			//On résous le problème à partir des données
 			SolutionData solutionData = s.solve(data);

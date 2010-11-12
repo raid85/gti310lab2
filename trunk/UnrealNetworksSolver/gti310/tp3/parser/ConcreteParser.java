@@ -13,16 +13,16 @@ import java.util.regex.Pattern;
  * http://www.javapractices.com/topic/TopicAction.do?Id=42
  * @author ah45290 
  */
-public class ConcreteParser implements Parser<gInputData> {
+public class ConcreteParser implements Parser<InputData> {
 
-	private gInputData data = new gInputData();
+	private InputData data = new InputData();
 	final String end = "$";
 	private int[][] matrice = null;
 
 
 
 	@Override
-	public gInputData parse(String filename) {
+	public InputData parse(String filename) {
 
 
 		if(validate(filename)){
