@@ -1,7 +1,4 @@
 package gti310.tp3;
-import java.util.ArrayList;
-import java.util.List;
-
 import gti310.tp3.parser.*;
 import gti310.tp3.solver.ConcreteSolver;
 import gti310.tp3.solver.SolutionData;

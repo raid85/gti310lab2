@@ -1,7 +1,6 @@
 package gti310.tp3.solver;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SolutionData {
 

@@ -1,5 +1,4 @@
 package gti310.tp3.parser;
-import java.util.*;
 
 public class InputData {
 
