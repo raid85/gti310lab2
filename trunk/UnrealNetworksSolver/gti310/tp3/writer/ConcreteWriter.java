@@ -17,7 +17,7 @@ public class ConcreteWriter implements Writer<SolutionData> {
 			    
 			    int nbSol = solutionData.getNbSolution();
 			    int i=0;
-			    //Boucle qui passe le nombre de solutions
+			    //Boucle qui passe chaque solution
 			    for (i=0;i<nbSol;i++){
 			    	String solution = solutionData.getSolution(i);
 			    	writer.write(solution);
@@ -25,7 +25,7 @@ public class ConcreteWriter implements Writer<SolutionData> {
 			   
 			    writer.close(); 
 			    
-			    }catch (Exception e){//Catch exception if any
+			    }catch (Exception e){
 			      System.err.println("Error: " + e.getMessage());
 			    }
 		

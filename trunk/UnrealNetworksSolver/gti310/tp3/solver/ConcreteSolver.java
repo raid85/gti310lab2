@@ -14,8 +14,6 @@ public class ConcreteSolver implements Solver<InputData, SolutionData>{
 	public static int depart = 0;
 	public static int valInf = 999999;
 	public static int counter = 0;
-	//public static ArrayList<List<Integer>> solutions = new ArrayList<List<Integer>>();
-	//public static ArrayList<Integer> solution = new ArrayList<Integer>();
 	private static SolutionData solutionData = new SolutionData();
 	public static ArrayList<Integer> listeVoisins;
 	
@@ -75,8 +73,10 @@ public class ConcreteSolver implements Solver<InputData, SolutionData>{
 		//pour pouvoir terminer le cycle au point de départ
 		if (chemin.size() == n) {
 			boolean cycle = false;
+			
 			//On va chercher les voisins du dernier noeud du chemin
 			ArrayList<Integer> voisins = getVoisins(chemin.get(n-1));
+			
 			//On regarde si un des voisins est le noeud de départ (pour pouvoir boucler)
 			for (int i = 0; i < voisins.size();i++){
 				if (depart == voisins.get(i)){
