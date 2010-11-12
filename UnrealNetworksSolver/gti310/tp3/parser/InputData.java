@@ -1,7 +1,7 @@
 package gti310.tp3.parser;
 import java.util.*;
 
-public class gInputData {
+public class InputData {
 
 	private int nbSommet ;
 	private int valI ;

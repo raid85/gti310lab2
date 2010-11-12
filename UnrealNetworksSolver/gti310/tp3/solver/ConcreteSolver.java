@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import gti310.tp3.parser.gInputData;
+import gti310.tp3.parser.InputData;
 
-public class ConcreteSolver implements Solver<gInputData, SolutionData>{
+public class ConcreteSolver implements Solver<InputData, SolutionData>{
 
 	
 	public static int[][] matrice = null;
@@ -26,7 +26,7 @@ public class ConcreteSolver implements Solver<gInputData, SolutionData>{
 	 * @param input (gInputData) Ce qui est requis pour resoudre le probleme
 	 * @return solutions ( ArrayList<List<Integer>> ) ou null
 	 */
-	public SolutionData solve(gInputData data) {
+	public SolutionData solve(InputData data) {
 		
 		try {
 			matrice = data.getMatrice();
