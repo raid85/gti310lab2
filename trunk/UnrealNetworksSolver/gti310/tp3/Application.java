@@ -22,8 +22,8 @@ public class Application {
 	 */
 	public static void main(String args[]) {
 		System.out.println("Unreal Networks Solver !");
-		Parser p = new ConcreteParser();
-		Solver s = new ConcreteSolver();
+		Parser<gInputData> p = new ConcreteParser();
+		Solver<gInputData, ?> s = new ConcreteSolver();
 		
 		//gInputData data = p.parse(args[0]);
 		gInputData data = p.parse("Musee.txt");
