@@ -19,7 +19,13 @@ public class ConcreteParser implements Parser<InputData> {
 	final String end = "$";
 	private int[][] matrice = null;
 
-	@Override
+	/**
+	 * Méthode redéfinie de l'interface qui lit le fichier texte et place les informations 
+	 * receuillies dans un un objet InputData si le fichier lu est valide.
+	 * 
+	 * @param String Filename 
+	 * @returns InputData
+	 */
 	public InputData parse(String filename) {
 
 		if(validate(filename)){
@@ -98,6 +104,11 @@ public class ConcreteParser implements Parser<InputData> {
 		return data;
 	}
 
+	/**
+	 * Méthode qui sert a valider la structure du fichier recu en paramètre
+	 * @param filename
+	 * @return boolean
+	 */
 	private boolean validate(String filename){
 
 		int i = 0 ;
