@@ -38,7 +38,7 @@ public class ConcreteParser implements Parser<InputData> {
 		      //La deuxieme ligne sera la valeur pour l'infinie
 		      data.setValI(Integer.parseInt(reader.readLine()));
 		      
-		      //La troisieme ligne sera le sommet de depart ( 1 si aucun d'écrit )
+		      //La troisieme ligne sera le sommet de depart ( 1 si aucun d'ï¿½crit )
 		      String sommetDepart = reader.readLine();
 		      if (!(sommetDepart.equals(""))){
 		    	  data.setSommetDepart(Integer.parseInt(reader.readLine()));
@@ -68,7 +68,7 @@ public class ConcreteParser implements Parser<InputData> {
 		    		  int sommet2 = Integer.parseInt(strArray[1]);
 		    		  int poids = Integer.parseInt(strArray[2]);
 		    		
-		    		  //On enlève 1 aux sommets car l'indice de la matrice commence à 0...
+		    		  //On enlï¿½ve 1 aux sommets car l'indice de la matrice commence ï¿½ 0...
 		    		  matrice[(sommet1 - 1)][(sommet2 - 1)] = poids;
 		    		  
 		    		  //System.out.println(line);
@@ -128,6 +128,7 @@ public class ConcreteParser implements Parser<InputData> {
 		catch (FileNotFoundException e) {
 			System.out.println("Fichier introuvable!");
 			e.printStackTrace();
+			
 		}
 
 		return isValid;

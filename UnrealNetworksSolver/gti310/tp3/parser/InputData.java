@@ -1,5 +1,11 @@
 package gti310.tp3.parser;
 
+/**
+ *Cette classe est la classe décrite par "E" dans le rapport de laboratoire.
+ *Sa fonction est de contenir les informations relatives à la matrice représentant le graphe
+ *ainsi que de fournir les accesseurs nécéssaire à la résolution du problème
+ */
+
 public class InputData {
 
 	private int nbSommet ;
@@ -7,45 +13,33 @@ public class InputData {
 	private int SommetDepart ;	
 	private int[][] matrice ;
 	
+	/**
+	 *Ensembles des accesseurs et des mutateurs pour la classe 
+	 */
 	public int[][] getMatrice() {
 		return matrice;
 	}
 	public void setMatrice(int[][] matrice) {
 		this.matrice = matrice;
 	}
-	/**
-	 * @param nbSommet the nbSommet to  set
-	 */
 	public void setNbSommet(int nbSommet) {
 		this.nbSommet = nbSommet;
 	}
-	/**
-	 * @return the nbSommet
-	 */
+	
 	public int getNbSommet() {
 		return nbSommet;
 	}
-	/**
-	 * @param valI the valI to set
-	 */
+
 	public void setValI(int valI) {
 		this.valI = valI;
 	}
-	/**
-	 * @return the valI
-	 */
+	
 	public int getValI() {
 		return valI;
 	}
-	/**
-	 * @param sommetDepart the sommetDepart to set
-	 */
 	public void setSommetDepart(int sommetDepart) {
 		SommetDepart = sommetDepart;
 	}
-	/**
-	 * @return the sommetDepart
-	 */
 	public int getSommetDepart() {
 		return SommetDepart;
 	}
