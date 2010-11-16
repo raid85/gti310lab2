@@ -38,8 +38,14 @@ public class Application {
 			//On résous le problème à partir des données
 			SolutionData solutionData = s.solve(data);
 			
-			//On écrit les solutions trouvé dans le fichier de sortie
-			w.write(args[1], solutionData);
+			//S'il y a une solution
+			if (solutionData.getNbSolution()>0){
+				//On écrit les solutions trouvé dans le fichier de sortie
+				w.write(args[1], solutionData);
+			}else{
+				System.out.println("Aucune solution trouvé");
+			}
+			
 		}
 	}
 }

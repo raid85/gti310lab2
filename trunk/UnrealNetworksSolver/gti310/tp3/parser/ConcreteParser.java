@@ -47,7 +47,7 @@ public class ConcreteParser implements Parser<InputData> {
 		      //La troisieme ligne sera le sommet de depart ( 1 si aucun d'�crit )
 		      String sommetDepart = reader.readLine();
 		      if (!(sommetDepart.equals(""))){
-		    	  data.setSommetDepart(Integer.parseInt(reader.readLine()));
+		    	  data.setSommetDepart(Integer.parseInt(sommetDepart));
 		      }else{
 		    	  data.setSommetDepart(1);
 		      }
