@@ -34,6 +34,11 @@ public class Main {
 	public static final int U = 1;
 	public static final int V = 2;
 	
+	//Arguments fourni par l'usager
+	public static String fichierEntree = "";
+	public static String fichierSortie = "";
+	public static int facteurQuantification = 0;
+	
 	/**
 	 * The application's entry point.
 	 * 
@@ -42,6 +47,20 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
 		
+		if (args[0] != null && args[1] != null && args[2] != null){
+			fichierEntree = args[0];
+			fichierSortie = args[1];
+			facteurQuantification = Integer.parseInt(args[2]);
+			
+			//On lit le fichier d'entrée
+			PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
+			int[][][] matriceRGB = ppmReaderWriter.readPPMFile(fichierEntree);
+			
+			
+		}else{
+			System.out.println("il manque des arguments !");
+			System.out.println("<fichierEntrée> <fichierSortie> <facteurQuantification>");
+		}
 		
 	}
 }
