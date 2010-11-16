@@ -21,6 +21,14 @@ public class ConcreteSolver implements Solver<InputData, SolutionData>{
 	 * Methode qui resous le probleme a partir des infos de gInputData (matrice, sommetDepart, etc)
 	 * et qui retourne une liste des solutions trouvé
 	 * 
+	 * Analyse de complexité : 
+	 * 
+	 * meilleur cas : 0(nbSommets) 
+	 * 
+	 * pire cas : Puisqu'il s'agit d'un algorithme de récursivité que non devons prévenir de 
+	 * récursivité infini dans le cas ou il n'y a pas de solution possible, le pire cas serait quand 
+	 * notre compteur atteint la limite que l'on lui impose soit 0(limite max du compteur) 
+	 * 
 	 * @param input (gInputData) Ce qui est requis pour resoudre le probleme
 	 * @return solutions ( ArrayList<List<Integer>> ) ou null
 	 */
@@ -105,8 +113,11 @@ public class ConcreteSolver implements Solver<InputData, SolutionData>{
 					chemin.remove(chemin.size()-1);
 		}
 	}
-	}
-
+	}	
+		//Empêche la récursion infini?
+		if (counter > 999999999){
+			return;
+		}
 	}
 
 	/**
