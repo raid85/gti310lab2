@@ -6,7 +6,7 @@ package gti310.tp4;
  * into PPM format. It is the implementation of the simplified JPEG block 
  * diagrams.
  * 
- * @author François Caron
+ * @author Franï¿½ois Caron
  */
 public class Main {
 
@@ -44,7 +44,7 @@ public class Main {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
 		
 		if (args[0] != null && args[1] != null && args[2] != null){
@@ -52,7 +52,7 @@ public class Main {
 			fichierSortie = args[1];
 			facteurQuantification = Integer.parseInt(args[2]);
 			
-			//On lit le fichier d'entrée
+			//On lit le fichier d'entrï¿½e
 			PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
 			int[][][] matriceRGB = ppmReaderWriter.readPPMFile(fichierEntree);
 			
@@ -63,7 +63,7 @@ public class Main {
 			
 		}else{
 			System.out.println("il manque des arguments !");
-			System.out.println("<fichierEntrée> <fichierSortie> <facteurQuantification>");
+			System.out.println("<fichierEntrï¿½e> <fichierSortie> <facteurQuantification>");
 		}
 		
 	}
