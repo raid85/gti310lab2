@@ -53,12 +53,12 @@ public class Main {
 			facteurQuantification = Integer.parseInt(args[2]);
 			
 			//On lit le fichier d'entr�e
-			PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
-			int[][][] matriceRGB = ppmReaderWriter.readPPMFile(fichierEntree);
+			//PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
+			int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
 			
 			//On converti la matriceRGB en matriceYUV
 			ConvertRGB2YUV convertRGB2YUV = new ConvertRGB2YUV();
-			int[][][] matriceYUV = convertRGB2YUV.convert_RGB_to_YUV(matriceRGB);
+			int[][][] matriceYUV = convertRGB2YUV.convert(matriceRGB);
 			
 			
 		}else{

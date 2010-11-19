@@ -18,6 +18,9 @@ import java.io.IOException;
  * @author Fran�ois Caron
  */
 public class PPMReaderWriter {
+	
+	
+	
 	/* 
 	 * constants used to read & write
 	 */
@@ -199,4 +202,6 @@ public class PPMReaderWriter {
 			System.err.println(e.getMessage());
 		}
 	}
+	
+	
 }
