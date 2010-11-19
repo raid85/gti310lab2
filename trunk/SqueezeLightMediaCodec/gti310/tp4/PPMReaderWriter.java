@@ -56,6 +56,7 @@ public class PPMReaderWriter {
 	 */
 	public static int[][][] readPPMFile(String filename) {
 		try {
+			
 			DataInputStream in = new DataInputStream(
 					new BufferedInputStream(new FileInputStream(filename)));
 			byte b;
@@ -69,6 +70,7 @@ public class PPMReaderWriter {
 			/* check to make sure we are reading a PPM file */
 			if(!magicId.equals(MAGIC_ID)) {
 				in.close();  // close file handler
+				System.out.println("Not a valid ppm file");
 				return null; // nothing to return.
 			}
 			
