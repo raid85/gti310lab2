@@ -9,14 +9,18 @@ public class ConvertRGB2YUV {
 		//y = 0.299R + 0.587G + 0.114B
 		//u = 0.492(B-Y)
 		//v = 0.877(R-Y)
+
+		int n = 0, ni = 0, nj = 0, nk = 0;
+		int i = 0, j = 0, k = 0;
 		
-		//!verifier avec le prof si les images vont etre de 256x256
-		int n = 255;
-		int i,j,k = 0;
+		n = matriceRGB.length;
+		//ni = matriceRGB[0].length;
+		nj = matriceRGB[1].length;
+		nk = matriceRGB[2].length;
 		
-		for (i=0; i<3; i++){
-			for (j=0; j<n; j++){
-				for (k=0; k<n; k++){
+		for (i=0; i<n; i++){
+			for (j=0; j<nj; j++){
+				for (k=0; k<nk; k++){
 					if ( i==0){
 						//on rempli la matrice des Y						
 						matriceYUV[i][j][k] = get_Y(matriceRGB[0][j][k], matriceRGB[1][j][k], matriceRGB[2][j][k]);
