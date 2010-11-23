@@ -44,7 +44,7 @@ public class Main {
 	 * 
 	 * @param args
 	 */
-	public static void main1(String[] args) {
+	public static void main(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
 		
 		if (args[0] != null && args[1] != null && args[2] != null){
@@ -52,19 +52,59 @@ public class Main {
 			fichierSortie = args[1];
 			facteurQuantification = Integer.parseInt(args[2]);
 			
-			//On lit le fichier d'entr�e
+			//On lit le fichier d'entree
 			//PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
 			int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
+			
+			//afficheMatrice(matriceRGB);
 			
 			//On converti la matriceRGB en matriceYUV
 			ConvertRGB2YUV convertRGB2YUV = new ConvertRGB2YUV();
 			int[][][] matriceYUV = convertRGB2YUV.convert(matriceRGB);
 			
+			//afficheMatrice(matriceYUV);
 			
 		}else{
 			System.out.println("il manque des arguments !");
-			System.out.println("<fichierEntr�e> <fichierSortie> <facteurQuantification>");
+			System.out.println("<fichierEntree> <fichierSortie> <facteurQuantification>");
 		}
 		
 	}
+	
+	public static void afficheMatrice(int [][][] matrice){
+		int i,j,k = 0;
+		int ni, nj, nk, n = 0;
+	     
+		n = matrice.length;
+		ni = matrice[0].length;
+		nj = matrice[1].length;
+		nk = matrice[2].length;
+		
+		System.out.println(" ni : " + ni + " nj : " + nj + " nk : " + nk);
+		
+		for (i=0; i<n; i++){
+			if ( i==0){
+				System.out.println("");
+				System.out.println("");
+				System.out.println("Composante R / Y : ");
+			}
+			if ( i==1){
+				System.out.println("");
+				System.out.println("");
+				System.out.println("Composante G / U : ");
+			}
+			if ( i==2){
+				System.out.println("");
+				System.out.println("");
+				System.out.println("Composante B / V : ");
+			}
+			for (j=0; j<nj; j++){
+				System.out.println("");
+				for (k=0; k<nk; k++){
+					System.out.print(matrice[i][j][k] + " ");
+				}
+			}
+		}	
+	}
+	
 }
