@@ -48,35 +48,40 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
-		
-		if (args[0] != null && args[1] != null && args[2] != null){
-			fichierEntree = args[0];
-			fichierSortie = args[1];
-			facteurQuantification = Integer.parseInt(args[2]);
-			
-			//On lit le fichier d'entree
-			//PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
-			int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
-		
-			//On converti la matriceRGB en matriceYUV
-			ConvertRGB2YUV convertRGB2YUV = new ConvertRGB2YUV();
-			int[][][] matriceYUV = convertRGB2YUV.convert(matriceRGB);
-		
-			//On decoupe la matrice en bloc 8x8
-			Decoupage8x8 decoupage = new Decoupage8x8();
-			ArrayList<ArrayList<int[][]>> listeBloc8x8 = decoupage.decoupe(matriceYUV);
-			
-			//On applique le DCT sur chaque bloc 8x8
-			for (int i=0;i<listeBloc8x8.size();i++){
-				for (int j=0;j<listeBloc8x8.get(0).size();j++){
-					
-				}
+	
+		try {
+			if (args.length == 3) {
+				fichierEntree = args[0];
+				fichierSortie = args[1];
+				facteurQuantification = Integer.parseInt(args[2]);
+
+				//On lit le fichier d'entree
+				//PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
+				int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
+
+				//On converti la matriceRGB en matriceYUV
+				ConvertRGB2YUV convertRGB2YUV = new ConvertRGB2YUV();
+				int[][][] matriceYUV = convertRGB2YUV.convert(matriceRGB);
+
+				//On decoupe la matrice en bloc 8x8
+				Decoupage8x8 decoupage = new Decoupage8x8();
+				ArrayList<ArrayList<int[][]>> listeBloc8x8 = decoupage.decoupe(matriceYUV);
+				
+				//A effacer
+				System.out.println("nb bloc 8x8 Y : " + listeBloc8x8.get(0).size());
+				System.out.println("nb bloc 8x8 U : " + listeBloc8x8.get(1).size());
+				System.out.println("nb bloc 8x8 V : " + listeBloc8x8.get(2).size());
+				
+				//On applique le DCT sur chaque bloc 8x8
+				DCT dct = new DCT();
+				listeBloc8x8 = dct.process(listeBloc8x8);
+
+			} else {
+				System.out.println("il manque des arguments !");
+				System.out.println("<fichierEntree> <fichierSortie> <facteurQuantification>");
 			}
-			DCT dct = new DCT();
-			
-		}else{
-			System.out.println("il manque des arguments !");
-			System.out.println("<fichierEntree> <fichierSortie> <facteurQuantification>");
+		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		
 	}

@@ -25,6 +25,8 @@ public class Decoupage8x8 {
 		int i,j,k,m;
 		
 		for (i=0; i<3; i++){
+			compteurBloc_K = 0;
+			compteurBloc_M = 0;
 			for (j=0; j<nbBloc; j++){
 				for (k=0; k<8; k++){
 					for (m=0; m<8; m++){
@@ -43,12 +45,12 @@ public class Decoupage8x8 {
 				
 				compteurBloc_K = compteurBloc_K + 8;
 				
-				if (compteurBloc_K >= 248 || done){
+				if (compteurBloc_K >= size-7 || done){
 					compteurBloc_M = compteurBloc_M + 8;
 					compteurBloc_K = 0;
 					done = true;
 				}
-				if (compteurBloc_M >= 248){
+				if (compteurBloc_M >= size-7 ){
 					break;
 				}
 			}
