@@ -1,5 +1,7 @@
 package gti310.tp4;
 
+import java.util.ArrayList;
+
 /**
  * The Main class is where the different functions are called to either encode
  * a PPM file to the Squeeze-Light format or to decode a Squeeze-Ligth image
@@ -63,6 +65,10 @@ public class Main {
 			int[][][] matriceYUV = convertRGB2YUV.convert(matriceRGB);
 			
 			//afficheMatrice(matriceYUV);
+			
+			//On decoupe la matrice en bloc 8x8
+			Decoupage8x8 decoupage = new Decoupage8x8();
+			ArrayList<ArrayList<int[][]>> listeBloc8x8 = decoupage.decoupe(matriceYUV);
 			
 		}else{
 			System.out.println("il manque des arguments !");
