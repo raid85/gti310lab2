@@ -57,18 +57,22 @@ public class Main {
 			//On lit le fichier d'entree
 			//PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
 			int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
-			
-			//afficheMatrice(matriceRGB);
-			
+		
 			//On converti la matriceRGB en matriceYUV
 			ConvertRGB2YUV convertRGB2YUV = new ConvertRGB2YUV();
 			int[][][] matriceYUV = convertRGB2YUV.convert(matriceRGB);
-			
-			//afficheMatrice(matriceYUV);
-			
+		
 			//On decoupe la matrice en bloc 8x8
 			Decoupage8x8 decoupage = new Decoupage8x8();
 			ArrayList<ArrayList<int[][]>> listeBloc8x8 = decoupage.decoupe(matriceYUV);
+			
+			//On applique le DCT sur chaque bloc 8x8
+			for (int i=0;i<listeBloc8x8.size();i++){
+				for (int j=0;j<listeBloc8x8.get(0).size();j++){
+					
+				}
+			}
+			DCT dct = new DCT();
 			
 		}else{
 			System.out.println("il manque des arguments !");
@@ -77,40 +81,40 @@ public class Main {
 		
 	}
 	
-	public static void afficheMatrice(int [][][] matrice){
-		int i,j,k = 0;
-		int ni, nj, nk, n = 0;
-	     
-		n = matrice.length;
-		ni = matrice[0].length;
-		nj = matrice[1].length;
-		nk = matrice[2].length;
-		
-		System.out.println(" ni : " + ni + " nj : " + nj + " nk : " + nk);
-		
-		for (i=0; i<n; i++){
-			if ( i==0){
-				System.out.println("");
-				System.out.println("");
-				System.out.println("Composante R / Y : ");
-			}
-			if ( i==1){
-				System.out.println("");
-				System.out.println("");
-				System.out.println("Composante G / U : ");
-			}
-			if ( i==2){
-				System.out.println("");
-				System.out.println("");
-				System.out.println("Composante B / V : ");
-			}
-			for (j=0; j<nj; j++){
-				System.out.println("");
-				for (k=0; k<nk; k++){
-					System.out.print(matrice[i][j][k] + " ");
-				}
-			}
-		}	
-	}
+//	public static void afficheMatrice(int [][][] matrice){
+//		int i,j,k = 0;
+//		int ni, nj, nk, n = 0;
+//	     
+//		n = matrice.length;
+//		ni = matrice[0].length;
+//		nj = matrice[1].length;
+//		nk = matrice[2].length;
+//		
+//		System.out.println(" ni : " + ni + " nj : " + nj + " nk : " + nk);
+//		
+//		for (i=0; i<n; i++){
+//			if ( i==0){
+//				System.out.println("");
+//				System.out.println("");
+//				System.out.println("Composante R / Y : ");
+//			}
+//			if ( i==1){
+//				System.out.println("");
+//				System.out.println("");
+//				System.out.println("Composante G / U : ");
+//			}
+//			if ( i==2){
+//				System.out.println("");
+//				System.out.println("");
+//				System.out.println("Composante B / V : ");
+//			}
+//			for (j=0; j<nj; j++){
+//				System.out.println("");
+//				for (k=0; k<nk; k++){
+//					System.out.print(matrice[i][j][k] + " ");
+//				}
+//			}
+//		}	
+//	}
 	
 }
