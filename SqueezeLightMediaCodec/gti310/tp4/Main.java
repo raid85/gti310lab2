@@ -78,7 +78,7 @@ public class Main {
 
 				//On applique la quantification sur chaque bloc 8x8
 				Quantification quantification = new Quantification();
-				//listeBloc8x8 = quantification.process(listeBloc8x8, facteurQuantification);
+				listeBloc8x8 = quantification.process(listeBloc8x8, facteurQuantification);
 				
 			} else {
 				System.out.println("il manque des arguments !");
