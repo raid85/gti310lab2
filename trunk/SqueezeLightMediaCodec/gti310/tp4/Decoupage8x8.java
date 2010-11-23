@@ -8,7 +8,11 @@ public class Decoupage8x8 {
 	
 	public ArrayList<ArrayList<int[][]>> decoupe(int[][][] matrice){
 		
+		//On regarde la longueur des matrices
+		int n = matrice[0].length;
+		
 		
 		return listeBloc8x8;
 	}
 }
+ 
