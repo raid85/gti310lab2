@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DCT {
 
-	int[][]  blocSortie = new int[8][8]; 
+	int[][]  blocSortie = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE]; 
 	
 	public ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8){
 		
