@@ -4,7 +4,7 @@ import java.util.*;
 
 public class WorkBench  {
 	
-	public static void main1(String[] args) {
+	public static void main(String[] args) {
 		
 		ConvertRGB2YUV test = new ConvertRGB2YUV();
 		int [][][]RGB=null;

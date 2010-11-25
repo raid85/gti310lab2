@@ -9,8 +9,7 @@ public class TestConvertRGB2YUV extends TestCase {
 
 	
 	public void testconvert(){
-		//ne fonctionne pas si la classe correspondante n<accepte
-		//pas toute les tailles de matrice
+		
 		int R = 250 ;
 		int G = 125;
 		int B = 75;
@@ -41,7 +40,7 @@ public class TestConvertRGB2YUV extends TestCase {
 	}
 	public void testget_V() {
 		
-		assertTrue(testeur.get_U(125,157)==82);
+		assertTrue(testeur.get_V(250,157)==82);
 
 	}
 

@@ -46,7 +46,7 @@ public class Main {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
 	
 		try {
