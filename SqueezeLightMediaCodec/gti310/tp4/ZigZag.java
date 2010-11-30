@@ -26,7 +26,7 @@ public class ZigZag {
 		return listeTab64;
 	}
 	
-	//http://www.coderanch.com/t/485470/java/java/zigzag-traverse-matrix
+	//Référence:
 	//http://rosettacode.org/wiki/Zig-zag_matrix
 	public int[] zigzag(int[][] blocEntree){
 		
