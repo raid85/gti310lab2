@@ -19,10 +19,41 @@ public class ZigZag {
 		return listeTab64;
 	}
 	
+	//http://www.coderanch.com/t/485470/java/java/zigzag-traverse-matrix
+	//http://rosettacode.org/wiki/Zig-zag_matrix
 	public int[] zigzag(int[][] blocEntree){
-		int[] tab64 = new int[64];
 		
-		//....
+		int[] tab64 = new int[64];
+		//int size = blocEntree.length;
+		int size = 8;
+		
+		int i= 1;
+		int j= 1;
+		
+		for(int element= 0;element < size * size;element++){
+			tab64[element] = blocEntree[i-1][j-1];
+			if((i + j) % 2 == 0){
+				// Even stripes
+				if(j < size){
+					j++;
+				}else{
+					i+= 2;
+				}
+				if(i > 1){
+					i--;
+				}
+			}else{
+				// Odd stripes
+				if(i < size){
+					i++;
+				}else{
+					j+= 2;
+				}
+				if(j > 1){
+					j--;
+				}
+			}
+		}
 		
 		return tab64;
 	}

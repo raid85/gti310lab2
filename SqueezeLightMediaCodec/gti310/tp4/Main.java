@@ -67,11 +67,6 @@ public class Main {
 				Decoupage8x8 decoupage = new Decoupage8x8();
 				ArrayList<ArrayList<int[][]>> listeBloc8x8 = decoupage.decoupe(matriceYUV);
 				
-				//A effacer
-				System.out.println("nb bloc 8x8 Y : " + listeBloc8x8.get(0).size());
-				System.out.println("nb bloc 8x8 U : " + listeBloc8x8.get(1).size());
-				System.out.println("nb bloc 8x8 V : " + listeBloc8x8.get(2).size());
-				
 				//On applique le DCT sur chaque bloc 8x8
 				DCT dct = new DCT();
 				listeBloc8x8 = dct.process(listeBloc8x8);
@@ -79,6 +74,15 @@ public class Main {
 				//On applique la quantification sur chaque bloc 8x8
 				Quantification quantification = new Quantification();
 				listeBloc8x8 = quantification.process(listeBloc8x8, facteurQuantification);
+				
+				//Zigzag
+				ZigZag zigZaz = new ZigZag();
+				ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
+				listeTab64 = zigZaz.process(listeBloc8x8);
+			
+				System.out.println(listeTab64.get(0).size());
+				System.out.println(listeTab64.get(1).size());
+				System.out.println(listeTab64.get(2).size());
 				
 			} else {
 				System.out.println("il manque des arguments !");
