@@ -23,10 +23,10 @@ public class DCT {
 		int u,v,i,j;
 		double somme = 0;
 		
-		for (u=0; u<8; u++){
-			for (v=0; v<8; v++){
-				for (i=0; i<8; i++){
-					for (j=0; j<8; j++){
+		for (u=0; u<Main.BLOCK_SIZE; u++){
+			for (v=0; v<Main.BLOCK_SIZE; v++){
+				for (i=0; i<Main.BLOCK_SIZE; i++){
+					for (j=0; j<Main.BLOCK_SIZE; j++){
 						somme = somme + Math.cos(((2*i+1)*u*Math.PI)/16)*Math.cos(((2*j+1)*v*Math.PI)/16);
 					}
 				}
