@@ -7,8 +7,10 @@ public class DPCM {
 	public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 		
 		for (int i=0;i<listeTab64.size();i++){
+			
 			//On prend la valeur de DC de reference
 			int premierDC = listeTab64.get(i).get(0)[0];
+			
 			for (int j=0;j<listeTab64.get(0).size();j++){
 				
 				if (j==0){

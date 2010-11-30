@@ -41,6 +41,10 @@ public class Main {
 	public static String fichierSortie = "";
 	public static int facteurQuantification = 0;
 	
+	//Hauteur et largeur de l'image
+	public static int hauteur = 0;
+	public static int largeur = 0;
+	
 	/**
 	 * The application's entry point.
 	 * 
@@ -54,10 +58,14 @@ public class Main {
 				fichierEntree = args[0];
 				fichierSortie = args[1];
 				facteurQuantification = Integer.parseInt(args[2]);
-
+				
 				//On lit le fichier d'entree
 				int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
-
+				
+				//On defini les dimensions de l'image
+				hauteur = matriceRGB[0].length;
+				largeur = matriceRGB[0].length;
+				
 				//On converti la matriceRGB en matriceYUV
 				int[][][] matriceYUV = ConvertRGB2YUV.convert(matriceRGB);
 
@@ -74,11 +82,14 @@ public class Main {
 				ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 				listeTab64 = ZigZag.process(listeBloc8x8);
 			
-//				System.out.println(listeTab64.get(0).size());
-//				System.out.println(listeTab64.get(1).size());
-//				System.out.println(listeTab64.get(2).size());
-				
 				//On applique le DPCM
+				DPCM.process(listeTab64);
+				
+				//On applique le RLC
+				RLC.process(listeTab64);
+				
+				//On écrit le fichier de sortie
+				SZLReaderWriter.writeSZLFile(fichierSortie, hauteur, largeur, facteurQuantification);
 				
 				
 			} else {
