@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class DCT {
 
-	int[][]  blocSortie = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE]; 
+	private static int[][]  blocSortie = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE]; 
 	
-	public ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8){
+	public static ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8){
 		
 		for (int i=0;i<listeBloc8x8.size();i++){
 			for (int j=0;j<listeBloc8x8.get(0).size();j++){
@@ -18,7 +18,7 @@ public class DCT {
 		
 		return listeBloc8x8;
 	}
-	public  int[][] dct(int[][]  blocEntree){
+	public static int[][] dct(int[][]  blocEntree){
 		
 		int u,v,i,j;
 		double somme = 0;
