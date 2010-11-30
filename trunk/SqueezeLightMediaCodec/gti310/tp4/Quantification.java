@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Quantification {
 	
-	int factQ;
-	int[][] Qy =  {
+	static int factQ;
+	static int[][] Qy =  {
 		      { 46, 41, 40, 46, 54, 60, 61, 71 },
 		      { 42, 42, 44, 49, 56, 58, 70, 75 },
 		      { 44, 43, 46, 54, 50, 57, 69, 56 },
@@ -16,7 +16,7 @@ public class Quantification {
 		      { 72, 92, 95, 98, 112, 100, 103, 95 }
 		    };
 	
-	int[][] Quv =  {
+	static int[][] Quv =  {
 		      { 47, 48, 44, 57, 95, 95, 95, 95 },
 		      { 48, 41, 46, 66, 95, 95, 95, 95 },
 		      { 44, 46, 56, 59, 95, 95, 95, 95 },
@@ -27,8 +27,8 @@ public class Quantification {
 		      { 95, 95, 95, 95, 95, 95, 95, 95}
 		    };
 
-	public ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8, int factQ){
-		this.factQ = factQ;
+	public static ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8, int factQu){
+		factQ = factQu;
 		
 		for (int i=0;i<listeBloc8x8.size();i++){
 			for (int j=0;j<listeBloc8x8.get(0).size();j++){
@@ -41,7 +41,7 @@ public class Quantification {
 		return listeBloc8x8;
 	}
 	
-	public int[][] quantification(int[][]  blocEntree, int yuv){
+	public static int[][] quantification(int[][]  blocEntree, int yuv){
 		int[][]  blocSortie = new int[8][8]; 
 		double alpha=0;
 		

@@ -56,33 +56,30 @@ public class Main {
 				facteurQuantification = Integer.parseInt(args[2]);
 
 				//On lit le fichier d'entree
-				//PPMReaderWriter ppmReaderWriter = new PPMReaderWriter();
 				int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
 
 				//On converti la matriceRGB en matriceYUV
-				ConvertRGB2YUV convertRGB2YUV = new ConvertRGB2YUV();
-				int[][][] matriceYUV = convertRGB2YUV.convert(matriceRGB);
+				int[][][] matriceYUV = ConvertRGB2YUV.convert(matriceRGB);
 
 				//On decoupe la matrice en bloc 8x8
-				Decoupage8x8 decoupage = new Decoupage8x8();
-				ArrayList<ArrayList<int[][]>> listeBloc8x8 = decoupage.decoupe(matriceYUV);
+				ArrayList<ArrayList<int[][]>> listeBloc8x8 = Decoupage8x8.decoupe(matriceYUV);
 				
 				//On applique le DCT sur chaque bloc 8x8
-				DCT dct = new DCT();
-				listeBloc8x8 = dct.process(listeBloc8x8);
+				listeBloc8x8 = DCT.process(listeBloc8x8);
 
 				//On applique la quantification sur chaque bloc 8x8
-				Quantification quantification = new Quantification();
-				listeBloc8x8 = quantification.process(listeBloc8x8, facteurQuantification);
+				listeBloc8x8 = Quantification.process(listeBloc8x8, facteurQuantification);
 				
-				//Zigzag
-				ZigZag zigZaz = new ZigZag();
+				//On applique la lecture en Zigzag
 				ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
-				listeTab64 = zigZaz.process(listeBloc8x8);
+				listeTab64 = ZigZag.process(listeBloc8x8);
 			
-				System.out.println(listeTab64.get(0).size());
-				System.out.println(listeTab64.get(1).size());
-				System.out.println(listeTab64.get(2).size());
+//				System.out.println(listeTab64.get(0).size());
+//				System.out.println(listeTab64.get(1).size());
+//				System.out.println(listeTab64.get(2).size());
+				
+				//On applique le DCPM
+				
 				
 			} else {
 				System.out.println("il manque des arguments !");

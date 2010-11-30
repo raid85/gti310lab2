@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ZigZag {
 
-	public ArrayList<ArrayList<int[]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8){
+	public static ArrayList<ArrayList<int[]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8){
 		
 		ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 		listeTab64.add(new ArrayList<int[]>() );
@@ -28,7 +28,7 @@ public class ZigZag {
 	
 	//Référence:
 	//http://rosettacode.org/wiki/Zig-zag_matrix
-	public int[] zigzag(int[][] blocEntree){
+	public static int[] zigzag(int[][] blocEntree){
 		
 		int[] tab64 = new int[64];
 		int i= 1;
