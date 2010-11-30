@@ -78,7 +78,7 @@ public class Main {
 //				System.out.println(listeTab64.get(1).size());
 //				System.out.println(listeTab64.get(2).size());
 				
-				//On applique le DCPM
+				//On applique le DPCM
 				
 				
 			} else {
