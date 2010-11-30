@@ -89,53 +89,17 @@ public class Main {
 				RLC.process(listeTab64);
 				
 				//On écrit le fichier de sortie
-				SZLReaderWriter.writeSZLFile(fichierSortie, hauteur, largeur, facteurQuantification);
-				
+				SZLReaderWriter.writeSZLFile("imageCompr.szl", hauteur, largeur, facteurQuantification);
 				
 			} else {
 				System.out.println("il manque des arguments !");
-				System.out.println("<fichierEntree> <fichierSortie> <facteurQuantification>");
+				System.out.println("<fichierEntree> <fichierCompr> <facteurQuantification>");
+				System.out.println("ou");
+				System.out.println("<fichierCompr> <fichierSortie> <facteurQuantification>");
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 		
 	}
-	
-//	public static void afficheMatrice(int [][][] matrice){
-//		int i,j,k = 0;
-//		int ni, nj, nk, n = 0;
-//	     
-//		n = matrice.length;
-//		ni = matrice[0].length;
-//		nj = matrice[1].length;
-//		nk = matrice[2].length;
-//		
-//		System.out.println(" ni : " + ni + " nj : " + nj + " nk : " + nk);
-//		
-//		for (i=0; i<n; i++){
-//			if ( i==0){
-//				System.out.println("");
-//				System.out.println("");
-//				System.out.println("Composante R / Y : ");
-//			}
-//			if ( i==1){
-//				System.out.println("");
-//				System.out.println("");
-//				System.out.println("Composante G / U : ");
-//			}
-//			if ( i==2){
-//				System.out.println("");
-//				System.out.println("");
-//				System.out.println("Composante B / V : ");
-//			}
-//			for (j=0; j<nj; j++){
-//				System.out.println("");
-//				for (k=0; k<nk; k++){
-//					System.out.print(matrice[i][j][k] + " ");
-//				}
-//			}
-//		}	
-//	}
-	
 }
