@@ -2,27 +2,30 @@ package gti310.tp4;
 
 import java.util.ArrayList;
 
+
 public class DCT {
 
+	//http://www.nyx.net/~smanley/dct/DCT.java
+
 	private static int[][]  blocSortie = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE]; 
-	
+
 	public static ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8){
-		
+
 		for (int i=0;i<listeBloc8x8.size();i++){
 			for (int j=0;j<listeBloc8x8.get(0).size();j++){
 				int[][] bloc = listeBloc8x8.get(i).get(j);
-					dct(bloc);
+				dct(bloc);
 				listeBloc8x8.get(i).set(j,bloc);
 			}
 		}
-		
+
 		return listeBloc8x8;
 	}
 	public static int[][] dct(int[][]  blocEntree){
-		
+
 		int u,v,i,j;
 		double somme = 0;
-		
+
 		for (u=0; u<Main.BLOCK_SIZE; u++){
 			for (v=0; v<Main.BLOCK_SIZE; v++){
 				for (i=0; i<Main.BLOCK_SIZE; i++){
@@ -35,13 +38,16 @@ public class DCT {
 		}	
 		return blocSortie;
 	}
-	
+
 	public static double C(double valeur){
 		if (valeur == 0){
 			valeur = (1 / (Math.sqrt(2))); 
-	    }else{
-	    	valeur = 1;
-	    }
+		}else{
+			valeur = 1;
+		}
 		return valeur;
 	}
+
+
+
 }
