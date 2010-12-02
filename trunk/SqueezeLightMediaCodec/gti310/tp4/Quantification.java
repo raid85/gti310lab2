@@ -48,8 +48,8 @@ public class Quantification {
 		if (factQ==100){
 			blocSortie = blocEntree;
 		}else{
-			for(int u=0;u<8;u++){
-				for(int v=0;v<8;v++){
+			for(int u=0;u<Main.BLOCK_SIZE;u++){
+				for(int v=0;v<Main.BLOCK_SIZE;v++){
 					if(factQ <= 49){
 						alpha = 50/factQ;
 					}
