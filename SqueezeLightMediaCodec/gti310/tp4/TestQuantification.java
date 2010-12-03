@@ -9,9 +9,8 @@ public class TestQuantification extends TestCase {
 	int[][] blocTestAttendu= new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
 	int[][] blocTest= new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
 	ArrayList<ArrayList<int[][]>> listeTest = new ArrayList<ArrayList<int[][]>>();
-	ArrayList<ArrayList<int[][]>> listeTestAttendu = new ArrayList<ArrayList<int[][]>>();
 	ArrayList<int[][]> listeTesti = new ArrayList<int[][]>();
-	ArrayList<int[][]> listeTestAttendui = new ArrayList<int[][]>();
+	
 	
 	public void testprocess(){
 		
