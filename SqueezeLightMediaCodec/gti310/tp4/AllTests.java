@@ -12,9 +12,7 @@ public class AllTests {
 		suite.addTestSuite(TestDecoupage8x8.class);
 		suite.addTestSuite(TestZigZag.class);
 		suite.addTestSuite(TestQuantification.class);
-		suite.addTestSuite(TestConvertRGB2YUV.class);
-		suite.addTestSuite(TestRLC.class);
-		suite.addTestSuite(TestDPCM.class);
+		suite.addTestSuite(TestConvertRGB2YUV.class);	
 		//$JUnit-END$
 		return suite;
 	}
