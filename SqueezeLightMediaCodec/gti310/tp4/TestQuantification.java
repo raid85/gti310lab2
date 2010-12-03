@@ -6,10 +6,10 @@ import junit.framework.TestCase;
 
 public class TestQuantification extends TestCase {
 	
-	int[][] blocTestAttendu= new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
-	int[][] blocTest= new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
-	ArrayList<ArrayList<int[][]>> listeTest = new ArrayList<ArrayList<int[][]>>();
-	ArrayList<int[][]> listeTesti = new ArrayList<int[][]>();
+	private int[][] blocTestAttendu= new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+	private int[][] blocTest= new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+	private ArrayList<ArrayList<int[][]>> listeTest = new ArrayList<ArrayList<int[][]>>();
+	private ArrayList<int[][]> listeTesti = new ArrayList<int[][]>();
 	
 	
 	public void testprocess(){
