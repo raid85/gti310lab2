@@ -13,6 +13,8 @@ public class AllTests {
 		suite.addTestSuite(TestZigZag.class);
 		suite.addTestSuite(TestQuantification.class);
 		suite.addTestSuite(TestConvertRGB2YUV.class);
+		suite.addTestSuite(TestRLC.class);
+		suite.addTestSuite(TestDPCM.class);
 		//$JUnit-END$
 		return suite;
 	}
