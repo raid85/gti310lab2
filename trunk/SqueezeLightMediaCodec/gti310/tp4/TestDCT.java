@@ -1,11 +1,10 @@
 package gti310.tp4;
 import java.util.ArrayList;
-
 import junit.framework.TestCase;
 
 public class TestDCT extends TestCase {
 
-	DCT test = new DCT();
+	
 	private  int[][]  blocTest = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
 	private  int[][]  blocTestRecu = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
 	private  int[][]  blocTestAttendu = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];

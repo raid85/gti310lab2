@@ -39,7 +39,7 @@ public class ZigZag {
 				tab64[element] = blocEntree[i-1][j-1];
 				if((i + j) % 2 == 0){
 					// Even stripes
-					if(j < 8){
+					if(j < Main.BLOCK_SIZE){
 						j++;
 					}else{
 						i+= 2;
@@ -49,7 +49,7 @@ public class ZigZag {
 					}
 				}else{
 					// Odd stripes
-					if(i < 8){
+					if(i < Main.BLOCK_SIZE){
 						i++;
 					}else{
 						j+= 2;
