@@ -33,7 +33,7 @@ public class DCT {
 						somme = somme + Math.cos(((2*i+1)*u*Math.PI)/16)*Math.cos(((2*j+1)*v*Math.PI)/16);
 					}
 				}
-				blocSortie[u][v] = (int) ((C((double)u)*C((double)v))/4*somme);
+				blocSortie[u][v] = (int) (((C((double)u)*C((double)v))/4)*somme);
 			}
 		}	
 		return blocSortie;

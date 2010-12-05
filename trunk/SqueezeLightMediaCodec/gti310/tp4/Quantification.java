@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Quantification {
 	
-	static int factQ;
+	static double factQ;
 	static int[][] Qy =  {
 		      { 46, 41, 40, 46, 54, 60, 61, 71 },
 		      { 42, 42, 44, 49, 56, 58, 70, 75 },
@@ -27,7 +27,7 @@ public class Quantification {
 		      { 95, 95, 95, 95, 95, 95, 95, 95}
 		    };
 
-	public static ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8, int factQu){
+	public static ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8, double factQu){
 		factQ = factQu;
 		
 		for (int i=0;i<listeBloc8x8.size();i++){
@@ -54,7 +54,7 @@ public class Quantification {
 						alpha = 50/factQ;
 					}
 					if(factQ >= 50 && factQ <= 99){
-						alpha = (200 - 2*factQ)/100;
+						alpha = (200 - (2*factQ)) / 100;
 					}
 					if(yuv==0){
 						blocSortie[u][v]=(int) Math.round(blocEntree[u][v]/(alpha*Qy[u][v]));
