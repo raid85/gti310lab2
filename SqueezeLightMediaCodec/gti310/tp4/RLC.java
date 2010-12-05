@@ -6,8 +6,6 @@ public class RLC {
 
 public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 		
-	
-	
 		for (int i=0;i<listeTab64.size();i++){
 			for (int j=0;j<listeTab64.get(0).size();j++){
 				
@@ -37,4 +35,16 @@ public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 			}
 		}
 	}
+
+public static void processINV(){
+	
+	ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
+	listeTab64.add(new ArrayList<int[]>() );
+	listeTab64.add(new ArrayList<int[]>() );
+	listeTab64.add(new ArrayList<int[]>() );
+	
+	
+	
+	
+}
 }

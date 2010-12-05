@@ -40,6 +40,8 @@ public class Main {
 	public static String fichierEntree = "";
 	public static String fichierSortie = "";
 	public static int facteurQuantification = 0;
+	public static boolean decode = false;
+	public static boolean encode = false;
 	
 	//Hauteur et largeur de l'image
 	public static int hauteur = 0;
@@ -54,63 +56,89 @@ public class Main {
 		System.out.println("Squeeze Light Media Codec !");
 	
 		try {
-			if (args.length == 3) {
+			if (args.length == 4) {
 				fichierEntree = args[0];
 				fichierSortie = args[1];
 				facteurQuantification = Integer.parseInt(args[2]);
+				if(args[3].equals("encode")){
+					encode = true;
+				}
+				if(args[3].equals("decode")){
+					decode = true;
+				}
 				
-				//On lit le fichier d'entree
-				int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
-				
-				//On defini les dimensions de l'image
-				hauteur = matriceRGB[0].length;
-				largeur = matriceRGB[0].length;
-				
-				//On converti la matriceRGB en matriceYUV
-				int[][][] matriceYUV = ConvertRGB2YUV.convert(matriceRGB);
+				//Si l'utilisateur demande un encodage
+				if (encode){
+					//On lit le fichier d'entree
+					int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
+					
+					//On defini les dimensions de l'image
+					hauteur = matriceRGB[0].length;
+					largeur = matriceRGB[0].length;
+					
+					//On converti la matriceRGB en matriceYUV
+					int[][][] matriceYUV = ConvertRGB2YUV.convert(matriceRGB);
 
-				//On decoupe la matrice en bloc 8x8
-				ArrayList<ArrayList<int[][]>> listeBloc8x8 = Decoupage8x8.decoupe(matriceYUV);
-				System.out.println();
-				System.out.println("Avant DCT :");
-				afficherBloc(listeBloc8x8.get(0).get(0));
-				
-				//On applique le DCT sur chaque bloc 8x8
-				listeBloc8x8 = DCT.process(listeBloc8x8);
-				System.out.println();
-				System.out.println();
-				System.out.println("Après DCT :");
-				afficherBloc(listeBloc8x8.get(0).get(0));
+					//On decoupe la matrice en bloc 8x8
+					ArrayList<ArrayList<int[][]>> listeBloc8x8 = Decoupage8x8.decoupe(matriceYUV);
+					System.out.println();
+					System.out.println("Avant DCT :");
+					afficherBloc(listeBloc8x8.get(0).get(0));
+					
+					//On applique le DCT sur chaque bloc 8x8
+					listeBloc8x8 = DCT.process(listeBloc8x8);
+					System.out.println();
+					System.out.println();
+					System.out.println("Après DCT :");
+					afficherBloc(listeBloc8x8.get(0).get(0));
 
-				//On applique la quantification sur chaque bloc 8x8
-				listeBloc8x8 = Quantification.process(listeBloc8x8, facteurQuantification);
-				System.out.println();
-				System.out.println();
-				System.out.println("Après Quantification :");
-				afficherBloc(listeBloc8x8.get(0).get(0));
+					//On applique la quantification sur chaque bloc 8x8
+					listeBloc8x8 = Quantification.process(listeBloc8x8, facteurQuantification);
+					System.out.println();
+					System.out.println();
+					System.out.println("Après Quantification :");
+					afficherBloc(listeBloc8x8.get(0).get(0));
+					
+					//On applique la lecture en Zigzag
+					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
+					listeTab64 = ZigZag.process(listeBloc8x8);
+					System.out.println();
+					System.out.println();
+					System.out.println("Après ZigZag :");
+					afficherTab(listeTab64.get(0).get(0));
 				
-				//On applique la lecture en Zigzag
-				ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
-				listeTab64 = ZigZag.process(listeBloc8x8);
-				System.out.println();
-				System.out.println();
-				System.out.println("Après ZigZag :");
-				afficherTab(listeTab64.get(0).get(0));
-			
-				//On applique le DPCM
-				DPCM.process(listeTab64);
+					//On applique le DPCM
+					DPCM.process(listeTab64);
+					
+					//On applique le RLC
+					RLC.process(listeTab64);
+					
+					//On écrit le fichier de sortie
+					SZLReaderWriter.writeSZLFile("imageCompr.szl", hauteur, largeur, facteurQuantification);
+				}
 				
-				//On applique le RLC
-				RLC.process(listeTab64);
-				
-				//On écrit le fichier de sortie
-				SZLReaderWriter.writeSZLFile("imageCompr.szl", hauteur, largeur, facteurQuantification);
+				//Si l'utilisateur demande un decodage
+				if (decode){
+					
+					//On lit le fichier SZL
+					SZLReaderWriter.readSZLFile(fichierEntree);
+					
+					
+					//On effectue le RLC inverse
+					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
+					
+					
+				}
 				
 			} else {
+				System.out.println();
 				System.out.println("il manque des arguments !");
-				System.out.println("<fichierEntree> <fichierCompr> <facteurQuantification>");
-				System.out.println("ou");
-				System.out.println("<fichierCompr> <fichierSortie> <facteurQuantification>");
+				System.out.println();
+				System.out.println("Pour un encodage :");
+				System.out.println("<fichierEntree> <fichierCompr> <facteurQuantification> <encode>");
+				System.out.println();
+				System.out.println("Pour un encodage :");
+				System.out.println("<fichierCompr> <fichierSortie> <facteurQuantification> <decode>");
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
