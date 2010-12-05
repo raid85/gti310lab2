@@ -99,17 +99,9 @@ public class Main {
 			
 				//On applique le DPCM
 				DPCM.process(listeTab64);
-				System.out.println();
-				System.out.println();
-				System.out.println("Après DPCM :");
-				afficherTab(listeTab64.get(0).get(0));
 				
 				//On applique le RLC
 				RLC.process(listeTab64);
-				System.out.println();
-				System.out.println();
-				System.out.println("Après RLC :");
-				afficherTab(listeTab64.get(0).get(0));
 				
 				//On écrit le fichier de sortie
 				SZLReaderWriter.writeSZLFile("imageCompr.szl", hauteur, largeur, facteurQuantification);
