@@ -33,8 +33,8 @@ public class Quantification {
 		for (int i=0;i<listeBloc8x8.size();i++){
 			for (int j=0;j<listeBloc8x8.get(0).size();j++){
 				int[][] bloc = listeBloc8x8.get(i).get(j);
-					quantification(bloc, i);
-				listeBloc8x8.get(i).set(j,bloc);
+					//quantification(bloc, i);
+				listeBloc8x8.get(i).set(j,quantification(bloc, i));
 			}
 		}
 		
