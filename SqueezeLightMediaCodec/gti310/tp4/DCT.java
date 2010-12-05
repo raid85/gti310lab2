@@ -14,8 +14,8 @@ public class DCT {
 		for (int i=0;i<listeBloc8x8.size();i++){
 			for (int j=0;j<listeBloc8x8.get(0).size();j++){
 				int[][] bloc = listeBloc8x8.get(i).get(j);
-				dct(bloc);
-				listeBloc8x8.get(i).set(j,bloc);
+				//dct(bloc);
+				listeBloc8x8.get(i).set(j,dct(bloc));
 			}
 		}
 
