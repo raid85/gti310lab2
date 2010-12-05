@@ -92,12 +92,24 @@ public class Main {
 				//On applique la lecture en Zigzag
 				ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 				listeTab64 = ZigZag.process(listeBloc8x8);
+				System.out.println();
+				System.out.println();
+				System.out.println("Après ZigZag :");
+				afficherTab(listeTab64.get(0).get(0));
 			
 				//On applique le DPCM
 				DPCM.process(listeTab64);
+				System.out.println();
+				System.out.println();
+				System.out.println("Après DPCM :");
+				afficherTab(listeTab64.get(0).get(0));
 				
 				//On applique le RLC
 				RLC.process(listeTab64);
+				System.out.println();
+				System.out.println();
+				System.out.println("Après RLC :");
+				afficherTab(listeTab64.get(0).get(0));
 				
 				//On écrit le fichier de sortie
 				SZLReaderWriter.writeSZLFile("imageCompr.szl", hauteur, largeur, facteurQuantification);
@@ -116,10 +128,17 @@ public class Main {
 	
 	public static void afficherBloc(int[][] bloc8x8){
 		for (int i=0;i<8;i++){
-			System.out.println();
+			if (i>0){
+				System.out.println();
+			}
 			for (int j=0;j<8;j++){
 				System.out.print(bloc8x8[i][j] + " ");
 			}
 		}
+	}
+	public static void afficherTab(int[] tab){
+		for (int i=0;i<64;i++){
+				System.out.print(tab[i] + " ");
+			}
 	}
 }
