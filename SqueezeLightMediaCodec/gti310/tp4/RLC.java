@@ -43,7 +43,24 @@ public static void processINV(){
 	listeTab64.add(new ArrayList<int[]>() );
 	listeTab64.add(new ArrayList<int[]>() );
 	
+	boolean loop = true;
 	
+	while(loop){
+		Object valeur = null;
+		
+		valeur = Entropy.readAC();
+		
+		if (valeur==null){
+			loop = false;
+		}else{
+			
+			int[] paire = (int[]) valeur;
+			int nbRep = paire[0];
+			int val = paire[1];
+			
+			//traite la paire...
+		}
+	}
 	
 	
 }
