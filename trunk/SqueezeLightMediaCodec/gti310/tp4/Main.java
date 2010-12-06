@@ -144,10 +144,8 @@ public class Main {
 					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 					
 					//On effectue le RLC inverse
+					//RLC.processINV();
 					
-					//test
-					int[] tabAC = Entropy.readAC();
-					afficherTab(tabAC);
 					
 					
 				}
