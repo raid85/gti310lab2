@@ -56,15 +56,30 @@ public class Main {
 		System.out.println("Squeeze Light Media Codec !");
 	
 		try {
-			if (args.length == 4) {
-				fichierEntree = args[0];
-				fichierSortie = args[1];
-				facteurQuantification = Integer.parseInt(args[2]);
-				if(args[3].equals("encode")){
-					encode = true;
+			if (args.length >= 3) {
+				
+				if (args.length == 4){
+					fichierEntree = args[0];
+					fichierSortie = args[1];
+					facteurQuantification = Integer.parseInt(args[2]);
+					
+					if(args[3].equals("encode")){
+						encode = true;
+					}
+					if(args[3].equals("decode")){
+						decode = true;
+					}
 				}
-				if(args[3].equals("decode")){
-					decode = true;
+				if (args.length == 3){
+					fichierEntree = args[0];
+					fichierSortie = args[1];
+					
+					if(args[2].equals("encode")){
+						encode = true;
+					}
+					if(args[2].equals("decode")){
+						decode = true;
+					}
 				}
 				
 				//Si l'utilisateur demande un encodage
@@ -114,18 +129,25 @@ public class Main {
 					RLC.process(listeTab64);
 					
 					//On écrit le fichier de sortie
-					SZLReaderWriter.writeSZLFile("imageCompr.szl", hauteur, largeur, facteurQuantification);
+					SZLReaderWriter.writeSZLFile(fichierSortie, hauteur, largeur, facteurQuantification);
 				}
 				
 				//Si l'utilisateur demande un decodage
 				if (decode){
 					
 					//On lit le fichier SZL
-					SZLReaderWriter.readSZLFile(fichierEntree);
+					int[] header = SZLReaderWriter.readSZLFile(fichierEntree);
+					hauteur = header[0]; 
+					largeur = header[1]; 
+					facteurQuantification = header[3];
 					
+					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 					
 					//On effectue le RLC inverse
-					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
+					
+					//test
+					int[] tabAC = Entropy.readAC();
+					afficherTab(tabAC);
 					
 					
 				}
@@ -138,7 +160,7 @@ public class Main {
 				System.out.println("<fichierEntree> <fichierCompr> <facteurQuantification> <encode>");
 				System.out.println();
 				System.out.println("Pour un encodage :");
-				System.out.println("<fichierCompr> <fichierSortie> <facteurQuantification> <decode>");
+				System.out.println("<fichierCompr> <fichierSortie> <decode>");
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -157,7 +179,7 @@ public class Main {
 		}
 	}
 	public static void afficherTab(int[] tab){
-		for (int i=0;i<64;i++){
+		for (int i=0;i<tab.length;i++){
 				System.out.print(tab[i] + " ");
 			}
 	}
