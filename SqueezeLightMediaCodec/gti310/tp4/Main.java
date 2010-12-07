@@ -136,10 +136,17 @@ public class Main {
 				if (decode){
 					
 					//On lit le fichier SZL
-					int[] header = SZLReaderWriter.readSZLFile(fichierEntree);
-					hauteur = header[0]; 
-					largeur = header[1]; 
-					facteurQuantification = header[3];
+				
+					int[] header;
+					try {
+						header = SZLReaderWriter.readSZLFile(fichierEntree);
+						hauteur = header[0]; 
+						largeur = header[1]; 
+						facteurQuantification = header[3];
+					} catch (Exception e) {
+						System.out.println("Erreur lors de la lecture du fichier SZL... Format invalide!");
+						e.printStackTrace();
+					}
 					
 					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 					ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
@@ -151,9 +158,12 @@ public class Main {
 					listeTab64 = DPCM.processINV(listeTab64);
 					
 					//On effectue le zigzag inverse
-					//listeBloc8x8 = ZigZag.processINV(listeTab64);
+					listeBloc8x8 = ZigZag.processINV(listeTab64);
 					
 					//On effectue la dequantification
+					
+					//On effectue la DCT inverse
+					
 					
 				}
 				
