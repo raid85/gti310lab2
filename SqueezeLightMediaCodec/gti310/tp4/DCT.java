@@ -8,6 +8,8 @@ public class DCT {
 	//http://www.nyx.net/~smanley/dct/DCT.java
 
 	private static int[][]  blocSortie = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE]; 
+	public double cT[][]= new double[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+	public double c[][] = new double[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
 
 	public static ArrayList<ArrayList<int[][]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8){
 
@@ -47,6 +49,46 @@ public class DCT {
 		}
 		return valeur;
 	}
+
+	public int[][] forwardDCT(char input[][]){
+
+		int output[][] = new int[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+		double temp[][] = new double[Main.BLOCK_SIZE][Main.BLOCK_SIZE];
+		double temp1;
+		int i;
+		int j;
+		int k;
+
+		for (i = 0; i < Main.BLOCK_SIZE; i++){
+
+			for (j = 0; j < Main.BLOCK_SIZE; j++){
+
+				temp[i][j] = 0.0;
+				for (k = 0; k < Main.BLOCK_SIZE; k++){
+
+					temp[i][j] += (((int)(input[i][k]) - 128) * cT[k][j]);
+				}
+			}
+		}
+
+		for (i = 0; i < Main.BLOCK_SIZE; i++){
+			
+			for (j = 0; j < Main.BLOCK_SIZE; j++){
+				
+				temp1 = 0.0;
+
+				for (k = 0; k < Main.BLOCK_SIZE; k++){
+					
+					temp1 += (c[i][k] * temp[k][j]);
+				}
+
+				output[i][j] = (int)Math.round(temp1);
+			}
+		}
+
+		return output;
+	}
+
 
 
 
