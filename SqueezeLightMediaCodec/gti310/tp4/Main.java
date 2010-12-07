@@ -142,6 +142,7 @@ public class Main {
 					facteurQuantification = header[3];
 					
 					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
+					ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
 					
 					//On effectue le RLC inverse
 					listeTab64 = RLC.processINV();
@@ -149,6 +150,10 @@ public class Main {
 					//On effectue le DPCM inverse
 					listeTab64 = DPCM.processINV(listeTab64);
 					
+					//On effectue le zigzag inverse
+					//listeBloc8x8 = ZigZag.processINV(listeTab64);
+					
+					//On effectue la dequantification
 					
 				}
 				
