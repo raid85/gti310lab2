@@ -36,7 +36,7 @@ public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 		}
 	}
 
-public static void processINV(){
+public static ArrayList<ArrayList<int[]>> processINV(){
 	
 	ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 	listeTab64.add(new ArrayList<int[]>() );
@@ -44,6 +44,11 @@ public static void processINV(){
 	listeTab64.add(new ArrayList<int[]>() );
 	
 	boolean loop = true;
+	int[] tab64 = new int[64];
+	int count = 1;
+	int yuv = 0;
+	int nbTotalTab64 = (Main.hauteur)/8; // remplacer par (largeur image / 8)
+	int incTab64 = 0;
 	
 	while(loop){
 		Object valeur = null;
@@ -58,10 +63,34 @@ public static void processINV(){
 			int nbRep = paire[0];
 			int val = paire[1];
 			
-			//traite la paire...
+			if (count>=64){
+				
+				//On ajoute le tableau de 64 à la liste pour le bon indice yuv
+				listeTab64.get(yuv).add(tab64);
+				
+				count=0;
+				incTab64++;
+				
+				//On regarde si on a passé toute les tableau pour y,u, ou v
+				if (incTab64 >=nbTotalTab64){
+					incTab64 = 0;
+					yuv++;
+				}
+			}
+			
+			//traite la paire
+			if (nbRep==0){
+				tab64[count]= val;
+				count++;
+			}else{
+				for (int i=0;i<nbRep;i++){
+					tab64[count]= val;
+					count++;
+				}
+			}
 		}
 	}
 	
-	
+	return listeTab64;
 }
 }
