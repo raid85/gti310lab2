@@ -3,6 +3,9 @@ package gti310.tp4;
 import java.util.ArrayList;
 
 public class ZigZag {
+	
+	public static int zigZag[][] = new int[64][2];
+
 
 	public static ArrayList<ArrayList<int[]>> process(ArrayList<ArrayList<int[][]>> listeBloc8x8){
 		
@@ -66,4 +69,24 @@ public class ZigZag {
 		
 		return tab64;
 	}
+	
+	
+
+	public static int[][] zigzagINV(int[] tab64){
+		int[][] bloc8x8 = new int[8][8];
+		
+		
+
+		
+		return bloc8x8;
+	}
+	
+	public static ArrayList<ArrayList<int[][]>> processINV(ArrayList<ArrayList<int[]>> listeTab64){
+		ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
+		
+		
+		
+		return listeBloc8x8;
+	}
+	
 }
