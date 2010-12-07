@@ -144,8 +144,10 @@ public class Main {
 					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 					
 					//On effectue le RLC inverse
-					//RLC.processINV();
+					listeTab64 = RLC.processINV();
 					
+					//On effectue le DPCM inverse
+					listeTab64 = DPCM.processINV(listeTab64);
 					
 					
 				}

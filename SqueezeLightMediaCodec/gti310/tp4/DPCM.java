@@ -22,4 +22,42 @@ public class DPCM {
 			}
 		}
 	}
+	
+	public static ArrayList<ArrayList<int[]>> processINV(ArrayList<ArrayList<int[]>> listeTab64){
+		
+		boolean loop = true;
+		int[] tab64 = new int[64];
+		int yuv = 0;
+		int nbTotalTab64 = (Main.hauteur)/8; // remplacer par (largeur image / 8)
+		int incTab64 = 0;
+		
+		while(loop){
+			int valeur = 0;
+			
+			valeur = Entropy.readDC();
+			
+			if (valeur == 0xffffffff){
+				loop = false;
+			}else{
+				tab64 = listeTab64.get(yuv).get(incTab64);
+				tab64[0]= valeur;
+				listeTab64.get(yuv).set(incTab64, tab64);
+				
+				incTab64++;
+				
+				if (incTab64>=nbTotalTab64){
+					yuv++;
+					incTab64 = 0;
+					if (yuv>=3){
+						//a enlever
+						System.out.println(" Erreur yuv > 3...");
+						break;
+					}
+				}
+				
+			}
+		
+	}
+		return listeTab64;
+}
 }
