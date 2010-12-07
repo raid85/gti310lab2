@@ -63,23 +63,12 @@ public static ArrayList<ArrayList<int[]>> processINV(){
 			int nbRep = paire[0];
 			int val = paire[1];
 			
-			//traite la paire
-			if (nbRep==0){
-				tab64[count]= val;
-				count++;
-			}else{
-				for (int i=0;i<nbRep;i++){
-					tab64[count]= val;
-					count++;
-				}
-			}
-			
-			if (count>=64){
+	if (count>=64){
 				
 				//On ajoute le tableau de 64 à la liste pour le bon indice yuv
 				listeTab64.get(yuv).add(tab64);
 				
-				count=0;
+				count=1;
 				incTab64++;
 				
 				//On regarde si on a passé toute les tableau pour y,u, ou v
@@ -93,6 +82,24 @@ public static ArrayList<ArrayList<int[]>> processINV(){
 					}
 				}
 			}
+	
+			//traite la paire
+			if (nbRep==0){
+				tab64[count]= val;
+				count++;
+			}else{
+				for (int i=0;i<nbRep;i++){
+					if (count >= 64){
+						//a enlever
+						System.out.println(" Erreur debordement tab 64 ...");
+						break;
+					}
+					tab64[count]= val;
+					count++;
+				}
+			}
+			
+		
 	
 		}
 	}
