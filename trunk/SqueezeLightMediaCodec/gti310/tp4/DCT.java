@@ -31,6 +31,18 @@ public class DCT {
 
 		return listeBloc8x8;
 	}
+	
+	public static ArrayList<ArrayList<int[][]>> processINV(ArrayList<ArrayList<int[][]>> listeBloc8x8){
+
+		for (int i=0;i<listeBloc8x8.size();i++){
+			for (int j=0;j<listeBloc8x8.get(0).size();j++){
+				int[][] bloc = listeBloc8x8.get(i).get(j);				
+				listeBloc8x8.get(i).set(j,DCTinverse(bloc));
+			}
+		}
+
+		return listeBloc8x8;
+	}
 
 
 	public static double C(double valeur){
@@ -131,10 +143,6 @@ public class DCT {
 				{
 					output[i][j] = (int)Math.round(temp1);
 				}
-
-
-
-
 
 			}
 		}
