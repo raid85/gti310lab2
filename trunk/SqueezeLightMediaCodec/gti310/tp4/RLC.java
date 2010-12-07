@@ -75,6 +75,11 @@ public static ArrayList<ArrayList<int[]>> processINV(){
 				if (incTab64 >=nbTotalTab64){
 					incTab64 = 0;
 					yuv++;
+					if(yuv>=3){
+						//a enlever
+						System.out.println(" Erreur yuv...");
+						break;
+					}
 				}
 			}
 			
