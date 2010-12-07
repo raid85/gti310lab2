@@ -33,7 +33,6 @@ public class Quantification {
 		for (int i=0;i<listeBloc8x8.size();i++){
 			for (int j=0;j<listeBloc8x8.get(0).size();j++){
 				int[][] bloc = listeBloc8x8.get(i).get(j);
-					//quantification(bloc, i);
 				listeBloc8x8.get(i).set(j,quantification(bloc, i));
 			}
 		}
@@ -68,4 +67,49 @@ public class Quantification {
 		
 		return blocSortie;
 	}
+	
+	public static ArrayList<ArrayList<int[][]>> processINV(ArrayList<ArrayList<int[][]>> listeBloc8x8, double factQu){
+	
+		factQ = factQu;
+		
+		for (int i=0;i<listeBloc8x8.size();i++){
+			for (int j=0;j<listeBloc8x8.get(0).size();j++){
+				int[][] bloc = listeBloc8x8.get(i).get(j);
+				listeBloc8x8.get(i).set(j,quantificationINV(bloc, i));
+			}
+		}
+		
+		return listeBloc8x8;
+		
+	}
+	
+	
+	public static int[][] quantificationINV(int[][]  blocEntree, int yuv){
+		int[][]  blocSortie = new int[8][8]; 
+		double alpha=0;
+		
+		if (factQ==100){
+			blocSortie = blocEntree;
+		}else{
+			for(int u=0;u<Main.BLOCK_SIZE;u++){
+				for(int v=0;v<Main.BLOCK_SIZE;v++){
+					if(factQ <= 49){
+						alpha = 50/factQ;
+					}
+					if(factQ >= 50 && factQ <= 99){
+						alpha = (200 - (2*factQ)) / 100;
+					}
+					if(yuv==0){
+						blocSortie[u][v]= (int) Math.round(blocEntree[u][v]*(alpha*Qy[u][v]));
+					}
+					if(yuv==1 || yuv ==2){
+						blocSortie[u][v]= (int) Math.round(blocEntree[u][v]*(alpha*Quv[u][v]));
+					}
+				}
+			}
+		}
+		
+		return blocSortie;
+	}
+		
 }

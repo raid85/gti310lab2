@@ -151,18 +151,29 @@ public class Main {
 					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
 					ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
 					
+					try {
+						//On effectue le DPCM inverse
+						listeTab64 = DPCM.processINV(listeTab64);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					
 					//On effectue le RLC inverse
-					listeTab64 = RLC.processINV();
-					
-					//On effectue le DPCM inverse
-					listeTab64 = DPCM.processINV(listeTab64);
-					
+					try {
+						listeTab64 = RLC.processINV();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					//On effectue le zigzag inverse
 					listeBloc8x8 = ZigZag.processINV(listeTab64);
 					
 					//On effectue la dequantification
+					listeBloc8x8 = Quantification.processINV(listeBloc8x8, facteurQuantification);
 					
 					//On effectue la DCT inverse
+					
+					//On effectue la conversion YUV à RGB
 					
 					
 				}
