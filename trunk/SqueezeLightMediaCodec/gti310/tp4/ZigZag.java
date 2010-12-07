@@ -74,10 +74,34 @@ public class ZigZag {
 
 	public static int[][] zigzagINV(int[] tab64){
 		int[][] bloc8x8 = new int[8][8];
-		
-		
+		int i= 1;
+		int j= 1;
+	
+		for(int element= 0;element < 64;element++){
+			bloc8x8[i-1][j-1] = tab64[element];
+			if((i + j) % 2 == 0){
+				// Even stripes
+				if(j < Main.BLOCK_SIZE){
+					j++;
+				}else{
+					i+= 2;
+				}
+				if(i > 1){
+					i--;
+				}
+			}else{
+				// Odd stripes
+				if(i < Main.BLOCK_SIZE){
+					i++;
+				}else{
+					j+= 2;
+				}
+				if(j > 1){
+					j--;
+				}
+			}
+		}
 
-		
 		return bloc8x8;
 	}
 	
@@ -85,6 +109,13 @@ public class ZigZag {
 		ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
 		
 		
+		for (int i=0;i<listeTab64.size();i++){
+			for (int j=0;j<listeTab64.get(0).size();j++){
+				int[] tab64 = listeTab64.get(i).get(j);
+					int[][] bloc = zigzagINV(tab64);
+					listeBloc8x8.get(i).add(bloc);
+			}
+		}
 		
 		return listeBloc8x8;
 	}
