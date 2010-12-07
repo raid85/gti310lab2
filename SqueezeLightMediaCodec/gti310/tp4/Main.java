@@ -172,6 +172,7 @@ public class Main {
 					listeBloc8x8 = Quantification.processINV(listeBloc8x8, facteurQuantification);
 					
 					//On effectue la DCT inverse
+					listeBloc8x8 = DCT.processINV(listeBloc8x8);
 					
 					//On effectue la conversion YUV à RGB
 					
