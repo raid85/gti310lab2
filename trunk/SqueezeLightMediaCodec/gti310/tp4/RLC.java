@@ -63,6 +63,17 @@ public static ArrayList<ArrayList<int[]>> processINV(){
 			int nbRep = paire[0];
 			int val = paire[1];
 			
+			//traite la paire
+			if (nbRep==0){
+				tab64[count]= val;
+				count++;
+			}else{
+				for (int i=0;i<nbRep;i++){
+					tab64[count]= val;
+					count++;
+				}
+			}
+			
 			if (count>=64){
 				
 				//On ajoute le tableau de 64 à la liste pour le bon indice yuv
@@ -77,22 +88,12 @@ public static ArrayList<ArrayList<int[]>> processINV(){
 					yuv++;
 					if(yuv>=3){
 						//a enlever
-						System.out.println(" Erreur yuv...");
+						System.out.println(" Erreur yuv > 3...");
 						break;
 					}
 				}
 			}
-			
-			//traite la paire
-			if (nbRep==0){
-				tab64[count]= val;
-				count++;
-			}else{
-				for (int i=0;i<nbRep;i++){
-					tab64[count]= val;
-					count++;
-				}
-			}
+	
 		}
 	}
 	
