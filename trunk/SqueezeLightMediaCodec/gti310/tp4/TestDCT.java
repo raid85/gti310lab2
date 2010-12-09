@@ -425,13 +425,7 @@ public class TestDCT extends TestCase {
 		
 
 		blocTestRecu =DCT.DCTinverse(blocTestAttendu);
-		
-		for (int i=0; i<Main.BLOCK_SIZE ;i++){
-			System.out.println("");
-			for(int j=0 ; j<Main.BLOCK_SIZE;j++){
-				System.out.print(" "+blocTestRecu[i][j]);			
-			}
-		}
+
 
 		boolean valid = true ;
 		for (int i=0; i<Main.BLOCK_SIZE ;i++){			
