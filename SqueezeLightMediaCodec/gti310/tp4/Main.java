@@ -175,7 +175,7 @@ public class Main {
 					listeBloc8x8 = DCT.processINV(listeBloc8x8);
 					
 					//On replace les blocs8x8 ensemble (decoupage inverse)
-					
+					int[][][] matriceYUV = Decoupage8x8.decoupeINV(listeBloc8x8);
 					
 					//On effectue la conversion YUV à RGB
 					
