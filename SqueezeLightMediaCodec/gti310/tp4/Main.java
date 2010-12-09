@@ -153,14 +153,14 @@ public class Main {
 					
 					try {
 						//On effectue le DPCM inverse
-						listeTab64 = DPCM.processINV(listeTab64);
+						listeTab64 = DPCM.processINV();
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
 					
 					//On effectue le RLC inverse
 					try {
-						listeTab64 = RLC.processINV();
+						listeTab64 = RLC.processINV(listeTab64);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -173,6 +173,9 @@ public class Main {
 					
 					//On effectue la DCT inverse
 					listeBloc8x8 = DCT.processINV(listeBloc8x8);
+					
+					//On replace les blocs8x8 ensemble (decoupage inverse)
+					
 					
 					//On effectue la conversion YUV à RGB
 					

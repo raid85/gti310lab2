@@ -9,7 +9,7 @@ public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 		for (int i=0;i<listeTab64.size();i++){
 			for (int j=0;j<listeTab64.get(0).size();j++){
 				
-				int nbRep = 0;
+				int nbRep = -1;
 				int valeurRep = 0;
 				
 				for (int k=1;k<64;k++){
@@ -28,7 +28,7 @@ public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 						}
 					}else{
 						Entropy.writeAC(nbRep, valeurRep);
-						nbRep = 0;
+						nbRep = -1;
 						valeurRep = valeur;
 					}
 				}				
@@ -36,12 +36,7 @@ public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 		}
 	}
 
-public static ArrayList<ArrayList<int[]>> processINV(){
-	
-	ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
-	listeTab64.add(new ArrayList<int[]>() );
-	listeTab64.add(new ArrayList<int[]>() );
-	listeTab64.add(new ArrayList<int[]>() );
+public static ArrayList<ArrayList<int[]>> processINV(ArrayList<ArrayList<int[]>> listeTab64){
 	
 	boolean loop = true;
 	int[] tab64 = new int[64];

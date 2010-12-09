@@ -23,7 +23,12 @@ public class DPCM {
 		}
 	}
 	
-	public static ArrayList<ArrayList<int[]>> processINV(ArrayList<ArrayList<int[]>> listeTab64){
+	public static ArrayList<ArrayList<int[]>> processINV(){
+		
+		ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
+		listeTab64.add(new ArrayList<int[]>() );
+		listeTab64.add(new ArrayList<int[]>() );
+		listeTab64.add(new ArrayList<int[]>() );
 		
 		boolean loop = true;
 		int[] tab64 = new int[64];
@@ -39,13 +44,13 @@ public class DPCM {
 			if (valeur == 0xffffffff){
 				loop = false;
 			}else{
-				tab64 = listeTab64.get(yuv).get(incTab64);
+			
 				tab64[0]= valeur;
-				listeTab64.get(yuv).set(incTab64, tab64);
+				listeTab64.get(yuv).add(tab64);
 				
 				incTab64++;
 				
-				if (incTab64>=nbTotalTab64){
+				if (incTab64>=nbTotalTab64-1){
 					yuv++;
 					incTab64 = 0;
 					if (yuv>=3){
