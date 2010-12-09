@@ -178,7 +178,10 @@ public class Main {
 					int[][][] matriceYUV = Decoupage8x8.decoupeINV(listeBloc8x8);
 					
 					//On effectue la conversion YUV à RGB
+					int[][][] matriceRGB = ConvertRGB2YUV.convertINV(matriceYUV);
 					
+					//On écrit le fichier de sortie
+					PPMReaderWriter.writePPMFile(fichierSortie, matriceRGB);
 					
 				}
 				
