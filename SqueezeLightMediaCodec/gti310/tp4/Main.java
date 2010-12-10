@@ -192,7 +192,7 @@ public class Main {
 				System.out.println("Pour un encodage :");
 				System.out.println("<fichierEntree> <fichierCompr> <facteurQuantification> <encode>");
 				System.out.println();
-				System.out.println("Pour un encodage :");
+				System.out.println("Pour un decodage :");
 				System.out.println("<fichierCompr> <fichierSortie> <decode>");
 			}
 		} catch (Exception e) {
