@@ -22,15 +22,17 @@ public class Decoupage8x8 {
 		ArrayList<int[][]> liste2 = new ArrayList<int[][]>();
 		ArrayList<int[][]> liste3 = new ArrayList<int[][]>();
 		
-		int i,j,k,m;
+		int i,j,k,m,l;
 		
 		for (i=0; i<3; i++){
-			compteurBloc_K = 0;
-			compteurBloc_M = 0;
+			//compteurBloc_K = 0;
+			//compteurBloc_M = 0;
 			for (j=0; j<nbBloc; j++){
-				for (k=0; k<8; k++){
-					for (m=0; m<8; m++){
-						bloc8x8[k][m] = matrice[i][k + compteurBloc_K][m + compteurBloc_M];
+				for(l=0; l<nbBloc; l++){
+					for (k=0; k<8; k++){
+						for (m=0; m<8; m++){
+						
+						bloc8x8[k][m] = matrice[i][k + (8*j)][m + (8*l)];
 					}
 				}
 				if (i == 0){
@@ -43,15 +45,16 @@ public class Decoupage8x8 {
 					liste3.add(bloc8x8);
 				}
 		
-				compteurBloc_K = compteurBloc_K + 8;
+				//compteurBloc_K = compteurBloc_K + 8;
 				
-				if (compteurBloc_K >= size-7 || done){
-					compteurBloc_M = compteurBloc_M + 8;
-					compteurBloc_K = 0;
-					done = true;
-				}
-				if (compteurBloc_M >= size-7 ){
-					break;
+				//if (compteurBloc_K >= size-7 || done){
+					//compteurBloc_M = compteurBloc_M + 8;
+					//compteurBloc_K = 0;
+					//done = true;
+				//}
+				//if (compteurBloc_M >= size-7 ){
+					//break;
+				//}
 				}
 			}
 		}	
