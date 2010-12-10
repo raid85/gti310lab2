@@ -100,7 +100,7 @@ public class Main {
 					
 				
 
-					//On decoupe la matrice en bloc 8x8
+					//On decoupe la matrice en bloc 8x8					
 					listeBloc8x8 = Decoupage8x8.decoupe(matriceYUV);
 					System.out.println();
 					System.out.println("Avant DCT :");
