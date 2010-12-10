@@ -28,6 +28,7 @@ public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 							//quand k=63... r=64 donc listeTab64.get(i).get(j)[r] donne une erreur pcq t'essaye d'acceder l'element 64...
 							for (r=k+1; listeTab64.get(i).get(j)[r]==valeurRep;r++ ){
 								if(r==64 || r==63){
+									Entropy.writeAC(nbOccurence, valeurRep);
 									Entropy.writeAC(0, 0);
 									r=1;
 									k=1;
