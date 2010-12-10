@@ -4,70 +4,39 @@ import java.util.ArrayList;
 
 public class RLC {
 
-public static void process(ArrayList<ArrayList<int[]>> listeTab64){
-		
+	public static void process(ArrayList<ArrayList<int[]>> listeTab64){
+
 		try {
 			for (int i=0;i<listeTab64.size();i++){
 				for (int j=0;j<listeTab64.get(0).size();j++){
-					
+
 					int nbOccurence = 1;
 					int valeurRep = 0;
 					int k =1 ;
 					int r = 1;
 					while(k<64){					
-						
+
 						valeurRep = listeTab64.get(i).get(j)[k];	
-						
-						
-						//if (k==63 || r==64){
-							//Entropy.writeAC(0, 0);
-							//r=1;
-						//	k=1;
-							//break;
-						//}else{
-							//quand k=63... r=64 donc listeTab64.get(i).get(j)[r] donne une erreur pcq t'essaye d'acceder l'element 64...
-							for (r=k+1; listeTab64.get(i).get(j)[r]==valeurRep;r++ ){
-								if(r==64 || r==63){
-									Entropy.writeAC(nbOccurence, valeurRep);
-									Entropy.writeAC(0, 0);
-									r=1;
-									k=1;
-									//break;
-								}
-								nbOccurence++;
+
+
+						for (r=k+1; listeTab64.get(i).get(j)[r]==valeurRep;r++ ){
+							if(r==64 || r==63){
+								Entropy.writeAC(nbOccurence, valeurRep);
+								Entropy.writeAC(0, 0);
+								r=1;
+								k=1;
+								//break;
 							}
+							nbOccurence++;
+						}
 						//}
-						
+
 						Entropy.writeAC(nbOccurence, valeurRep);
-						
+
 						k=r;
-						
+
 					}
-					
-					//Entropy.writeAC(0, 0);
-					
-//				for (int k=1;k<64;k++){
-//					
-//					
-//					
-//					if (k==1){
-//						valeurRep = listeTab64.get(i).get(j)[k];
-//					}
-//					
-//					int valeur = listeTab64.get(i).get(j)[k];
-//					
-//					//On incr�mente si on a une repetition
-//					if (valeur == valeurRep){
-//						nbRep++;
-//						if (k==63){
-//							Entropy.writeAC(nbRep, valeurRep);
-//						}
-//					}else{
-//						Entropy.writeAC(nbRep, valeurRep);
-//						nbRep = -1;
-//						valeurRep = valeur;
-//					}
-//				}				
+
 				}
 			}
 		} catch (Exception e) {
@@ -76,71 +45,72 @@ public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 		}
 	}
 
-public static ArrayList<ArrayList<int[]>> processINV(ArrayList<ArrayList<int[]>> listeTab64){
-	
-	boolean loop = true;
-	int[] tab64 = new int[64];
-	int count = 1;
-	int yuv = 0;
-	int nbTotalTab64 = (Main.hauteur)/8; // remplacer par (largeur image / 8)
-	int incTab64 = 0;
-	
-	try {
-		while(loop){
-			Object valeur = null;
-			
-			valeur = Entropy.readAC();
-			
-			if (valeur==null){
-				loop = false;
-			}else{
+	public static ArrayList<ArrayList<int[]>> processINV(ArrayList<ArrayList<int[]>> listeTab64){
+
+		boolean loop = true;
+		int[] tab64 = new int[64];
+		int count = 1;
+		int yuv = 0;
+		int nbTotalTab64 = (Main.hauteur)/8; // remplacer par (largeur image / 8)
+		int incTab64 = 0;
+
+		try {
+			while(loop){
 				
-				int[] paire = (int[]) valeur;
-				int nbRep = paire[0];
-				int val = paire[1];
-				
-		if (count>=64){
-					
-					//On ajoute le tableau de 64 � la liste pour le bon indice yuv
-					listeTab64.get(yuv).add(tab64);
-					
-					count=1;
-					incTab64++;
-					
-					//On regarde si on a pass� toute les tableau pour y,u, ou v
-					if (incTab64 >=nbTotalTab64){
-						incTab64 = 0;
-						yuv++;
-						if(yuv>=3){
-							//a enlever
-							System.out.println(" Erreur yuv > 3...");
-							break;
+				int[] valeur = null;
+
+				valeur = Entropy.readAC();
+
+				if (valeur[0]==0 && valeur[1]==0){
+					loop = false;
+				}else{
+
+					int[] paire = (int[]) valeur;
+					int nbRep = paire[0];
+					int val = paire[1];
+
+					if (count>=64){
+
+						//On ajoute le tableau de 64 � la liste pour le bon indice yuv
+						listeTab64.get(yuv).add(tab64);
+
+						count=1;
+						incTab64++;
+
+						//On regarde si on a pass� toute les tableau pour y,u, ou v
+						if (incTab64 >=nbTotalTab64){
+							incTab64 = 0;
+							yuv++;
+							if(yuv>=3){
+								//a enlever
+								System.out.println(" Erreur yuv > 3...");
+								break;
+							}
 						}
 					}
-				}
-		
-				//traite la paire
-				if (nbRep==0){
-					tab64[count]= val;
-					count++;
-				}else{
-					for (int i=0;i<nbRep;i++){
-						if (count >= 64){
-							//a enlever
-							System.out.println(" Erreur debordement tab 64 ...");
-							break;
-						}
+
+					//traite la paire
+					if (nbRep==0){
 						tab64[count]= val;
 						count++;
+					}else{
+						for (int i=0;i<nbRep;i++){
+							if (count >= 64){
+								//a enlever
+								System.out.println(" Erreur debordement tab 64 ...");
+								break;
+							}
+							tab64[count]= val;
+							count++;
+						}
 					}
 				}
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+
+		return listeTab64;
 	}
-	
-	return listeTab64;
-}
 }
