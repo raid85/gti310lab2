@@ -9,29 +9,48 @@ public static void process(ArrayList<ArrayList<int[]>> listeTab64){
 		for (int i=0;i<listeTab64.size();i++){
 			for (int j=0;j<listeTab64.get(0).size();j++){
 				
-				int nbRep = -1;
+				int nbOccurence = 1;
 				int valeurRep = 0;
+				int k =1 ;
+				int r = 1;
+				while(k<64){					
+					
+					valeurRep = listeTab64.get(i).get(j)[k];	
+					
+					for (r=k+1; listeTab64.get(i).get(j)[r]==valeurRep;r++ ){
+						nbOccurence++;
+					}
+					
+					Entropy.writeAC(nbOccurence, valeurRep);
+					
+					k=r;
+					
+				}
 				
-				for (int k=1;k<64;k++){
-					
-					if (k==1){
-						valeurRep = listeTab64.get(i).get(j)[k];
-					}
-					
-					int valeur = listeTab64.get(i).get(j)[k];
-					
-					//On incrémente si on a une repetition
-					if (valeur == valeurRep){
-						nbRep++;
-						if (k==63){
-							Entropy.writeAC(nbRep, valeurRep);
-						}
-					}else{
-						Entropy.writeAC(nbRep, valeurRep);
-						nbRep = -1;
-						valeurRep = valeur;
-					}
-				}				
+				Entropy.writeAC(0, 0);
+				
+//				for (int k=1;k<64;k++){
+//					
+//					
+//					
+//					if (k==1){
+//						valeurRep = listeTab64.get(i).get(j)[k];
+//					}
+//					
+//					int valeur = listeTab64.get(i).get(j)[k];
+//					
+//					//On incrï¿½mente si on a une repetition
+//					if (valeur == valeurRep){
+//						nbRep++;
+//						if (k==63){
+//							Entropy.writeAC(nbRep, valeurRep);
+//						}
+//					}else{
+//						Entropy.writeAC(nbRep, valeurRep);
+//						nbRep = -1;
+//						valeurRep = valeur;
+//					}
+//				}				
 			}
 		}
 	}
@@ -60,13 +79,13 @@ public static ArrayList<ArrayList<int[]>> processINV(ArrayList<ArrayList<int[]>>
 			
 	if (count>=64){
 				
-				//On ajoute le tableau de 64 à la liste pour le bon indice yuv
+				//On ajoute le tableau de 64 ï¿½ la liste pour le bon indice yuv
 				listeTab64.get(yuv).add(tab64);
 				
 				count=1;
 				incTab64++;
 				
-				//On regarde si on a passé toute les tableau pour y,u, ou v
+				//On regarde si on a passï¿½ toute les tableau pour y,u, ou v
 				if (incTab64 >=nbTotalTab64){
 					incTab64 = 0;
 					yuv++;
