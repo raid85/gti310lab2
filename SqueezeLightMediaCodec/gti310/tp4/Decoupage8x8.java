@@ -15,7 +15,7 @@ public class Decoupage8x8 {
 		
 		//On la divise par 8 pour savoir le nb de matrice 8x8 qu'on aura pour chaque composante (Y-U-V)
 		int nbBloc = size/8;
-		System.out.println("Avant DCT :"+nbBloc);
+		
 		int compteurBloc_K = 0;
 		int compteurBloc_M = 0;
 		boolean done = false;
@@ -64,6 +64,13 @@ public class Decoupage8x8 {
 		listeBloc8x8.add(liste1);
 		listeBloc8x8.add(liste2);
 		listeBloc8x8.add(liste3);
+		
+		for(int q=0 ; q<8;q++){
+			System.out.println();
+			for(int w=0 ; w<8;w++){
+				System.out.print(" "+listeBloc8x8.get(2).get(2)[q][w]);
+			}
+		}
 		
 		return listeBloc8x8;
 	}
