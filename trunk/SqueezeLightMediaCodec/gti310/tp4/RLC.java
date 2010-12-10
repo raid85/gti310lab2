@@ -26,14 +26,14 @@ public class RLC {
 
 					Entropy.writeAC(nbOccurence, valeurRep);
 
-					System.out.println("k..."+k);
-					System.out.println("r..."+r);
-					System.out.println("nb OCC "+nbOccurence+" Valeur.."+valeurRep);
+//					System.out.println("k..."+k);
+//					System.out.println("r..."+r);
+//					System.out.println("nb OCC "+nbOccurence+" Valeur.."+valeurRep);
 
 					k=r;
 
 				}
-				System.out.println("Ecriture EOB...");
+//				System.out.println("Ecriture EOB...");
 				Entropy.writeAC(0, 0);
 
 							

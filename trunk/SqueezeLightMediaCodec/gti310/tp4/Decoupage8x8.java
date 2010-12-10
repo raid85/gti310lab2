@@ -11,9 +11,11 @@ public class Decoupage8x8 {
 		//On regarde la longueur des matrices
 		int size = matrice[0].length;
 		
+		
+		
 		//On la divise par 8 pour savoir le nb de matrice 8x8 qu'on aura pour chaque composante (Y-U-V)
 		int nbBloc = size/8;
-		
+		System.out.println("Avant DCT :"+nbBloc);
 		int compteurBloc_K = 0;
 		int compteurBloc_M = 0;
 		boolean done = false;
