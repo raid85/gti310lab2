@@ -42,7 +42,7 @@ public class Decoupage8x8 {
 				if (i == 2){
 					liste3.add(bloc8x8);
 				}
-				
+		
 				compteurBloc_K = compteurBloc_K + 8;
 				
 				if (compteurBloc_K >= size-7 || done){
