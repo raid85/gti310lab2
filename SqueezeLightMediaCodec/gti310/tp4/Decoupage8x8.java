@@ -11,17 +11,14 @@ public class Decoupage8x8 {
 		//On regarde la longueur des matrices
 		int size = matrice[0].length;	
 
-
-
-
 		ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
 
 		//On la divise par 8 pour savoir le nb de matrice 8x8 qu'on aura pour chaque composante (Y-U-V)
 		int nbBloc = size/8;
 
-		int compteurBloc_K = 0;
-		int compteurBloc_M = 0;
-		boolean done = false;
+		//int compteurBloc_K = 0;
+		//int compteurBloc_M = 0;
+		//boolean done = false;
 		int[][] bloc8x8= new int[8][8];
 		ArrayList<int[][]> listeY = new ArrayList<int[][]>();
 		ArrayList<int[][]> listeU = new ArrayList<int[][]>();
@@ -29,18 +26,19 @@ public class Decoupage8x8 {
 
 		for(int k=0;k<Main.COLOR_SPACE_SIZE;k++){
 			for (int m=0;m<nbBloc;m++){
-				for(int i=0 ;i<Main.BLOCK_SIZE;i++){
-					for(int j=0;j<Main.BLOCK_SIZE;j++){
-						bloc8x8[i][j]=matrice[k][(m*8)+i][(m*8)+j];
-					}
-				}			  
-				switch(k){				
-				case 0:listeY.add(m,bloc8x8);break;
-				case 1:listeU.add(m,bloc8x8);break;
-				case 2:listeV.add(m,bloc8x8);break;
-				
-				}			
+				for (int l=0;l<nbBloc;l++){
+					for(int i=0 ;i<Main.BLOCK_SIZE;i++){
+						for(int j=0;j<Main.BLOCK_SIZE;j++){
+							bloc8x8[i][j]=matrice[k][(m*8)+i][(l*8)+j];
+						}
+					}			  
+					switch(k){				
+					case 0:listeY.add((m+l),bloc8x8);break;
+					case 1:listeU.add((m+l),bloc8x8);break;
+					case 2:listeV.add((m+l),bloc8x8);break;
 
+					}			
+				}
 			}
 		}
 
