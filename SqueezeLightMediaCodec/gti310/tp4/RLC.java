@@ -84,58 +84,60 @@ public static ArrayList<ArrayList<int[]>> processINV(ArrayList<ArrayList<int[]>>
 	int nbTotalTab64 = (Main.hauteur)/8; // remplacer par (largeur image / 8)
 	int incTab64 = 0;
 	
-	while(loop){
-		Object valeur = null;
-		
-		valeur = Entropy.readAC();
-		
-		if (valeur==null){
-			loop = false;
-		}else{
+	try {
+		while(loop){
+			Object valeur = null;
 			
-			int[] paire = (int[]) valeur;
-			int nbRep = paire[0];
-			int val = paire[1];
+			valeur = Entropy.readAC();
 			
-	if (count>=64){
+			if (valeur==null){
+				loop = false;
+			}else{
 				
-				//On ajoute le tableau de 64 � la liste pour le bon indice yuv
-				listeTab64.get(yuv).add(tab64);
+				int[] paire = (int[]) valeur;
+				int nbRep = paire[0];
+				int val = paire[1];
 				
-				count=1;
-				incTab64++;
-				
-				//On regarde si on a pass� toute les tableau pour y,u, ou v
-				if (incTab64 >=nbTotalTab64){
-					incTab64 = 0;
-					yuv++;
-					if(yuv>=3){
-						//a enlever
-						System.out.println(" Erreur yuv > 3...");
-						break;
+		if (count>=64){
+					
+					//On ajoute le tableau de 64 � la liste pour le bon indice yuv
+					listeTab64.get(yuv).add(tab64);
+					
+					count=1;
+					incTab64++;
+					
+					//On regarde si on a pass� toute les tableau pour y,u, ou v
+					if (incTab64 >=nbTotalTab64){
+						incTab64 = 0;
+						yuv++;
+						if(yuv>=3){
+							//a enlever
+							System.out.println(" Erreur yuv > 3...");
+							break;
+						}
 					}
 				}
-			}
-	
-			//traite la paire
-			if (nbRep==0){
-				tab64[count]= val;
-				count++;
-			}else{
-				for (int i=0;i<nbRep;i++){
-					if (count >= 64){
-						//a enlever
-						System.out.println(" Erreur debordement tab 64 ...");
-						break;
-					}
+		
+				//traite la paire
+				if (nbRep==0){
 					tab64[count]= val;
 					count++;
+				}else{
+					for (int i=0;i<nbRep;i++){
+						if (count >= 64){
+							//a enlever
+							System.out.println(" Erreur debordement tab 64 ...");
+							break;
+						}
+						tab64[count]= val;
+						count++;
+					}
 				}
 			}
-			
-		
-	
 		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 	
 	return listeTab64;
