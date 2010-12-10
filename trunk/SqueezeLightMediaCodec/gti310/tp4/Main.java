@@ -107,7 +107,7 @@ public class Main {
 					afficherBloc(listeBloc8x8.get(0).get(0));
 					System.out.println();
 					System.out.println("Avant DCT :");
-					afficherBloc(listeBloc8x8.get(0).get(1));
+					afficherBloc(listeBloc8x8.get(0).get(0));
 					
 					//On applique le DCT sur chaque bloc 8x8
 					listeBloc8x8 = DCT.process(listeBloc8x8);
