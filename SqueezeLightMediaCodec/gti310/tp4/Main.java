@@ -54,6 +54,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Squeeze Light Media Codec !");
+		ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
 	
 		try {
 			if (args.length >= 3) {
@@ -88,14 +89,19 @@ public class Main {
 					int[][][] matriceRGB = PPMReaderWriter.readPPMFile(fichierEntree);
 					
 					//On defini les dimensions de l'image
+					
+					
 					hauteur = matriceRGB[0].length;
 					largeur = matriceRGB[0].length;
 					
+					
 					//On converti la matriceRGB en matriceYUV
 					int[][][] matriceYUV = ConvertRGB2YUV.convert(matriceRGB);
+					
+				
 
 					//On decoupe la matrice en bloc 8x8
-					ArrayList<ArrayList<int[][]>> listeBloc8x8 = Decoupage8x8.decoupe(matriceYUV);
+					listeBloc8x8 = Decoupage8x8.decoupe(matriceYUV);
 					System.out.println();
 					System.out.println("Avant DCT :");
 					afficherBloc(listeBloc8x8.get(0).get(0));
@@ -164,7 +170,7 @@ public class Main {
 					}
 					
 					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
-					ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
+					listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
 					
 					try {
 						//On effectue le DPCM inverse
