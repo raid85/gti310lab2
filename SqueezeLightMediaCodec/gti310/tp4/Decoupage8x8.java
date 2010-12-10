@@ -10,8 +10,8 @@ public class Decoupage8x8 {
 
 		//On regarde la longueur des matrices
 		int size = matrice[0].length;	
-		
-		
+
+
 
 
 		ArrayList<ArrayList<int[][]>> listeBloc8x8 = new ArrayList<ArrayList<int[][]>>();
@@ -33,21 +33,16 @@ public class Decoupage8x8 {
 					for(int j=0;j<Main.BLOCK_SIZE;j++){
 						bloc8x8[i][j]=matrice[k][(m*8)+i][(m*8)+j];
 					}
-				}
-			
-			  
-				switch(k){
-				
-				
+				}			  
+				switch(k){				
 				case 0:listeY.add(m,bloc8x8);break;
 				case 1:listeU.add(m,bloc8x8);break;
 				case 2:listeV.add(m,bloc8x8);break;
-				}
-				
-			
+				}			
+
 			}
 		}
-		
+
 
 		//		int i,j,k,m,l;
 
