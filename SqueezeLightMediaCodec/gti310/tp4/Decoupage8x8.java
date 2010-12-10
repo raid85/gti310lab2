@@ -38,6 +38,7 @@ public class Decoupage8x8 {
 				case 0:listeY.add(m,bloc8x8);break;
 				case 1:listeU.add(m,bloc8x8);break;
 				case 2:listeV.add(m,bloc8x8);break;
+				
 				}			
 
 			}
