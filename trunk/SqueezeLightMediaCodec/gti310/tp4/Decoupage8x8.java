@@ -34,7 +34,8 @@ public class Decoupage8x8 {
 					for (k=0; k<8; k++){
 						for (m=0; m<8; m++){
 						
-						bloc8x8[k][m] = matrice[i][k + (8*j)][m + (8*l)];
+						bloc8x8[k][m] = matrice[i][(k + (8*l))][(m + (8*j))];
+						
 					}
 				}
 				if (i == 0){

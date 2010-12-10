@@ -108,6 +108,9 @@ public class Main {
 					System.out.println();
 					System.out.println("Avant DCT :");
 					afficherBloc(listeBloc8x8.get(0).get(0));
+					System.out.println();
+					System.out.println("Avant DCT :");
+					afficherBloc(listeBloc8x8.get(1).get(2));
 					
 					//On applique le DCT sur chaque bloc 8x8
 					listeBloc8x8 = DCT.process(listeBloc8x8);
@@ -115,21 +118,14 @@ public class Main {
 					System.out.println();
 					System.out.println("Après DCT :");
 					afficherBloc(listeBloc8x8.get(0).get(0));
-					System.out.println();
-					System.out.println();
-					System.out.println("Après DCT 2:");
-					afficherBloc(listeBloc8x8.get(0).get(1));
-
+					
 					//On applique la quantification sur chaque bloc 8x8
 					listeBloc8x8 = Quantification.process(listeBloc8x8, facteurQuantification);
 					System.out.println();
 					System.out.println();
 					System.out.println("Après Quantification :");
 					afficherBloc(listeBloc8x8.get(0).get(0));
-					System.out.println();
-					System.out.println();
-					System.out.println("Après Quantification :");
-					afficherBloc(listeBloc8x8.get(0).get(1));
+				
 					
 					//On applique la lecture en Zigzag
 					ArrayList<ArrayList<int[]>> listeTab64 = new ArrayList<ArrayList<int[]>>();
@@ -138,10 +134,7 @@ public class Main {
 					System.out.println();
 					System.out.println("Après ZigZag :");
 					afficherTab(listeTab64.get(0).get(0));
-					System.out.println();
-					System.out.println();
-					System.out.println("Après ZigZag :");
-					afficherTab(listeTab64.get(0).get(1));
+					
 				
 					//On applique le DPCM
 					DPCM.process(listeTab64);
