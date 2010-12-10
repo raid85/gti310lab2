@@ -34,13 +34,7 @@ public class Decoupage8x8 {
 						bloc8x8[i][j]=matrice[k][(m*8)+i][(m*8)+j];
 					}
 				}
-				for(int z=0;z<Main.BLOCK_SIZE;z++){					
-					System.out.println("");
-					for(int w=0; w<Main.BLOCK_SIZE;w++){
-						System.out.print(" "+bloc8x8[z][w]);						
-					}
-					
-				}
+			
 			  
 				switch(k){
 				
