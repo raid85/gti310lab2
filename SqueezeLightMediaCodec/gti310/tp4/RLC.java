@@ -20,7 +20,7 @@ public class RLC {
 
 					for (r=k+1; listeTab64.get(i).get(j)[r]==valeurRep && r<63 ;r++ ){
 						nbOccurence++;
-						if(r==62)
+						if(r==62&&listeTab64.get(i).get(j)[63]==valeurRep )
 							nbOccurence++;
 					}
 
